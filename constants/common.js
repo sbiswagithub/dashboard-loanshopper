@@ -1,0 +1,12 @@
+export const DD='DD';
+export const MMM='MMM';
+export const YYYY='YYYY';
+export const DMY='DD MMM YYYY';
+export const NULL='';
+export const THUMB_COLOR='#00b4f0';
+export const ZERO=0;
+export const L = 'left';
+export const R = 'right';
+export const SHOW = 'show';
+export const HIDE = 'hide';
+export const COUNTRY_CODE = 'AU';
