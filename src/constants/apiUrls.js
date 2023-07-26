@@ -1,0 +1,21 @@
+
+export const API_ME_URI = process.env.REACT_APP_PUBLIC_API_BASE_URL + "/me";
+export const API_ADDRESS_AUTOCOMPLETE_URI = process.env.REACT_APP_PUBLIC_API_BORROWER_BASE_URL + "/addresses";
+export const API_PROFESSIONS_AUTOCOMPLETE_URI = process.env.REACT_APP_PUBLIC_API_BORROWER_BASE_URL + "/professions";
+export const API_ACCOUNTS_URI = process.env.REACT_APP_PUBLIC_API_BORROWER_BASE_URL + "/accounts";
+export const API_BORROWER_URI = process.env.REACT_APP_PUBLIC_API_BORROWER_BASE_URL + "/borrowers";
+export const API_BORROWER_MESSAGES_URI = process.env.REACT_APP_PUBLIC_API_BORROWER_BASE_URL + "/messages";
+export const API_BORROWER_RECOMMENDATIONS_URI = process.env.REACT_APP_PUBLIC_API_BORROWER_BASE_URL + "/recommendations";
+export const API_BORROWER_BROKERAGENTS_URI = process.env.REACT_APP_PUBLIC_API_BORROWER_BASE_URL + "/brokeragents";
+export const API_LOAN_REQUESTS_URI = process.env.REACT_APP_PUBLIC_API_BORROWER_BASE_URL + "/loanrequests";
+export const API_VERIFY_OTP_URI = process.env.REACT_APP_PUBLIC_API_BORROWER_BASE_URL + "/otp";
+export const API_PROPOSALS_URI = process.env.REACT_APP_PUBLIC_API_BORROWER_BASE_URL + "/proposals";
+export const API_LOAN_PPRODUCTS_URI = process.env.REACT_APP_PUBLIC_API_BORROWER_BASE_URL + "/loanproducts";
+export const API_CLIENT_CONNECTIONS_URI = process.env.REACT_APP_PUBLIC_API_BORROWER_BASE_URL + "/clientconnections";
+export const API_DOCUMENT_METADATA_URI = process.env.REACT_APP_PUBLIC_API_BORROWER_BASE_URL + "/documents/data";
+export const API_DOCUMENTS_URI = process.env.REACT_APP_PUBLIC_API_BORROWER_BASE_URL + "/documents";
+export const API_MORTGAGE_APPLICATIONS_URI = process.env.REACT_APP_PUBLIC_API_BORROWER_BASE_URL + "/mortgageapplications";
+export const API_LOAN_PACKAGES_URI = process.env.REACT_APP_PUBLIC_API_BORROWER_BASE_URL + "/loanpackages";
+// Broker APIs
+export const API_BROKER_BROKERAGENTS_URI = process.env.REACT_APP_PUBLIC_API_BROKER_BASE_URL + "/brokeragents";
+export const API_BROKER_PROSPECTS_URI = process.env.REACT_APP_PUBLIC_API_BROKER_BASE_URL + "/prospects";
