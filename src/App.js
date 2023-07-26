@@ -33,7 +33,6 @@ export default class App extends React.Component {
 
   render() {
     LogBox.ignoreAllLogs();
-    const colorScheme = Appearance.getColorScheme();
 
     return (
       <Provider store={store}>

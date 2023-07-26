@@ -1,9 +1,12 @@
-import { amountOrDefault } from '../actions/Utils';
+import {  } from '../actions/Utils';
 import { SELECT_DISPLAY_PRODUCT } from '../actions/types';
 import { } from '../constants/review';
 import { } from '../constants/apiUrls';
 import { } from '../constants/banners';
 
+const amountOrDefault = (amount, ifNull) => {
+	return amount == null ? ifNull : '$' + amount;
+};
 const getPackageRatesAndFees = (payload) => {
 	const ratesAndFees = payload?.ratesAndFees == null ? [] : Object
 			.values(payload.ratesAndFees)

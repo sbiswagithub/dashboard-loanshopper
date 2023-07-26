@@ -1,0 +1,573 @@
+[
+	{
+		"_id": "proposal-1679633336273-5-2",
+		"_etag": {
+			"$oid": "641d3ed83c02fe35ec6da7ac"
+		},
+		"agency": {
+			"_id": "brokeragency-1679633336273-67-1",
+			"createdTs": 1679635145034,
+			"lastUpdatedTs": 1679635200607,
+			"_etag": {
+				"$oid": "641d33003c02fe35ec6d958a"
+			},
+			"companyDetails": {
+				"companyName": "TWO INTO ONE PTY LIMITED",
+				"abn": "50099581423",
+				"contact": {
+					"primaryEmail": "test1.loanseller@sharklasers.com",
+					"primaryPhone": "0427967771"
+				},
+				"companyAddress": {
+					"addressLine1": "213 Princes Hwy",
+					"suburb": "Arncliffe",
+					"state": "NSW",
+					"postCode": "2205",
+					"countryCode": "AU",
+					"fullAddress": "213 Princes Hwy, Arncliffe NSW 2205, Australia",
+					"externalId": "ChIJM6V-l6awEmsRupKAm6BZZyY"
+				},
+				"dataSet": []
+			}
+		},
+		"agent": {
+			"_id": "broker-1679633336273-60-1",
+			"fullName": "Test1 Loanseller",
+			"title": "Mr",
+			"firstName": "Test1",
+			"lastName": "Loanseller",
+			"contact": {
+				"primaryEmail": "test1.loanseller@sharklasers.com",
+				"primaryPhone": "+61427967771"
+			},
+			"accountId": "4cc47878-596e-400a-89a8-e3c16069db00",
+			"createdTs": 1679635144668,
+			"lastUpdatedTs": 1679635145076,
+			"_etag": {
+				"$oid": "641d32c93c02fe35ec6d9529"
+			},
+			"brokerAgencyId": "brokeragency-1679633336273-67-1"
+		},
+		"agentId": "broker-1679633336273-60-1",
+		"createdTs": 1679635755349,
+		"lastUpdatedTs": 1679638232606,
+		"lender": {
+			"_id": "LENDER-1",
+			"name": "ANZ",
+			"fullName": "The Australia and New Zealand Banking Group Limited",
+			"_etag": {
+				"$oid": "641d320f3c02fe35ec6d92df"
+			}
+		},
+		"loanPackage": {
+			"_id": "loanpackage-1679633336273-6-6",
+			"loanProducts": [
+				{
+					"loanAmount": {
+						"value": 50000
+					},
+					"_id": "ANZ-LP-14",
+					"loanProduct": {
+						"lenderId": "LENDER-1",
+						"productName": "ANZ Fixed",
+						"variation": "2 Yr Fixed LVR > 80",
+						"features": {
+							"repaymentTypes": [
+								"Fortnightly",
+								"Monthly",
+								"Weekly"
+							],
+							"maxLoanTermInYears": 30.0,
+							"minLoanAmount": {
+								"value": 20000
+							},
+							"redraw": true,
+							"additionalRepaymentSupport": true,
+							"loanInterestCategory": "Principal and Interest",
+							"rateOption": "Fixed",
+							"residentialLoan": true,
+							"investmentLoan": false,
+							"fixedTermInMonths": 24,
+							"offsetAccount": true
+						},
+						"ratesAndFees": {
+							"interestRatePI": 5.54,
+							"comparisonRatePI": 4.23,
+							"loanProductFees": [
+								{
+									"label": "Loan approval fee",
+									"amount": {
+										"value": 0
+									},
+									"applicable": true
+								},
+								{
+									"label": "Loan administration charge",
+									"amount": {
+										"value": 0
+									},
+									"applicable": true
+								},
+								{
+									"label": "Lock rate fee",
+									"text": "750 per $1m lending",
+									"applicable": true
+								},
+								{
+									"label": "Offset account fee",
+									"text": "$10 pm",
+									"applicable": true
+								},
+								{
+									"label": "Late payment fee",
+									"amount": {
+										"value": 20
+									},
+									"applicable": true
+								},
+								{
+									"label": "Settlement fee",
+									"amount": {
+										"value": 160
+									},
+									"applicable": true
+								},
+								{
+									"label": "Production fee",
+									"amount": {
+										"value": 160
+									},
+									"applicable": true
+								},
+								{
+									"label": "Lodgement fee",
+									"amount": {
+										"value": 160
+									},
+									"applicable": true
+								},
+								{
+									"label": "Search fee",
+									"amount": {
+										"value": 50
+									},
+									"applicable": true
+								},
+								{
+									"label": "Govt fee",
+									"text": "Yes",
+									"applicable": true
+								},
+								{
+									"label": "Early repayment cost",
+									"text": "Yes",
+									"applicable": true
+								}
+							],
+							"feeStatement": "Loan security fees including Lodgement Fee, Production Fee, Settlement Fee and Search Fee still apply however will not be charged on establishment of a loan. Government fees, including government search fees, may still apply.",
+							"interestRate": 5.54,
+							"comparisonRate": 4.23
+						},
+						"entitlements": {
+							"benefit": [
+								"300000 Qantas points"
+							]
+						},
+						"status": "active",
+						"reference": "ANZ-LP-14",
+						"createdTs": 1679635028582,
+						"lastUpdatedTs": 1679635028582,
+						"_id": "loanproducts-1679633336273-14-167"
+					},
+					"createdTs": 1679635028612,
+					"lastUpdatedTs": 1679635028612,
+					"_etag": {
+						"$oid": "641d32543c02fe35ec6d94db"
+					}
+				},
+				{
+					"loanAmount": {
+						"value": 250000
+					},
+					"_id": "ANZ-LP-3",
+					"loanProduct": {
+						"lenderId": "LENDER-1",
+						"productName": "ANZ Standard Variable",
+						"variation": "LVR <=80%",
+						"features": {
+							"repaymentTypes": [
+								"Fortnightly",
+								"Monthly",
+								"Weekly"
+							],
+							"maxLoanTermInYears": 30.0,
+							"minLoanAmount": {
+								"value": 20000
+							},
+							"redraw": true,
+							"additionalRepaymentSupport": true,
+							"loanInterestCategory": "Interest Only",
+							"rateOption": "Variable",
+							"residentialLoan": true,
+							"investmentLoan": false,
+							"offsetAccount": true
+						},
+						"ratesAndFees": {
+							"interestRateIO": 4.29,
+							"comparisonRateIO": 3.96,
+							"loanProductFees": [
+								{
+									"label": "Loan approval fee",
+									"amount": {
+										"value": 0
+									},
+									"applicable": true
+								},
+								{
+									"label": "Loan administration charge",
+									"amount": {
+										"value": 0
+									},
+									"applicable": true
+								},
+								{
+									"label": "Offset account fee",
+									"text": "$10 pm",
+									"applicable": true
+								},
+								{
+									"label": "Late payment fee",
+									"amount": {
+										"value": 20
+									},
+									"applicable": true
+								},
+								{
+									"label": "Settlement fee",
+									"amount": {
+										"value": 160
+									},
+									"applicable": true
+								},
+								{
+									"label": "Production fee",
+									"amount": {
+										"value": 160
+									},
+									"applicable": true
+								},
+								{
+									"label": "Lodgement fee",
+									"amount": {
+										"value": 160
+									},
+									"applicable": true
+								},
+								{
+									"label": "Search fee",
+									"amount": {
+										"value": 50
+									},
+									"applicable": true
+								},
+								{
+									"label": "Govt fee",
+									"text": "Yes",
+									"applicable": true
+								},
+								{
+									"label": "Early repayment cost",
+									"text": "Not applicable",
+									"applicable": false
+								}
+							],
+							"feeStatement": "Loan security fees including Lodgement Fee, Production Fee, Settlement Fee and Search Fee still apply however will not be charged on establishment of a loan. Government fees, including government search fees, may still apply.",
+							"interestRate": 4.29,
+							"comparisonRate": 3.96
+						},
+						"entitlements": {
+							"benefit": [
+								"300000 Qantas points"
+							]
+						},
+						"status": "active",
+						"reference": "ANZ-LP-3",
+						"createdTs": 1679635029245,
+						"lastUpdatedTs": 1679635029245,
+						"_id": "loanproducts-1679633336273-14-178"
+					},
+					"createdTs": 1679635029278,
+					"lastUpdatedTs": 1679635029278,
+					"_etag": {
+						"$oid": "641d32553c02fe35ec6d9512"
+					}
+				},
+				{
+					"loanAmount": {
+						"value": 150000
+					},
+					"_id": "ANZ-LP-5",
+					"loanProduct": {
+						"lenderId": "LENDER-1",
+						"productName": "ANZ Standard Variable",
+						"variation": "LVR <=80%",
+						"features": {
+							"repaymentTypes": [
+								"Fortnightly",
+								"Monthly",
+								"Weekly"
+							],
+							"maxLoanTermInYears": 30.0,
+							"minLoanAmount": {
+								"value": 20000
+							},
+							"redraw": true,
+							"additionalRepaymentSupport": true,
+							"loanInterestCategory": "Principal and Interest",
+							"rateOption": "Variable",
+							"residentialLoan": false,
+							"investmentLoan": true,
+							"offsetAccount": true
+						},
+						"ratesAndFees": {
+							"interestRatePI": 4.34,
+							"comparisonRatePI": 4.34,
+							"loanProductFees": [
+								{
+									"label": "Loan approval fee",
+									"amount": {
+										"value": 0
+									},
+									"applicable": true
+								},
+								{
+									"label": "Loan administration charge",
+									"amount": {
+										"value": 0
+									},
+									"applicable": true
+								},
+								{
+									"label": "Offset account fee",
+									"text": "$10 pm",
+									"applicable": true
+								},
+								{
+									"label": "Late payment fee",
+									"amount": {
+										"value": 20
+									},
+									"applicable": true
+								},
+								{
+									"label": "Settlement fee",
+									"amount": {
+										"value": 160
+									},
+									"applicable": true
+								},
+								{
+									"label": "Production fee",
+									"amount": {
+										"value": 160
+									},
+									"applicable": true
+								},
+								{
+									"label": "Lodgement fee",
+									"amount": {
+										"value": 160
+									},
+									"applicable": true
+								},
+								{
+									"label": "Search fee",
+									"amount": {
+										"value": 50
+									},
+									"applicable": true
+								},
+								{
+									"label": "Govt fee",
+									"text": "Yes",
+									"applicable": true
+								},
+								{
+									"label": "Early repayment cost",
+									"text": "Not applicable",
+									"applicable": false
+								}
+							],
+							"feeStatement": "Loan security fees including Lodgement Fee, Production Fee, Settlement Fee and Search Fee still apply however will not be charged on establishment of a loan. Government fees, including government search fees, may still apply.",
+							"interestRate": 4.34,
+							"comparisonRate": 4.34
+						},
+						"entitlements": {
+							"benefit": [
+								"300000 Qantas points"
+							]
+						},
+						"status": "active",
+						"reference": "ANZ-LP-5",
+						"createdTs": 1679635029071,
+						"lastUpdatedTs": 1679635029071,
+						"_id": "loanproducts-1679633336273-14-176"
+					},
+					"createdTs": 1679635029116,
+					"lastUpdatedTs": 1679635029116,
+					"_etag": {
+						"$oid": "641d32553c02fe35ec6d9508"
+					}
+				}
+			],
+			"loanTermInYears": 18,
+			"createdTs": 1679638232415,
+			"lastUpdatedTs": 1679638232415,
+			"lenderId": "LENDER-1",
+			"_etag": {
+				"$oid": "641d3ed83c02fe35ec6da7a9"
+			}
+		},
+		"loanPackageId": "loanpackage-1679633336273-6-6",
+		"loanPackageSummary": {
+			"interestRate": 4.29,
+			"label": "ANZ Standard Variable"
+		},
+		"loanRequest": {
+			"_id": "loanrequest-1679633336273-30-1",
+			"loanProcessing": "Normal",
+			"loanProfile": "First mortgage",
+			"loanPurpose": "Residential",
+			"loanAmount": {
+				"value": 0
+			},
+			"lvr": 0,
+			"preferences": {
+				"firstPreference": {
+					"leastInterestRate": false,
+					"lowerRepayment": false,
+					"longerFixedTerm": false,
+					"shorterLoanDuration": false
+				},
+				"secondPreference": {
+					"leastInterestRate": false,
+					"lowerRepayment": false,
+					"longerFixedTerm": false,
+					"shorterLoanDuration": false
+				}
+			},
+			"extras": {},
+			"borrowers": {
+				"mainApplicant": {
+					"_id": "borrower-1679633336273-66-1"
+				}
+			},
+			"financials": {
+				"annualIncome": {
+					"value": 152000
+				}
+			},
+			"mortgageProperty": [],
+			"createdTs": 1679635700322,
+			"lastUpdatedTs": 1679635700322,
+			"_etag": {
+				"$oid": "641d34f43c02fe35ec6d972e"
+			}
+		},
+		"loanRequestId": "loanrequest-1679633336273-30-1",
+		"mainBorrower": {
+			"_id": "borrower-1679633336273-66-1",
+			"title": "Mr",
+			"firstName": "Joe",
+			"lastName": "Sharks",
+			"email": "joesharklasers@yahoo.com",
+			"mobile": "0427967771",
+			"accountId": "z-qJMwYmmz",
+			"createdTs": 1679635666066,
+			"lastUpdatedTs": 1679635666066,
+			"_etag": {
+				"$oid": "641d34f43c02fe35ec6d972b"
+			},
+			"currentAddress": {
+				"addressLine1": "19 Hope St",
+				"suburb": "South Brisbane",
+				"state": "QLD",
+				"postCode": "4101",
+				"countryCode": "AU",
+				"fullAddress": "19 Hope St, South Brisbane QLD 4101, Australia",
+				"externalId": "ChIJ5SPx6AdakWsR9wPJVqNM0So"
+			},
+			"dateOfBirth": 133334872000,
+			"employmentType": "Permanent",
+			"immigrationStatus": "Citizen",
+			"numDependants": 1,
+			"primaryProfession": "CLUB - BOUNCER"
+		},
+		"prospect": {
+			"_id": "prospects-1679633336273-9-1",
+			"loanRequestId": "loanrequest-1679633336273-30-1",
+			"brokerAgentId": "broker-1679633336273-60-1",
+			"mainBorrower": {
+				"_id": "borrower-1679633336273-66-1"
+			},
+			"expiryTs": 1687411700000,
+			"createdTs": 1679635700951,
+			"lastUpdatedTs": 1679635700951,
+			"_etag": {
+				"$oid": "641d34f53c02fe35ec6d9739"
+			}
+		},
+		"prospectId": "prospects-1679633336273-9-1",
+		"requiredDocs": [
+			{
+				"type": "bank_statement",
+				"description": "Last 3 months personal loan statements",
+				"name": "PERSONAL_LOAN_ACC_STMT",
+				"_id": "REQDOC-8"
+			},
+			{
+				"type": "bank_statement",
+				"description": "Last 6 months home loan statements",
+				"name": "HOME_LOAN_ACC_STMT",
+				"_id": "REQDOC-7"
+			},
+			{
+				"type": "bank_statement",
+				"description": "Last 3 months credit card statements",
+				"name": "CREDIT_CARD_STMT",
+				"_id": "REQDOC-6"
+			},
+			{
+				"type": "bank_statement",
+				"description": "Last 3 months bank account statements",
+				"name": "BANK_ACCOUNT_STMT",
+				"_id": "REQDOC-5"
+			},
+			{
+				"type": "id_proof",
+				"description": "Medicare copy",
+				"name": "MEDICARE",
+				"_id": "REQDOC-4"
+			},
+			{
+				"type": "id_proof",
+				"description": "Birth certificate copy",
+				"name": "BIRTH_CERTIFICATE",
+				"_id": "REQDOC-3"
+			},
+			{
+				"type": "id_proof",
+				"description": "Passport copy",
+				"name": "PASSPORT",
+				"_id": "REQDOC-2"
+			},
+			{
+				"type": "id_proof",
+				"description": "Driver licence copy",
+				"name": "DRIVER_LICENCE",
+				"_id": "REQDOC-1"
+			}
+		],
+		"status": "proposed"
+	}
+]

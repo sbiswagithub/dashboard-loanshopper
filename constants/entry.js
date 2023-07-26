@@ -1,0 +1,14 @@
+export const SINGLE_INC='Single';
+export const JOINT_INC='Joint';
+export const MIN_DEPENDANTS=0
+export const MAX_DEPENDANTS=5
+export const STEP_DEPENDANTS=1
+export const INC_RANGE_1=1;
+export const INC_RANGE_2=2;
+export const INC_RANGE_3=3;
+export const INC_RANGE_4=4;
+export const INC_SRC_SAL=1;
+export const INC_SRC_SELF=2;
+export const INC_SRC_BUS=3;
+export const BIRTH_YEAR_RANGE_START=-50
+export const BIRTH_YEAR_RANGE_END=50

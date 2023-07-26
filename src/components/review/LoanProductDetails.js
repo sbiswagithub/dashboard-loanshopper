@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Moment from 'moment';
 
 import getStyleSheet from '../../styles/styles';  
-import { NOT_SPECIFIED_BANNER, DOCS_REQUIRED } from '../../constants/banners';
+import { NOT_SPECIFIED_BANNER,  } from '../../constants/banners';
 import { FEATURES, RATES_AND_FEES, DISCOUNTS_AND_OFFERS, SPECIAL_REQUIREMENTS, REQUIRED_DOCS } from '../../constants/review';
 
 import { handleFetchError } from '../../actions';
