@@ -1,6 +1,6 @@
 import {
   LOGIN, REGISTRATION_IN_PROGRESS, API_CALL_FAILED, RESET_ERROR, AUTHENTICATED_BORROWER, LOGOUT, SET_ERROR, 
-  SET_AUTH_LOGIN, SET_AUTH_PASSWORD, AUTHENTICATED_BROKER, EMAIL_REGISTRATION_START, LOGIN_INIT, SET_AUTH_REPEAT_PASSWORD, 
+  SET_AUTH_LOGIN, SET_AUTH_PASSWORD, AUTHENTICATED_WEB, AUTHENTICATED_BROKER, EMAIL_REGISTRATION_START, LOGIN_INIT, SET_AUTH_REPEAT_PASSWORD, 
   SET_RESET_CONFIRMATION_CODE, SHOW_RESET_PASSWORD, HIDE_RESET_PASSWORD
 } from '../actions/types';
 const INIT = 'init'
@@ -44,6 +44,8 @@ export default (state = INITIAL_STATE, action) => {
         return { ...state, password: action.payload, };
     case SET_AUTH_REPEAT_PASSWORD:
         return { ...state, passwordRepeat: action.payload, };
+    case AUTHENTICATED_WEB:
+        return { ...state, accessCode: action.payload,  };
     case AUTHENTICATED_BROKER:
         return { ...state, 
           cognitoUser: action.payload, 

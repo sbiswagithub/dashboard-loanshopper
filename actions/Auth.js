@@ -1,5 +1,5 @@
 import {
-  LOGIN, REGISTRATION_IN_PROGRESS, API_CALL_FAILED, RESET_ERROR, AUTHENTICATED_BORROWER, LOGOUT,
+  LOGIN, REGISTRATION_IN_PROGRESS, API_CALL_FAILED, RESET_ERROR, AUTHENTICATED_BORROWER, AUTHENTICATED_WEB, LOGOUT,
 	SET_AUTH_LOGIN, SET_AUTH_PASSWORD, SET_ERROR, AUTHENTICATED_BROKER,
 	EMAIL_REGISTRATION_START, LOGIN_INIT, SET_AUTH_REPEAT_PASSWORD, SET_RESET_CONFIRMATION_CODE,
 	SHOW_RESET_PASSWORD, HIDE_RESET_PASSWORD
@@ -76,6 +76,12 @@ export const setError = (error) => {
 export const resetFetchError = () => {
 	return {
 		type: RESET_ERROR,
+	};
+};
+export const webAuthenticatedBorrower = (accessCode) => {
+	return {
+		type: AUTHENTICATED_WEB,
+		payload: accessCode,
 	};
 };
 export const authenticatedBorrower = (borrower) => {

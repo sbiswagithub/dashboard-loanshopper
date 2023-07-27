@@ -3,12 +3,9 @@ import {
   Text,
   TouchableHighlight,
   Image,
-  StyleSheet,
-  SafeAreaView,
 } from "react-native";
 
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import FAIcon from "react-native-vector-icons/FontAwesome5";
 
 import { LOGO_BRIGHT_BLUE, LOGO_DARK_BLUE, WHITE } from "./../constants/colors";
 import * as banners from "./../constants/banners";
@@ -17,9 +14,9 @@ import getStyleSheet from "./../styles/styles";
 
 import { LinearGradient } from "expo-linear-gradient";
 import { colors } from "react-native-elements";
-
 export default function Landing({ navigation }) {
   const styles = getStyleSheet();
+
   return (
     <View style={[styles.container, styles.evenlySpacedSingleColumn]}>
       <LinearGradient
@@ -49,7 +46,7 @@ export default function Landing({ navigation }) {
             { flexDirection: "row", borderRadius: 10 },
           ]}
           onPress={() => {
-            navigation.navigate("BorrowerEntry");
+            navigation.navigate("SignIn");
           }}
           underlayColor={colors.white}
         >

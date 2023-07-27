@@ -1,65 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { BrowserRouter as Router, } from "react-router-dom";
 import { Provider } from "react-redux";
 import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
-import {
-  LogBox,
-  Appearance,
-} from "react-native";
-
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import { navigationRef } from "./actions/RootNavigation";
-import Landing from "./components/Landing";
-import BorrowerEntry from "./components/BorrowerEntry";
-import BrokerEntry from "./components/BrokerEntry";
-import Amplify from "@aws-amplify/core";
-import awsconfig from './aws/aws-exports';
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
+import Root from "./Root";
 import store from "./reducers";
-
-Amplify.configure(awsconfig);
 
 const theme = {
   ...DefaultTheme,
 };
-
-const Stack = createStackNavigator();
-
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      redirectData: null,
-    };
-  }
-
-  render() {
-    LogBox.ignoreAllLogs();
-    const colorScheme = Appearance.getColorScheme();
-
-    return (
-      <Provider store={store}>
+function App() {
+ useEffect(() => {
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+  }, []);
+  return (
+     <GestureHandlerRootView style={{ flex: 1 }}><Provider store={store}>
         <PaperProvider theme={theme}>
-          <NavigationContainer ref={navigationRef}>
-            <Stack.Navigator>
-              <Stack.Screen
-                name="Landing"
-                component={Landing}
-                options={{ headerShown: false, gestureEnabled: false, }}
-              />
-              <Stack.Screen
-                name="BorrowerEntry"
-                component={BorrowerEntry}
-                options={{ headerShown: false, gestureEnabled: false, }}
-              />
-              <Stack.Screen
-                name="BrokerEntry"
-                component={BrokerEntry}
-                options={{ headerShown: false,  }}
-              />
-            </Stack.Navigator>
-          </NavigationContainer>
+          <Router>
+            <Root/>
+          </Router>
         </PaperProvider>
-      </Provider>
-    );
-  }
+      </Provider></GestureHandlerRootView>
+  );
 }
+
+export default App;

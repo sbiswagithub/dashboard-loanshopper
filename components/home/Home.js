@@ -17,7 +17,6 @@ class Home extends Component {
 	constructor(props) {
         super(props);
 	}
-	
 
 	componentDidMount() {
 		if (this.props?.appEntryMode != null && this.props.appEntryMode.toUpperCase() === "REGISTRATION_IN_PROGRESS") {

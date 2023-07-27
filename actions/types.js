@@ -56,6 +56,7 @@ export const TOGGLE_AGENT_RECOMMENDATION = 'toggle_agent_recommendation';
 export const LOGIN = 'login';
 export const LOGOUT = 'logout';
 export const AUTHENTICATED = 'authenticated';
+export const AUTHENTICATED_WEB = 'authenticatedWeb';
 export const REGISTRATION_IN_PROGRESS = 'registration_in_progress';
 export const API_CALL_FAILED = 'api_call_failed';
 export const SET_ERROR = 'set_error';
