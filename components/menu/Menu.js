@@ -28,7 +28,10 @@ function DrawerActionContent(props) {
 			<DrawerItemList {...props} />
 			<DrawerItem label={T_AND_C} onPress={() => Linking.openURL(t_and_c_url)} activeTintColor={color_active} inactiveTintColor={color_inactive} />
 			<DrawerItem label={PRIVACY_POLICY} onPress={() => Linking.openURL(privacy_policy_url)} activeTintColor={color_active} inactiveTintColor={color_inactive} />
-			<DrawerItem label={LOGOUT} onPress={props.onLogout} activeTintColor={color_active} inactiveTintColor={color_inactive} />
+			<DrawerItem label={LOGOUT} onPress={() => {
+				props.onLogout()
+				RootNavigation.navigate('Landing')}} 
+				activeTintColor={color_active} inactiveTintColor={color_inactive} />
 		</DrawerContentScrollView>
 	);
 }
@@ -56,25 +59,25 @@ class Menu extends Component {
 					}
 				},
 			})}		
-		drawerContent={props => <DrawerActionContent {...props} onLogout={this.props.onLogout} />}
-				initialRouteName={HOME}
-				screenOptions={{
-					overlayColor: color_active,
-					drawerType: 'front',
-					drawerStyle: { backgroundColor: '#1f215e' },
-					drawerActiveTintColor: color_active,
-					itemStyle: { marginVertical: 30 },
-					drawerInactiveTintColor: color_inactive,
-					headerShown: 'true',
-					header: ({ navigation, route, options }) => {
-						const title = getHeaderTitle(options, route.name);
+			drawerContent={props => <DrawerActionContent {...props} {...this.props} />}
+			initialRouteName={HOME}
+			screenOptions={{
+				overlayColor: color_active,
+				drawerType: 'front',
+				drawerStyle: { backgroundColor: '#1f215e' },
+				drawerActiveTintColor: color_active,
+				itemStyle: { marginVertical: 30 },
+				drawerInactiveTintColor: color_inactive,
+				headerShown: 'true',
+				header: ({ navigation, route, options }) => {
+					const title = getHeaderTitle(options, route.name);
 
-						return (
-							<Header title={title} style={options.headerStyle}
-								onTogglePress={navigation.toggleDrawer} />
-						);
-					}
-				}}
+					return (
+						<Header title={title} style={options.headerStyle}
+							onTogglePress={navigation.toggleDrawer} />
+					);
+				}
+			}}
 			>
 				<Drawer.Screen
 					name={HOME}

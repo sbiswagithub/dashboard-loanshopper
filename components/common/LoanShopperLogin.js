@@ -24,7 +24,7 @@ class LoanShopperLogin extends Component {
 			<TouchableHighlight onPress={()=> {
 				const loginUrl = COGNITO_AUTH.loginUrl + toQueryString(COGNITO_AUTH.authorizeQParams)
 				if (Constants.platform.web) {
-					window.open( loginUrl )
+					window.open( loginUrl,"_self" )
 				} else
 					this._openAuthSessionAsync( loginUrl )
 			}} >

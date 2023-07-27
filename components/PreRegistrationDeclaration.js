@@ -54,7 +54,7 @@ class PreRegistrationDeclaration extends Component {
 									iconStyle={{flexGrow:1, flexDirection:"row",  writingDirection:"rtl" }}
 									onPress={() => {
 										this.setState({ ...this.state, showPrivacyTAndCLinks: false})
-										RootNavigation.navigate('SignIn')
+										RootNavigation.navigate('Landing')
 									}} >Cancel</Icon.Button>
 							</View>
 

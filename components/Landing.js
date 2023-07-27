@@ -14,6 +14,8 @@ import getStyleSheet from "./../styles/styles";
 
 import { LinearGradient } from "expo-linear-gradient";
 import { colors } from "react-native-elements";
+import EmailSignIn from './EmailSignIn'
+
 export default function Landing({ navigation }) {
   const styles = getStyleSheet();
 
@@ -21,8 +23,9 @@ export default function Landing({ navigation }) {
     <View style={[styles.container, styles.evenlySpacedSingleColumn]}>
       <LinearGradient
         colors={[
-          LOGO_BRIGHT_BLUE,
           LOGO_DARK_BLUE,
+          LOGO_BRIGHT_BLUE,
+          WHITE
         ]}
         style={[styles.background]}
         start={{ x: 0.5, y: 1 }}
@@ -37,51 +40,14 @@ export default function Landing({ navigation }) {
         ]}
       >
 
-
-        <TouchableHighlight
-          style={[
-            styles.alignCenter,
-            styles.tableRow,
-            styles.p2,
-            { flexDirection: "row", borderRadius: 10 },
-          ]}
-          onPress={() => {
-            navigation.navigate("SignIn");
-          }}
-          underlayColor={colors.white}
-        >
-          <>
-            <View
-              style={[styles.iconWrapper, styles.centerItems, styles.bgWhite]}
-            >
-              <Icon.Button
-                name="home-city-outline"
-                size={20}
-                borderRadius={25}
-                backgroundColor={WHITE}
-                color={"black"}
-                iconStyle={{ margin: 8 }}
-              />
-            </View>
-            <View style={[styles.tableColumn70pct]}>
-              <Text
-                style={[
-                  styles.textMediumBoldLogoPaleBlue,
-                  styles.textCenter,
-                  styles.p2,
-                ]}
-              >Welcome !</Text>
-            </View>
-          </>
-        </TouchableHighlight>
-
-
         <Image
           source={require("../assets/LoanShopper_LR.png")}
           style={styles.logoMastheadWide}
         />
 
-          <View style={[styles.signInBannerBlock, {maxHeight:"40%"}]}>
+          <View style={[styles.signInBannerBlock, {maxHeight:"70%"}]}>
+						<EmailSignIn />
+
             <View style={[styles.signInBanner, {maxWidth:"90%", alignSelf:"center"}]}>
               <View style={{flex: 1,
                   flexDirection:'row',
@@ -92,7 +58,7 @@ export default function Landing({ navigation }) {
                   flexDirection:'column',
                   alignItems: 'flex-start',
                   justifyContent: 'space-between',maxWidth:"90%",}}>
-                  <Text style={[styles.textMediumBoldLogoBrightBlue,]}>Secure</Text>
+                  <Text style={[styles.textMediumBoldLogoDarkBlue,]}>Secure</Text>
                   <Text style={[styles.textSmallWhite,]}>{banners.SIGNIN_BANNER_2}</Text>
                 </View>
                 </View>
@@ -118,11 +84,10 @@ export default function Landing({ navigation }) {
                   flexDirection:'column',
                   alignItems: 'flex-start',
                   justifyContent: 'space-between',}}>
-                  <Text style={[styles.textMediumBoldLogoDarkBlue,]}>Offers</Text>
+                  <Text style={[styles.textMediumBoldLogoBrightBlue,]}>Offers</Text>
                 <Text style={styles.textSmallWhite}>{banners.SIGNIN_BANNER_4}</Text>
                 </View>
                 </View>
-
           </View>
         </View>
       </View>

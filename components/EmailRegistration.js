@@ -87,7 +87,7 @@ class EmailRegistration extends Component {
 						<Icon.Button name={'arrow-left-bold-circle-outline'} size={30} borderRadius={10} 
 							backgroundColor={TRANSPARENT}  color={LOGO_BRIGHT_BLUE} 
 							iconStyle={{flexGrow:1, flexDirection:"row",  writingDirection:"rtl" }}
-							onPress={() => {RootNavigation.navigate('SignIn')}} >Back</Icon.Button>	
+							onPress={() => {RootNavigation.navigate('Landing')}} >Back</Icon.Button>	
 						<Icon.Button name={'arrow-right-bold-circle-outline'} size={30} borderRadius={10} 
 							backgroundColor={TRANSPARENT}  color={ready ? LOGO_DARK_BLUE : 'grey'} 
 							iconStyle={{flexGrow:1, flexDirection:"row",  writingDirection:"rtl" }}

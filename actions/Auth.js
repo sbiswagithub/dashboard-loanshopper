@@ -49,11 +49,10 @@ export const onRedirect = (redirectData) => {
     payload: redirectData,
   };
 };
-export const onLogout = () => {
-  return {
-    type: LOGOUT,
-  };
+export const onLogout = () => async (dispatch) => {
+  dispatch({ type: LOGOUT });
 };
+
 export const onRegistrationInProgress = (account) => {
 	return {
 		type: REGISTRATION_IN_PROGRESS,

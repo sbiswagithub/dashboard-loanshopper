@@ -92,7 +92,7 @@ class EmailRegistration2 extends Component {
 							<Icon.Button name={'close-circle-outline'} size={30} borderRadius={10} 
 								backgroundColor={TRANSPARENT}  color={'black'} 
 								iconStyle={{flexGrow:1, flexDirection:"row",  writingDirection:"rtl" }}
-								onPress={() => {RootNavigation.navigate('SignIn')}} >Exit</Icon.Button>	
+								onPress={() => {RootNavigation.navigate('Landing')}} >Exit</Icon.Button>	
 						</View>
 					</View>
 				<ErrorDialog />
