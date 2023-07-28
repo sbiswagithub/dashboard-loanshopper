@@ -50,7 +50,7 @@ class Charts extends Component {
 						  data: this.props.borrowingEstimatesData,
 						  barColors: [this.props.colorDarkBlue]
 						}}
-				      width={Dimensions.get("window").width * (Constants.platform.web ? 0.3 : 0.75)} // from react-native
+				      width={Dimensions.get("window").width * (Constants.platform.web ? 0.5 : 0.75)} // from react-native
 					  height={200}
 					  withHorizontalLabels={false}
 					  chartConfig={borrowingRangeChartConfig}
@@ -63,7 +63,7 @@ class Charts extends Component {
 						  data: this.props.weeklyInstalmentsData,
 						  barColors: [this.props.colorPaleBlue]
 						}}
-				      width={Dimensions.get("window").width * (Constants.platform.web ? 0.3 : 0.75)} // from react-native
+				      width={Dimensions.get("window").width * (Constants.platform.web ? 0.5 : 0.75)} // from react-native
 					  height={200}
 					  withHorizontalLabels={false}
 					  chartConfig={borrowingRangeChartConfig}
@@ -77,7 +77,7 @@ class Charts extends Component {
 						  data: this.props.interestAndPrincipal,
 						  barColors: ["#00b4f0","#20225d"]
 						}}
-				      width={Dimensions.get("window").width * (Constants.platform.web ? 0.3 : 0.75)} 
+				      width={Dimensions.get("window").width * (Constants.platform.web ? 0.5 : 0.75)} 
 					  height={275}
 					  withHorizontalLabels={false}
 					  chartConfig={interestBarChartConfig}

@@ -45,7 +45,7 @@ class AmortizationChart extends Component {
 						},
 						]
 					}}
-				width={Dimensions.get("window").width*(Constants.platform.web ? 0.3:0.75)} 
+				width={Dimensions.get("window").width*(Constants.platform.web ? 0.5:0.75)} 
 				height={300}
 				yAxisLabel="$"
 				yAxisSuffix="k"
