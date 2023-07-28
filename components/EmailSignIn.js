@@ -12,6 +12,17 @@ import LoanShopperLogin from './common/LoanShopperLogin';
 import ResetPassword from './ResetPassword';
 import {  } from "../constants/banners";
 
+function LoginButton (props) {
+	return (
+		<>{props => (
+			<Icon.Button name={'email-lock'} onPress={props.onPress}
+						backgroundColor={ LOGO_DARK_BLUE}  color={WHITE} size={40} borderRadius={10} 
+						iconStyle={{flexGrow:1, flexDirection:"row",  writingDirection:"rtl" }} >Login</Icon.Button>
+		)}
+		</>
+	)
+}
+
 class EmailSignIn extends Component {
     constructor(props) {
 		super(props);
@@ -24,11 +35,13 @@ class EmailSignIn extends Component {
 			<Card containerStyle={[styles.brokerCard, {backgroundColor:LOGO_BRIGHT_BLUE}]} 
 				title={'Title'} titleStyle={styles.cardTitle} >
 				<View style={styles.brokerCardPanel}>
-					<LoanShopperLogin>
-					<Icon.Button name={'email-lock'} size={40} borderRadius={10} 
-						backgroundColor={ LOGO_DARK_BLUE}  color={WHITE} 
-						iconStyle={{flexGrow:1, flexDirection:"row",  writingDirection:"rtl" }}
-						disabled={true} >Login</Icon.Button></LoanShopperLogin>
+				<LoanShopperLogin>
+					{(onLoginPressed) => (
+						<Icon.Button name={'email-lock'} onPress={onLoginPressed}
+								backgroundColor={ LOGO_DARK_BLUE}  color={WHITE} size={40} borderRadius={10} 
+								iconStyle={{flexGrow:1, flexDirection:"row",  writingDirection:"rtl" }} >Login</Icon.Button>
+					)}
+				</LoanShopperLogin>
 				</View>
 				<View style={styles.space} />
 				<View style={styles.brokerCardPanel}>

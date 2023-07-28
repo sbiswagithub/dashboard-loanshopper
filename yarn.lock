@@ -5528,6 +5528,11 @@ babel-plugin-react-native-web@~0.18.10:
   resolved "https://registry.yarnpkg.com/babel-plugin-react-native-web/-/babel-plugin-react-native-web-0.18.12.tgz#3e9764484492ea612a16b40135b07c2d05b7969d"
   integrity sha512-4djr9G6fMdwQoD6LQ7hOKAm39+y12flWgovAqS1k5O8f42YQ3A1FFMyV5kKfetZuGhZO5BmNmOdRRZQ1TixtDw==
 
+babel-plugin-rename-jsx-attribute@^0.2.4:
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/babel-plugin-rename-jsx-attribute/-/babel-plugin-rename-jsx-attribute-0.2.4.tgz#6441fe55ba6a1c8218b2aadd2b5c8151c02dc436"
+  integrity sha512-R3kRggMmkXAd465a2q2Y2IceIUJHoyw9q/c0I7i3JdQDHGbUj59OTOR6QjRuB/bII1yH2Xuy/KM5+NNs9NzCGw==
+
 babel-plugin-syntax-optional-chaining@7.0.0-beta.3:
   version "7.0.0-beta.3"
   resolved "https://registry.yarnpkg.com/babel-plugin-syntax-optional-chaining/-/babel-plugin-syntax-optional-chaining-7.0.0-beta.3.tgz#0abab5055caddd68d099263c2d65ad5d5da97e3d"

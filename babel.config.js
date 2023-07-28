@@ -3,24 +3,21 @@ module.exports = function(api) {
   api.cache(true);
   return {
     presets: ['module:metro-react-native-babel-preset','babel-preset-expo'],
-    plugins: ['transform-inline-environment-variables'],
-    // reanimated must be last
-    plugins: 
-    [
+    plugins: [
+      'transform-inline-environment-variables',
       ["module:react-native-dotenv", {
-                    "envName": "LS_ENV",
-                    "moduleName": "@env",
-                    "path": ".env",
-                    "blocklist": null,
-                    "allowlist": null,
-                    "blacklist": null, // DEPRECATED
-                    "whitelist": null, // DEPRECATED
-                    "safe": false,
-                    "allowUndefined": true,
-                    "verbose": false
-                  }],      
-      [ "module-resolver",
-        {
+        "envName": "LS_ENV",
+        "moduleName": "@env",
+        "path": ".env",
+        "blocklist": null,
+        "allowlist": null,
+        "blacklist": null, // DEPRECATED
+        "whitelist": null, // DEPRECATED
+        "safe": false,
+        "allowUndefined": true,
+        "verbose": false
+      }],      
+      [ "module-resolver", {
             root: ["."],
             resolvePath(sourcePath, currentFile) {
               if (
@@ -42,8 +39,9 @@ module.exports = function(api) {
             },
           }, 
         ],
+      // reanimated must be the last in this list
       'react-native-reanimated/plugin'
-      ],
+    ],
       
   };
 };
