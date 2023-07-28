@@ -41,7 +41,7 @@ class Charts extends Component {
     	const styles = getStyleSheet();
 
     	return (
-			<View style={{flexDirection:'column', margin:'2%'}}>
+			<View style={{flexDirection:'column', margin:'1%'}}>
 				<Text style={[styles.textSmallBoldGray]}>{BORROWING_RANGE}</Text>
 	            <StackedBarChart
   					style={styles.stackedBarChart}

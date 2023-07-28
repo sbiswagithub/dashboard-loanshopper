@@ -1051,7 +1051,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     borderWidth: 6,
     borderRadius: 15,
-    padding: 15,
+    padding: '1%',
   },
   borrowPanelRowContent: {
     flexDirection: "row",

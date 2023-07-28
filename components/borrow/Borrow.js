@@ -125,7 +125,7 @@ class Borrow extends Component {
 						onPress={() => this.props.closeCalculator()} >{CLOSE_BUTTON_BANNER}</Icon.Button>
 				</View>
     		</View>
-			<View style={{flexDirection:'row',alignItems:"flex-start", alignSelf:'center', width:'100%'}}>
+			<View style={{flexDirection:'row',alignItems:"flex-start", alignSelf:'center', width:'95%'}}>
 				<View style={{flexDirection:'column', width:"30%", marginRight:'1%'}}>
 				<View style={[styles.borrowPanel]}>
 					<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{MAIN_APPL_ANN_INC}</Text>
