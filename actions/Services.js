@@ -5,7 +5,84 @@ import { API_ACCOUNTS_URI, API_DOCUMENTS_URI, API_DOCUMENT_METADATA_URI, API_ME_
 import { ERROR_DIALOG_PUBLIC_MSG_1, ERROR_DIALOG_TITLE_1,  } from '../constants/banners';
 import { toQueryString } from './Utils'
 
-
+export const fetchEstimatedBorrowingLimits = (borrower, qParams, onSuccess, onError) => (dispatch) => {
+	const uri = `${API_BORROWER_URI}/`+ borrower._id + '/getEstimatedBorrowingLimits' + toQueryString(qParams);
+	return 	fetch(uri, {
+			    method: "GET",
+			    headers: { 'Content-Type': 'application/json', 'Authorization': store.getState().authReducer.accessCode,  },
+			})
+		    .then(response => {
+				if (response.status == 403) {
+					// Redirect to relogin perhaps?
+				    ////console.log('Authentication expired');
+	                const error = Object.assign({}, {
+	                    status: response.status,
+	                    statusText: response.statusText,
+	                    showDialog: true, 
+	                    dialogTitle: ERROR_DIALOG_TITLE_1, 
+	                    publicMessage: ERROR_DIALOG_PUBLIC_MSG_2, 
+                    	logMessage: 'Failed to connect to ' + uri
+	                });
+	                return Promise.reject(error);
+	            } else if (response.status == 200) {
+		    		return response.json();
+	            } else {
+					// Service unavailable
+				    ////console.log('Unexpected Error');
+	                const error = Object.assign({}, {
+	                    status: response.status,
+	                    statusText: response.statusText,
+	                    showDialog: true, 
+	                    dialogTitle: ERROR_DIALOG_TITLE_1, 
+	                    publicMessage: ERROR_DIALOG_PUBLIC_MSG_1, 
+	                    logMessage: 'Error occured at getEstimates operation'
+	                });
+	                return Promise.reject(error);
+	            }
+		    })
+		    .then((json) => {
+			    if(onSuccess) onSuccess(json);
+		    })
+		    .catch((error) => {
+				////console.log('Boo in ' + uri);
+				////console.log(error);
+			  	if(onError) onError(error);	  						  	
+		    })
+}
+ 
+export const fetchLoanRequest = (onSuccess, onError) => (dispatch) => {
+	// Load loan request details on load
+	const uri = `${API_LOAN_REQUESTS_URI}`;
+	return fetch(uri, {
+			method: "GET",
+			headers: { 'Content-Type': 'application/json', 'Authorization': store.getState().authReducer.accessCode,  },
+		})
+		.then(response => {
+			if (response.status >= 400 && response.status < 600) {
+				const error = Object.assign({}, {
+					status: response.status,
+					statusText: response.statusText,
+					showDialog: true, 
+					dialogTitle: ERROR_DIALOG_TITLE_1, 
+					publicMessage: ERROR_DIALOG_PUBLIC_MSG_1, 
+					logMessage: 'Failed to connect to ' + uri
+				});
+				return Promise.reject(error);
+			} else
+				return response.json();
+		})
+		.then((json) => {
+			console.log(json)
+			if (onSuccess)
+				onSuccess(json);
+		})
+		.catch((error) => {
+			////console.log('Boo in GET /loanrequests ');
+			////console.log(error);
+			if (onError)
+				onError(error);	  						  	
+		})
+}
 /*
  * @props : {status: ..., textMessageId: ...}
  */    

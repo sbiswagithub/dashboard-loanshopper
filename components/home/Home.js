@@ -10,7 +10,7 @@ import ErrorDialog from '../ErrorDialog'
 import ClientConnections from '../clientConnections/index';
 import {  } from "react-native-paper";
 import { BACKGROUND_LIGHT_BLUE,WHITE } from '../../constants/colors';
-import { handleFetchError, setClientConnections, fetchClientConnections, getBorrower, authenticatedBorrower, loadBorrowerDetails} from "../../actions";
+import { handleFetchError, setClientConnections, fetchClientConnections, fetchLoanRequest, getBorrower, authenticatedBorrower, loadBorrowerDetails, loadLoanRequest} from "../../actions";
 
 class Home extends Component {
 
@@ -32,6 +32,7 @@ class Home extends Component {
 					this.props.handleFetchError)
 					)
 			trackPromise(this.props.fetchClientConnections(this.props.setClientConnections, this.props.handleFetchError))
+			trackPromise(this.props.fetchLoanRequest(this.props.loadLoanRequest, this.props.handleFetchError))
 		}
 	}
 
@@ -62,4 +63,4 @@ const mapStateToProps = ({ homeReducer, disclosureReducer }) => {
 };
 
 export default connect(mapStateToProps, {  setClientConnections, handleFetchError, fetchClientConnections, getBorrower, 
-	authenticatedBorrower, loadBorrowerDetails,  })(Home);
+	authenticatedBorrower, loadBorrowerDetails, fetchLoanRequest,loadLoanRequest })(Home);

@@ -2,23 +2,20 @@ import React, { Component } from "react";
 import { Text, View, ScrollView } from 'react-native';
 import { Slider, Button } from 'react-native-elements';
 import { connect } from 'react-redux';
-import { trackPromise, usePromiseTracker  } from 'react-promise-tracker';
+import { trackPromise,   } from 'react-promise-tracker';
 import Icon from 'react-native-vector-icons/AntDesign';
-import Constants from 'expo-constants';
 
 import getStyleSheet from '../../styles/styles';  
 import { BORR_CALC_BANNER, MAIN_APPL_ANN_INC, JOINT_APPL_ANN_INC, 
-	BORROWING_TERM, NUM_DEPENDANTS, INTEREST_RATE, 
-	ERROR_DIALOG_PUBLIC_MSG_1, ERROR_DIALOG_TITLE_1, AMORTIZATION, CLOSE_BUTTON_BANNER, NEXT } from '../../constants/banners';
+	BORROWING_TERM, NUM_DEPENDANTS, INTEREST_RATE, CLOSE_BUTTON_BANNER, NEXT } from '../../constants/banners';
 import { MAX_INCOME, MIN_INCOME, INCOME_STEP, MAX_DEPENDANTS, MAX_INTEREST_RATE, } from '../../constants/borrow';
 import { THUMB_COLOR } from '../../constants/common';
-import { toQueryString, closeCalculator, calculateBorrowing,  
+import { closeCalculator, calculateBorrowing,  
 	mainApplicantAnnualIncomeUpdated, jointApplicantAnnualIncomeUpdated,
 	borrowingTermUpdated, dependantsUpdated, interestRateUpdated, 
 	handleGetEstimatesReturn, handleFetchError, 
-	onClickApplyButton, } from '../../actions';
+	onClickApplyButton, fetchEstimatedBorrowingLimits} from '../../actions';
 import * as RootNavigation from '../../actions/RootNavigation.js';
-import { API_BORROWER_URI, } from '../../constants/apiUrls';
 
 import ErrorDialog from '../ErrorDialog';
 import Charts from './Charts';
@@ -52,55 +49,13 @@ class Borrow extends Component {
 			break;
 		  }
 		const qParams = {
-			'mainApplicantIncome' : this.props.mainApplicantAnnualIncome,
-			'jointApplicantIncome': this.props.jointApplicantAnnualIncome,
-			'borrowingTerm': this.props.borrowingTerm,
-			'numDependants': this.props.numDependants,
-			'interestRate': this.props.interestRate,
+			'mainApplicantIncome' : this.props.mainApplicantAnnualIncome ,
+			'jointApplicantIncome': this.props.jointApplicantAnnualIncome ,
+			'numDependants': this.props.numDependants ,
+			'borrowingTerm': this.props.borrowingTerm ,
+			'interestRate': this.props.interestRate ,
 		};
-    	const uri = `${API_BORROWER_URI}/`+ this.props.borrower._id + '/getEstimatedBorrowingLimits' + toQueryString(qParams);
-		trackPromise(
-			fetch(uri, {
-			    method: "GET",
-			    headers: { 'Content-Type': 'application/json', 'Authorization': this.props.accessCode },
-			})
-		    .then(response => {
-				if (response.status == 403) {
-					// Redirect to relogin perhaps?
-				    ////console.log('Authentication expired');
-	                const error = Object.assign({}, {
-	                    status: response.status,
-	                    statusText: response.statusText,
-	                    showDialog: true, 
-	                    dialogTitle: ERROR_DIALOG_TITLE_1, 
-	                    publicMessage: ERROR_DIALOG_PUBLIC_MSG_2, 
-                    	logMessage: 'Failed to connect to ' + uri
-	                });
-	                return Promise.reject(error);
-	            } else if (response.status == 200) {
-		    		return response.json();
-	            } else {
-					// Service unavailable
-				    ////console.log('Unexpected Error');
-	                const error = Object.assign({}, {
-	                    status: response.status,
-	                    statusText: response.statusText,
-	                    showDialog: true, 
-	                    dialogTitle: ERROR_DIALOG_TITLE_1, 
-	                    publicMessage: ERROR_DIALOG_PUBLIC_MSG_1, 
-	                    logMessage: 'Error occured at getEstimates operation'
-	                });
-	                return Promise.reject(error);
-	            }
-		    })
-		    .then((json) => {
-			    this.props.handleGetEstimatesReturn(json);
-		    })
-		    .catch((error) => {
-				////console.log('Boo in ' + uri);
-				////console.log(error);
-			  	this.props.handleFetchError(error);	  						  	
-		    }));	
+		trackPromise(this.props.fetchEstimatedBorrowingLimits(this.props.borrower, qParams, this.props.handleGetEstimatesReturn, this.props.handleFetchError));	
 	}
 
 	componentDidMount() {
@@ -203,17 +158,17 @@ class Borrow extends Component {
     }
 }
 
-const mapStateToProps = ({ entryReducer, borrowReducer, authReducer }) => {
+const mapStateToProps = ({ entryReducer, borrowReducer, authReducer, disclosureReducer }) => {
   const { showButtons, borrowStep } = entryReducer;
   const { accessCode, borrower } = authReducer;
   const { mainApplicantAnnualIncome, jointApplicantAnnualIncome, borrowingTerm, numDependants, interestRate, } = borrowReducer;
   return { showButtons, borrowStep, 
   	mainApplicantAnnualIncome, jointApplicantAnnualIncome, borrowingTerm, numDependants, interestRate, 
-  	accessCode, borrower };
+	  accessCode, borrower,  };
 };
 
 export default connect(mapStateToProps, { closeCalculator, calculateBorrowing, 
 	mainApplicantAnnualIncomeUpdated, jointApplicantAnnualIncomeUpdated,
 	borrowingTermUpdated, dependantsUpdated, interestRateUpdated, 
 	handleGetEstimatesReturn, handleFetchError, 
-	onClickApplyButton, })(Borrow);
+	onClickApplyButton, fetchEstimatedBorrowingLimits })(Borrow);
