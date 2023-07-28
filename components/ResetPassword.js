@@ -33,9 +33,9 @@ class ResetPassword extends Component {
     	return (
 			<View>
 				<Portal>
-					<Dialog visible={this.props.resetPassword} style={{position: 'absolute' , top:'2%'}} >
+					<Dialog visible={this.props.resetPassword} style={{position: 'absolute' , alignSelf:"center", top:'2%'}} >
 						<Dialog.Title>
-							<View style={styles.endToEndLayout}>
+							<View style={{flexDirection: "row", justifyContent: "space-between", alignItems:"center", width:'95%' }}>
 								<Text style={styles.textMediumBoldLogoDarkBlue}>Reset password</Text>
 								<Icon.Button name={'close-circle'} size={30} borderRadius={10} 
 									backgroundColor={TRANSPARENT}  color={LOGO_DARK_BLUE} 
@@ -86,7 +86,7 @@ class ResetPassword extends Component {
 				<Portal>
 					<Dialog visible={this.state.enterPassword} style={[styles.centreAligned, {position: 'absolute', top:'2%',  }]}  >
 						<Dialog.Title>
-							<View style={styles.endToEndLayout}>
+							<View style={{flexDirection: "row", justifyContent: "space-between", alignItems:"center", width:'95%' }}>
 								<Text style={styles.textMediumBoldLogoDarkBlue}>Verify and reset password</Text>
 								<Icon.Button name={'close-circle'} size={30} borderRadius={10} 
 									backgroundColor={TRANSPARENT}  color={LOGO_DARK_BLUE} 
@@ -143,7 +143,7 @@ class ResetPassword extends Component {
 				<Portal>
 					<Dialog visible={this.state.passwordChanged} style={{position: 'absolute', top:'2%' }}  >
 						<Dialog.Title>
-							<View style={styles.endToEndLayout}>
+							<View style={{flexDirection: "row", justifyContent: "space-between", alignItems:"center", width:'95%' }}>
 								<Text style={styles.textMediumBoldLogoDarkBlue}>Password updated</Text>
 								<Icon.Button name={'close-circle'} size={30} borderRadius={10} 
 									backgroundColor={TRANSPARENT}  color={LOGO_DARK_BLUE} 
