@@ -39,7 +39,7 @@ class Home extends Component {
 		//console.log(this.props)
 		const styles = getStyleSheet();
     	return (
-	    	<View style={styles.container}>
+	    	<View style={[styles.container]}>
 				<LinearGradient
 					colors={[WHITE,BACKGROUND_LIGHT_BLUE]} style={styles.background}
 					start={{x:0,y:1}} end={{x:0,y:0}} />

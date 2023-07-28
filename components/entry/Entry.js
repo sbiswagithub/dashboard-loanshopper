@@ -19,94 +19,53 @@ import Deals from '../deals/Deals';
 import ErrorDialog from '../ErrorDialog'
 import { LOGO_BRIGHT_BLUE, LOGO_DARK_BLUE, BACKGROUND_LIGHT_GRAY, WHITE } from '../../constants/colors';
 
+function AButton (props) {
+
+  const styles = getStyleSheet();
+	return (
+		<View  style={[styles.entryButtonRowContent,]}>
+			<TouchableOpacity onPress={props.buttonAction} style={{width:'50%', padding:'2%', alignSelf:"center", borderWidth:2, borderRadius:20, borderColor: WHITE}} >
+			<LinearGradient
+					colors={[ LOGO_DARK_BLUE, LOGO_BRIGHT_BLUE, ]}
+					style={[styles.background, { borderWidth: 1, borderRadius: 20,borderColor: WHITE}]}
+					start={{ x: 0.5, y: 1 }}
+					end={{ x: 0.5, y: 0 }}
+				/>
+			<View style={[styles.tableRow]}>
+				<Avatar.Icon size={50} icon={props.numericIcon} color={LOGO_DARK_BLUE} style={{backgroundColor:LOGO_BRIGHT_BLUE,}}  />
+				<Text style={styles.largeBlueButtonText}>{props.buttonText}</Text>
+			</View>
+			</TouchableOpacity>				
+		</View>
+	);
+}
+
 function EntryButtons(props) {
-  const navigation = useNavigation();
   const styles = getStyleSheet();
 
   return (
-		  <View style={{height:"100%"}}>
+		  <View style={{ width:'100%'}}>
 			{props.showButtons ? 
 
-			<View>
-				<View style={[styles.stackedSimpleLayout, {maxWidth:"95%", maxHeight:'20%', alignSelf:"center", alignItems:"stretch"}]}>
-					<View style={styles.space}/>
+			<View style={{justifyContent:"space-between", alignSelf:"stretch"}} >
+				<View style={styles.space}/>
+				<View style={[styles.stackedSimpleLayout, {maxWidth:"95%", alignSelf:"center", alignItems:"stretch"}]}>
 					<Text style={styles.textMediumLogoDarkBlue}>{HOME_BANNER_1}</Text> 
-					<View style={styles.space}/>
 					<Text style={styles.textLargeLogoDarkBlue}>{HOME_BANNER_2}</Text> 
-					<View style={styles.space}/>
 				</View>
-				<View style={{justifyContent:"space-between", alignSelf:"center", height:'80%'}} >
+				<View style={styles.space}/>
+				<View style={{justifyContent:"space-between", alignSelf:"stretch"}} >
+					<AButton buttonAction={props.onClickBorrowButton} buttonText={BUTTON_1_BANNER} numericIcon='numeric-1-circle' />
 					<View style={styles.space}/>
-					<View  style={styles.entryButtonRowContent}>
-						
-						<TouchableOpacity onPress={() => { props.onClickBorrowButton() }} >
-						<LinearGradient
-								colors={[
-								LOGO_DARK_BLUE,
-								LOGO_BRIGHT_BLUE,
-								]}
-								style={[styles.background, { borderWidth: 1, borderRadius: 25,borderColor: WHITE}]}
-								start={{ x: 0.5, y: 1 }}
-								end={{ x: 0.5, y: 0 }}
-							/>
-						<View style={styles.tableRow}>
-							<View style={styles.tableColumn20pct}>
-								<Avatar.Icon size={50} icon="numeric-1-circle" color={LOGO_DARK_BLUE} style={{backgroundColor:LOGO_BRIGHT_BLUE,}}  />
-							</View>
-							<View style={styles.tableColumn80pct}>
-								<Text style={styles.largeBlueButtonText}>{BUTTON_1_BANNER}</Text>
-							</View>
-						</View>
-						</TouchableOpacity>				
-					</View>
+					<AButton buttonAction={props.onClickApplyButton} buttonText={BUTTON_2_BANNER} numericIcon='numeric-2-circle' />
 					<View style={styles.space}/>
-					<View style={styles.entryButtonRowContent}>
-						<TouchableOpacity onPress={() => { props.onClickApplyButton() }} >
-						<LinearGradient
-								colors={[
-								LOGO_DARK_BLUE,
-								LOGO_BRIGHT_BLUE,
-								]}
-								style={[styles.background, { borderWidth: 1, borderRadius: 25,borderColor: WHITE}]}
-								start={{ x: 0.5, y: 1 }}
-								end={{ x: 0.5, y: 0 }}
-							/>
-							<View style={styles.tableRow}>
-								<View style={styles.tableColumn20pct}>
-									<Avatar.Icon size={50} icon="numeric-2-circle" color={LOGO_DARK_BLUE} style={{backgroundColor:LOGO_BRIGHT_BLUE,}}  />									
-								</View>
-								<View style={styles.tableColumn80pct}>
-									<Text style={styles.largeBlueButtonText}>{BUTTON_2_BANNER}</Text>
-								</View>
-							</View>
-						</TouchableOpacity>
-					</View>
-					<View style={styles.space}/>
-					<View style={styles.entryButtonRowContent}>
-						<TouchableOpacity onPress={() => { 
+					<AButton buttonAction={() => {
 							props.setViewMode(CALENDAR_MODE);
-							props.onClickReviewButton(); }} >
-							<LinearGradient
-									colors={[
-									LOGO_DARK_BLUE,
-									LOGO_BRIGHT_BLUE,
-									]}
-									style={[styles.background, { borderWidth: 1, borderRadius: 25,borderColor: WHITE}]}
-									start={{ x: 0.5, y: 1 }}
-									end={{ x: 0.5, y: 0 }}
-								/>
-							<View style={styles.tableRow}>
-								<View style={styles.tableColumn20pct}>
-									<Avatar.Icon size={50} icon="numeric-3-circle" color={LOGO_DARK_BLUE} style={{backgroundColor:LOGO_BRIGHT_BLUE,}}  />
-								</View>
-								<View style={styles.tableColumn80pct}>
-									<Text style={styles.largeBlueButtonText}>{BUTTON_3_BANNER}</Text>
-								</View>
-							</View>
-						</TouchableOpacity>
-					</View>
+							props.onClickReviewButton();
+					}} buttonText={BUTTON_3_BANNER} numericIcon='numeric-3-circle' />
 					<View style={styles.space}/>
 				</View>
+				<View style={styles.space}/>
 			</View>
 			: 
 			props.showCalculator ? <Borrow /> : 
@@ -136,21 +95,19 @@ class Entry extends Component {
     render () {
     	const styles = getStyleSheet();
     	return (
-	    	<View>
-	    		<View style={styles.entryPanel}>
-			    	<EntryButtons {...this.props}
-			    		showButtons={this.props.showButtons} 
-			    		showDisclosure={this.props.showDisclosure}
-			    		showReview={this.props.showReview}
-						showCalculator={this.props.showCalculator}
-						showDeals={this.props.showDealInProgress}
-			    		onClickBorrowButton={this.props.onClickBorrowButton} 
-			    		onClickApplyButton={this.props.onClickApplyButton}
-			    		onClickReviewButton={this.props.onClickReviewButton}
-			    		onClickDealsButton={this.props.onClickDealsButton} />
-				</View>
-				<ErrorDialog />
-		    </View>
+			<View style={[styles.entryPanel,{width:'100%',alignSelf:"center"}]}>
+				<EntryButtons {...this.props}
+					showButtons={this.props.showButtons} 
+					showDisclosure={this.props.showDisclosure}
+					showReview={this.props.showReview}
+					showCalculator={this.props.showCalculator}
+					showDeals={this.props.showDealInProgress}
+					onClickBorrowButton={this.props.onClickBorrowButton} 
+					onClickApplyButton={this.props.onClickApplyButton}
+					onClickReviewButton={this.props.onClickReviewButton}
+					onClickDealsButton={this.props.onClickDealsButton} />
+			<ErrorDialog />
+			</View>
         )
     }
 }

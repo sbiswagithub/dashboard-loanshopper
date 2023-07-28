@@ -634,8 +634,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   largeBlueButtonText: {
-    padding: 10,
-    margin: 10,
     color: WHITE,
     fontSize: 12,
     fontWeight: 'bold',
@@ -880,13 +878,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     margin: 3,
   },
-  entryPanel: { flex: 1, flexDirection: "column", paddingTop:"2%" },
+  entryPanel: { flex: 1, flexDirection: "column",  },
   entryButtonRowContent: {
     flexDirection: "row",
     alignItems: "stretch",
     justifyContent: "center",
-    width: "95%",
-    height:'20%'
   },
   // ********************
   // Bottom Tabs
