@@ -1111,7 +1111,7 @@ const styles = StyleSheet.create({
     marginRight: 25,
   },
   // Borrowing Estimates Charts
-  stackedBarChart: { marginVertical: 8, borderRadius: 10 },
+  stackedBarChart: { marginVertical: 8, borderRadius: 10, fontFamily : 'Arial' },
 
   // Compare proposals
   compareScrollPanel: { borderRightWidth: 1, borderColor: "#ffffff" },

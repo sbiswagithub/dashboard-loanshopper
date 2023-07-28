@@ -52,10 +52,7 @@ class AmortizationChart extends Component {
 				yAxisInterval={1} // optional, defaults to 1
 				chartConfig={amortizationChartConfig}
 				bezier
-				style={{
-				      marginVertical: 8,
-				      borderRadius: 10
-				    }}
+				style={styles.stackedBarChart}
 				/>
 			</View>
         )
