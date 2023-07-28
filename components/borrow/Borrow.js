@@ -126,7 +126,7 @@ class Borrow extends Component {
 				</View>
     		</View>
 			<View style={{flexDirection:'row',alignItems:"flex-start", alignSelf:'center', width:'100%'}}>
-				<View style={{flexDirection:'column', maxWidth:"30%", marginRight:'1%'}}>
+				<View style={{flexDirection:'column', width:"30%", marginRight:'1%'}}>
 				<View style={[styles.borrowPanel]}>
 					<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{MAIN_APPL_ANN_INC}</Text>
 					<View style={styles.boxRow}>
@@ -187,7 +187,7 @@ class Borrow extends Component {
 				</View>
 				</View>
 
-				<View style={[styles.borrowPanel,{flexDirection:'column', width:'80%',  maxHeight:'35%'}]}>
+				<View style={[styles.borrowPanel,{flexDirection:'column', width:'65%',  maxHeight:'35%'}]}>
 				<ScrollView keyboardShouldPersistTaps='handled' 
 					showsHorizontalScrollIndicator={true} showsVerticalScrollIndicator={true} 
 					horizontal={false} >
