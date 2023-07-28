@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Keyboard, View, } from 'react-native';
-import { Switch, IconButton, TextInput , Dialog, Subheading,  } from 'react-native-paper';
+import { IconButton, TextInput , Dialog, Subheading,  } from 'react-native-paper';
+import Constants from 'expo-constants';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { trackPromise, usePromiseTracker  } from 'react-promise-tracker';
 
 import getStyleSheet from '../../styles/styles';  
 import { setFilesUploadOtp, switchDocumentUploaderMode, hideDocumentUploaderModal, toQueryString, handleFetchError, showStagingDocuments } from '../../actions';
@@ -21,7 +21,7 @@ class EmailUploader extends Component {
 	getDocumentsForOtp(input) {
 		if (input.length === 5) {
 			// Hide keyboard to stop further user input
-			Keyboard.dismiss();
+			if (!Constants.platform.web) Keyboard.dismiss();
 
 			this.props.setFilesUploadOtp(input);
 			this.props.fetchStagingDocumentsAction(input, this.props, this.props.showStagingDocuments);

@@ -2,6 +2,7 @@ import React, { Component, useState } from "react";
 import { Keyboard,TouchableWithoutFeedback,Text, TextInput, View, SafeAreaView, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { trackPromise  } from 'react-promise-tracker';
+import Constants from 'expo-constants';
 
 import getStyleSheet from '../styles/styles';  
 import { EMAIL_DEFAULT, MOBILE_DEFAULT } from '../constants/disclosure';
@@ -17,6 +18,7 @@ import ErrorDialog from './ErrorDialog';
 import SpinnerHolder from './common/SpinnerHolder';
 import PreRegistrationDeclaration from './PreRegistrationDeclaration';
 import {  LOGO_BRIGHT_BLUE, TRANSPARENT, LOGO_DARK_BLUE, } from "../constants/colors";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 class EmailRegistration extends Component {
 
@@ -33,7 +35,7 @@ class EmailRegistration extends Component {
 			&& !this.props.hasDuplicateEmail && !this.props.hasDuplicateMobile
     	return (
         <SafeAreaView style={styles.container}>
-			<TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+			<TouchableOpacity onPress={Constants.platform.web ? undefined :  Keyboard.dismiss} accessible={false}>
 			<View style={styles.stackedLayout}>
 				<View style={styles.space}/>
 				<Image source={require('../assets/LoanShopper_LR.png')}  style={styles.logoMastheadWide} />
@@ -99,7 +101,7 @@ class EmailRegistration extends Component {
 				<SpinnerHolder />
 				<ErrorDialog />
 			</View>
-			</TouchableWithoutFeedback>
+			</TouchableOpacity>
 	    </SafeAreaView>
         )
     }

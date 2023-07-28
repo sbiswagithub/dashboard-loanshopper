@@ -1,5 +1,6 @@
-import React, { useState, Component } from "react";
-import { Keyboard, View, TextInput, Text, TouchableWithoutFeedback  } from 'react-native';
+import Constants from 'expo-constants';
+import React, { Component } from "react";
+import { Keyboard, View, TextInput, Text, } from 'react-native';
 import { connect } from 'react-redux';
 import Moment from 'moment';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -28,7 +29,10 @@ class DateOfBirth extends Component {
   				  <Text style={[styles.textSmallBoldGray, {marginTop:5}]}>{DOB_BANNER}</Text>
 			      <View style={{ flexDirection:'row', justifyContent: 'space-around' }}>
 			    	<TextInput style={[styles.whiteBgCentredTextInput, styles.disclTextEntryWide,]} 
-			    		onFocus={() => {this.props.toggleDatePicker(this.props.showDp);Keyboard.dismiss();}} clearTextOnFocus={true} placeholder={'DD-MMM-YYYY'} 
+			    		onFocus={() => {
+							this.props.toggleDatePicker(this.props.showDp);
+							if (!Constants.platform.web) Keyboard.dismiss();}} 
+						clearTextOnFocus={true} placeholder={'DD-MMM-YYYY'} 
 			    		value={this.props.dob === null ? '' : Moment(this.props.dob).format('DD-MMM-YYYY')} />
 			      </View>
 		      </View>

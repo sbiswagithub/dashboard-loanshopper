@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Constants from 'expo-constants';
 import { Keyboard, View, Text, Alert, ScrollView  } from 'react-native';
 import { Switch, Button, Paragraph, Dialog, Portal, } from 'react-native-paper';
 import { connect } from 'react-redux';
@@ -30,7 +31,7 @@ class Disclosure extends Component {
     // Save switch 
 	_onToggleSwitch () {
 		// Hide keyboard if visible
-		Keyboard.dismiss();
+		if (!Constants.platform.web) Keyboard.dismiss();
 		// Remove co borrower if full name is not set
     	if (this.props.editMode && 
     		!this.props.checkFullName(this.props.titleCoBorr, this.props.firstNameCoBorr, this.props.lastNameCoBorr)){

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text , View, TextInput,  } from 'react-native';
+import { View, TextInput,  } from 'react-native';
 import { connect } from 'react-redux';
 import { Chip  } from 'react-native-paper';
 
@@ -24,7 +24,9 @@ class Name extends Component {
 	    		</View>
 	    		<View style={styles.space}/>
 
-    			<TextInput style={[styles.whiteBgCentredTextInput, styles.disclTextEntryWide]} clearTextOnFocus={true} onFocus={() => {this.props.fnameUpdated('')}} onChangeText={text => this.props.fnameUpdated(text)}
+				<TextInput style={[styles.whiteBgCentredTextInput, styles.disclTextEntryWide]} 
+					selectTextOnFocus={true} 
+					onChangeText={text => this.props.fnameUpdated(text)}
 	    			value={this.props.firstName} placeholder={FNAME_DEFAULT}  />
 	    		<View style={styles.space}/>
 
