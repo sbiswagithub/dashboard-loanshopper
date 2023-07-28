@@ -47,14 +47,14 @@ function EntryButtons(props) {
 		  <View style={{ width:'100%'}}>
 			{props.showButtons ? 
 
-			<View style={{justifyContent:"space-between", alignSelf:"stretch"}} >
-				<View style={styles.space}/>
-				<View style={[styles.stackedSimpleLayout, {maxWidth:"95%", alignSelf:"center", alignItems:"stretch"}]}>
-					<Text style={styles.textMediumLogoDarkBlue}>{HOME_BANNER_1}</Text> 
-					<Text style={styles.textLargeLogoDarkBlue}>{HOME_BANNER_2}</Text> 
-				</View>
-				<View style={styles.space}/>
 				<View style={{justifyContent:"space-between", alignSelf:"stretch"}} >
+					<View style={styles.space}/>
+					<View style={styles.space}/>
+					<View style={[{flexDirection:"row", alignSelf:"center", alignItems:"stretch"}]}>
+						<Text style={styles.textMediumLogoDarkBlue}>{HOME_BANNER_1}</Text> 
+						<Text style={styles.textLargeLogoDarkBlue}>{HOME_BANNER_2}</Text> 
+					</View>
+					<View style={styles.space}/>
 					<AButton buttonAction={props.onClickBorrowButton} buttonText={BUTTON_1_BANNER} numericIcon='numeric-1-circle' />
 					<View style={styles.space}/>
 					<AButton buttonAction={props.onClickApplyButton} buttonText={BUTTON_2_BANNER} numericIcon='numeric-2-circle' />
@@ -65,8 +65,6 @@ function EntryButtons(props) {
 					}} buttonText={BUTTON_3_BANNER} numericIcon='numeric-3-circle' />
 					<View style={styles.space}/>
 				</View>
-				<View style={styles.space}/>
-			</View>
 			: 
 			props.showCalculator ? <Borrow /> : 
 			props.showDisclosure ? <Disclosure /> : 

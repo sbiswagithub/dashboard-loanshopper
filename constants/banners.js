@@ -135,7 +135,7 @@ export const SIGNIN_BANNER_3 = "Connect with country wide registered licenced mo
 export const SIGNIN_BANNER_4 = "Enjoy extra cashback benefits, partner reward points and referral deals";
 // Home
 export const HOME_BANNER_1 = "Think - home loans...";
-export const HOME_BANNER_2 = "Think - you got this!";
+export const HOME_BANNER_2 = "  ...Think - you got this!";
 export const HOME_BANNER_3 = "Think - LoanShopper";
 // Quick Compare Panel
 export const QCOMP_BANNER_2 = "PO box";
