@@ -1,8 +1,9 @@
 import React, { useRef , Component } from "react";
-import {  Dimensions, Text, View, } from 'react-native';
+import {  Dimensions, Text, View,ScrollView } from 'react-native';
 import { Overlay } from 'react-native-elements';
 import { LineChart, StackedBarChart } from "react-native-chart-kit";
 import { connect } from 'react-redux';
+import Constants from 'expo-constants';
 
 import getStyleSheet from '../../styles/styles';  
 import { borrowingRangeChartConfig, weeklyInstalmentChartConfig, interestBarChartConfig, legends } from '../../constants/borrow';
@@ -40,8 +41,8 @@ class Charts extends Component {
     	const styles = getStyleSheet();
 
     	return (
-		<View style={{flexDirection:'column'}}>
-				<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{BORROWING_RANGE}</Text>
+			<View style={{flexDirection:'column', margin:'2%'}}>
+				<Text style={[styles.textSmallBoldGray]}>{BORROWING_RANGE}</Text>
 	            <StackedBarChart
   					style={styles.stackedBarChart}
 					data={{
@@ -49,13 +50,12 @@ class Charts extends Component {
 						  data: this.props.borrowingEstimatesData,
 						  barColors: [this.props.colorDarkBlue]
 						}}
-				      width={Dimensions.get("window").width*0.75} // from react-native
+				      width={Dimensions.get("window").width * (Constants.platform.web ? 0.3 : 0.75)} // from react-native
 					  height={200}
 					  withHorizontalLabels={false}
 					  chartConfig={borrowingRangeChartConfig}
 				/>    		
-	    		<View style={styles.hr} />
-				<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{EST_WEEKLY_INSTALMENT}</Text>
+				<Text style={[styles.textSmallBoldGray]}>{EST_WEEKLY_INSTALMENT}</Text>
 				<StackedBarChart
   					style={styles.stackedBarChart}
 					data={{
@@ -63,13 +63,12 @@ class Charts extends Component {
 						  data: this.props.weeklyInstalmentsData,
 						  barColors: [this.props.colorPaleBlue]
 						}}
-				      width={Dimensions.get("window").width*0.75} // from react-native
+				      width={Dimensions.get("window").width * (Constants.platform.web ? 0.3 : 0.75)} // from react-native
 					  height={200}
 					  withHorizontalLabels={false}
 					  chartConfig={borrowingRangeChartConfig}
 				/> 		
-	    		<View style={styles.hr} />
-				<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{INTEREST_AND_PRINCIPAL}</Text>
+				<Text style={[styles.textSmallBoldGray]}>{INTEREST_AND_PRINCIPAL}</Text>
 	            <StackedBarChart
   					style={styles.stackedBarChart}
 					data={{
@@ -78,13 +77,12 @@ class Charts extends Component {
 						  data: this.props.interestAndPrincipal,
 						  barColors: ["#00b4f0","#20225d"]
 						}}
-				      width={Dimensions.get("window").width*0.75} 
+				      width={Dimensions.get("window").width * (Constants.platform.web ? 0.3 : 0.75)} 
 					  height={275}
 					  withHorizontalLabels={false}
 					  chartConfig={interestBarChartConfig}
 				/>    		
-	    		<View style={styles.hr} />
-				<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{AMORTIZATION}</Text>
+				<Text style={[styles.textSmallBoldGray]}>{AMORTIZATION}</Text>
  				<AmortizationChart />	
 				<Overlay overlayStyle={styles.overlayOceanBlue} fullScreen={false} isVisible={this.props.indexData != null} onBackdropPress={() => {this.props.showIndexData(null)}}>
  				  <View style={{width:275}}>
@@ -93,6 +91,7 @@ class Charts extends Component {
 			      </View>
 			    </Overlay>
 			</View>
+			
         )
     }
 }

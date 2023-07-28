@@ -4,6 +4,7 @@ import { Slider, Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { trackPromise, usePromiseTracker  } from 'react-promise-tracker';
 import Icon from 'react-native-vector-icons/AntDesign';
+import Constants from 'expo-constants';
 
 import getStyleSheet from '../../styles/styles';  
 import { BORR_CALC_BANNER, MAIN_APPL_ANN_INC, JOINT_APPL_ANN_INC, 
@@ -110,93 +111,91 @@ class Borrow extends Component {
     	const styles = getStyleSheet();
 
     	return (
-		<View style={{flexDirection:'column',height:"93%"}}>
-    		<View style={styles.space}/>
-			<Text style={styles.textMediumBoldGray} >{BORR_CALC_BANNER}</Text>
-    		<View style={styles.space}/>
+		<View style={{flexDirection:'column',  alignSelf: "stretch", marginLeft:'1%', marginRight:'1%'}}>
+    		<View style={{flexDirection:'row',justifyContent:'space-between', paddingTop:"1%", paddingBottom:"2%"}}>
+				<Text style={styles.textMediumBoldGray} >{BORR_CALC_BANNER}</Text>
+				<View style={{flexDirection:'row',  alignItems:"flex-end" }}>
+					<View style={{marginRight:'2%'}}>
+					<Icon.Button name="cloudupload" size={20} borderRadius={25} 
+						backgroundColor={'#00b4f1'} iconStyle={{margin:8}} 
+						onPress={() => this.props.onClickApplyButton()}
+					>{NEXT}</Icon.Button></View>
+					<Icon.Button name="closesquareo" size={20} borderRadius={25}
+						backgroundColor={'#000000'} iconStyle={{margin:8}} 
+						onPress={() => this.props.closeCalculator()} >{CLOSE_BUTTON_BANNER}</Icon.Button>
+				</View>
+    		</View>
+			<View style={{flexDirection:'row',alignItems:"flex-start", alignSelf:'center', width:'100%'}}>
+				<View style={{flexDirection:'column', maxWidth:"30%", marginRight:'1%'}}>
+				<View style={[styles.borrowPanel]}>
+					<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{MAIN_APPL_ANN_INC}</Text>
+					<View style={styles.boxRow}>
+						<View style={styles.boxCol60}>
+							<Slider step={INCOME_STEP} minimumValue={MIN_INCOME} maximumValue={MAX_INCOME} value={this.props.mainApplicantAnnualIncome} 
+								onValueChange={value => this.whenUpdated(value, 1)} 
+								trackStyle={styles.track} thumbStyle={styles.thumb} thumbTintColor={THUMB_COLOR}  />
+						</View>
+						<View style={styles.boxCol40}>
+							<Text style={[styles.textSmallBoldBlue, {alignSelf:'flex-end', margin:5}]}>{'$' + this.props.mainApplicantAnnualIncome.toLocaleString(undefined, {maximumFractionDigits:0})} </Text>
+						</View>
+					</View>
 
-			<ScrollView showsVerticalScrollIndicator={false} style={{height: "90%"}} keyboardShouldPersistTaps='handled'>
-    		<View style={[styles.borrowPanel]}>
-				<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{MAIN_APPL_ANN_INC}</Text>
-	   			<View style={styles.boxRow}>
-		    		<View style={styles.boxCol60}>
-			    		<Slider step={INCOME_STEP} minimumValue={MIN_INCOME} maximumValue={MAX_INCOME} value={this.props.mainApplicantAnnualIncome} 
-			    			onValueChange={value => this.whenUpdated(value, 1)} 
-				    		trackStyle={styles.track} thumbStyle={styles.thumb} thumbTintColor={THUMB_COLOR}  />
-			        </View>
-		    		<View style={styles.boxCol40}>
-						<Text style={[styles.textSmallBoldBlue, {alignSelf:'flex-end', margin:5}]}>{'$' + this.props.mainApplicantAnnualIncome.toLocaleString(undefined, {maximumFractionDigits:0})} </Text>
-			        </View>
-		        </View>
+					<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{JOINT_APPL_ANN_INC}</Text>
+					<View style={styles.boxRow}>
+						<View style={styles.boxCol60}>
+							<Slider step={10000} maximumValue={MAX_INCOME} value={this.props.jointApplicantAnnualIncome} 
+								onValueChange={value => this.whenUpdated(value, 2)} 
+								trackStyle={styles.track} thumbStyle={styles.thumb} thumbTintColor={THUMB_COLOR}  />
+						</View>
+						<View style={styles.boxCol40}>
+							<Text style={[styles.textSmallBoldBlue, {alignSelf:'flex-end', margin:5}]}>{'$' + this.props.jointApplicantAnnualIncome.toLocaleString(undefined, {maximumFractionDigits:0})} </Text>
+						</View>
+					</View>
+					
+					<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{BORROWING_TERM}</Text>
+					<View style={styles.boxRow}>
+						<View style={styles.boxCol60}>
+							<Slider step={1} maximumValue={30} value={this.props.borrowingTerm} onValueChange={value => this.whenUpdated(value,3)}  
+								trackStyle={styles.track} thumbStyle={styles.thumb} thumbTintColor={THUMB_COLOR}  />
+						</View>
+						<View style={styles.boxCol40}>
+							<Text style={[styles.textSmallBoldBlue, {alignSelf:'flex-end', margin:5}]}>{this.props.borrowingTerm.toLocaleString(undefined, {maximumFractionDigits:0}) + ' years' } </Text>
+						</View>
+					</View>
 
-				<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{JOINT_APPL_ANN_INC}</Text>
-	   			<View style={styles.boxRow}>
-		    		<View style={styles.boxCol60}>
-			    		<Slider step={10000} maximumValue={MAX_INCOME} value={this.props.jointApplicantAnnualIncome} 
-			    			onValueChange={value => this.whenUpdated(value, 2)} 
-				    		trackStyle={styles.track} thumbStyle={styles.thumb} thumbTintColor={THUMB_COLOR}  />
-			        </View>
-		    		<View style={styles.boxCol40}>
-						<Text style={[styles.textSmallBoldBlue, {alignSelf:'flex-end', margin:5}]}>{'$' + this.props.jointApplicantAnnualIncome.toLocaleString(undefined, {maximumFractionDigits:0})} </Text>
-			        </View>
-		        </View>
-	    		
-				<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{BORROWING_TERM}</Text>
-	   			<View style={styles.boxRow}>
-		    		<View style={styles.boxCol60}>
-			    		<Slider step={1} maximumValue={30} value={this.props.borrowingTerm} onValueChange={value => this.whenUpdated(value,3)}  
-				    		trackStyle={styles.track} thumbStyle={styles.thumb} thumbTintColor={THUMB_COLOR}  />
-			        </View>
-		    		<View style={styles.boxCol40}>
-						<Text style={[styles.textSmallBoldBlue, {alignSelf:'flex-end', margin:5}]}>{this.props.borrowingTerm.toLocaleString(undefined, {maximumFractionDigits:0}) + ' years' } </Text>
-			        </View>
-		        </View>
+					<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{NUM_DEPENDANTS}</Text>
+					<View style={styles.boxRow}>
+						<View style={styles.boxCol60}>
+							<Slider step={1} maximumValue={MAX_DEPENDANTS} value={this.props.numDependants} onValueChange={value => this.whenUpdated(value,4)}  
+								trackStyle={styles.track} thumbStyle={styles.thumb} thumbTintColor={THUMB_COLOR}  />
+						</View>
+						<View style={styles.boxCol40}>
+							<Text style={[styles.textSmallBoldBlue, {alignSelf:'flex-end', margin:5}]}>{this.props.numDependants.toLocaleString(undefined, {maximumFractionDigits:0}) } </Text>
+						</View>
+					</View>
 
-				<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{NUM_DEPENDANTS}</Text>
-	   			<View style={styles.boxRow}>
-		    		<View style={styles.boxCol60}>
-			    		<Slider step={1} maximumValue={MAX_DEPENDANTS} value={this.props.numDependants} onValueChange={value => this.whenUpdated(value,4)}  
-				    		trackStyle={styles.track} thumbStyle={styles.thumb} thumbTintColor={THUMB_COLOR}  />
-			        </View>
-		    		<View style={styles.boxCol40}>
-						<Text style={[styles.textSmallBoldBlue, {alignSelf:'flex-end', margin:5}]}>{this.props.numDependants.toLocaleString(undefined, {maximumFractionDigits:0}) } </Text>
-			        </View>
-		        </View>
+					<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{INTEREST_RATE}</Text>
+					<View style={styles.boxRow}>
+						<View style={styles.boxCol60}>
+							<Slider maximumValue={MAX_INTEREST_RATE} value={this.props.interestRate} onValueChange={value => this.whenUpdated(value,5)}  
+								trackStyle={styles.track} thumbStyle={styles.thumb} thumbTintColor={THUMB_COLOR}  />
+						</View>
+						<View style={styles.boxCol40}>
+							<Text style={[styles.textSmallBoldBlue, {alignSelf:'flex-end', margin:5}]}>{this.props.interestRate.toLocaleString(undefined, {maximumFractionDigits:2}) + '%'  } </Text>
+						</View>
+					</View>
+				</View>
+				</View>
 
-				<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{INTEREST_RATE}</Text>
-	   			<View style={styles.boxRow}>
-		    		<View style={styles.boxCol60}>
-			    		<Slider maximumValue={MAX_INTEREST_RATE} value={this.props.interestRate} onValueChange={value => this.whenUpdated(value,5)}  
-				    		trackStyle={styles.track} thumbStyle={styles.thumb} thumbTintColor={THUMB_COLOR}  />
-			        </View>
-		    		<View style={styles.boxCol40}>
-						<Text style={[styles.textSmallBoldBlue, {alignSelf:'flex-end', margin:5}]}>{this.props.interestRate.toLocaleString(undefined, {maximumFractionDigits:2}) + '%'  } </Text>
-			        </View>
-		        </View>
+				<View style={[styles.borrowPanel,{flexDirection:'column', width:'80%',  maxHeight:'35%'}]}>
+				<ScrollView keyboardShouldPersistTaps='handled' 
+					showsHorizontalScrollIndicator={true} showsVerticalScrollIndicator={true} 
+					horizontal={false} >
+					<Charts />	
+				</ScrollView>
+				</View>
 
-	    		<View style={styles.hr} />
-
-			<View style={[styles.disclosureContainer]}>
-	    		<Charts />		
-		    </View>
 			</View>
-			</ScrollView>		
-
-    		<View style={{flexDirection:'row',justifyContent:'space-between', paddingTop:"5%", paddingBottom:"2%"}}>
-    		<View style={{flexDirection:'column', width:"40%"}}>
-		    	<Icon.Button name="closesquareo" size={20} borderRadius={25}
-		    		backgroundColor={'#000000'} iconStyle={{margin:8}} 
-		onPress={() => this.props.closeCalculator()} >{CLOSE_BUTTON_BANNER}</Icon.Button>
-    		</View>
-    		<View style={{flexDirection:'row', justifyContent:"flex-end", width:"40%", }}>
-		    	<Icon.Button name="cloudupload" size={20} borderRadius={25}
-		    		backgroundColor={'#00b4f1'} iconStyle={{margin:8}} 
-					onPress={() => this.props.onClickApplyButton()}
-				 >{NEXT}</Icon.Button>
-    		</View>
-    		</View>
-
-
 	      	<SpinnerHolder />
         </View>
 

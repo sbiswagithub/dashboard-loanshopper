@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Dimensions, View, } from 'react-native';
 import { LineChart } from "react-native-chart-kit";
 import { connect } from 'react-redux';
+import Constants from 'expo-constants';
 
 import getStyleSheet from '../../styles/styles';  
 import { amortizationChartConfig, legends, colourBlueLight, colourBlueDark } from '../../constants/borrow';
@@ -44,7 +45,7 @@ class AmortizationChart extends Component {
 						},
 						]
 					}}
-				width={Dimensions.get("window").width*0.75} 
+				width={Dimensions.get("window").width*(Constants.platform.web ? 0.3:0.75)} 
 				height={300}
 				yAxisLabel="$"
 				yAxisSuffix="k"
