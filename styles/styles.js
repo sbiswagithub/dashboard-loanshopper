@@ -986,11 +986,12 @@ const styles = StyleSheet.create({
     borderColor: "#00bcd4",
     borderWidth: 2.0,
     borderRadius: 20,
-    alignSelf: "flex-start",
-    margin: 5,
+    alignSelf: "center",
+    margin: '1%',
+    width:'80%'
   },
   disclosureMasthead: { flexDirection: "row" },
-  disclosureContainer: { width: "100%" },
+  disclosureContainer: { maxWidth: "100%" },
   disclosureMinRequirementsPanel: {
     borderColor: "#d1cebd",
     backgroundColor: "#EEEDE7",

@@ -23,61 +23,61 @@ class DisclosureSubmission extends Component {
     render () {
     	const styles = getStyleSheet();
     	return (
-			<>
-					<View style={this.props.editMode ? [{maxWidth:"99%"}] : [styles.disclosureBoxBlue]}>
-						
-						<View style={[styles.disclosureBoxColumn]}>
+		<>
+		<View style={this.props.editMode ? [{maxWidth:"80%", alignSelf:"center"}] : [styles.disclosureBoxBlue]}>
+			
+			<View style={[styles.disclosureBoxColumn]}>
 
-						{this.props.editMode ? 
-						<DisclosureEditable />	:	
-						<View>
-							<View style={styles.disclosureBoxRow}>
-							<SubmissionSection1/>
-							</View>
+			{this.props.editMode ? 
+			<DisclosureEditable />	:	
+			<View>
+				<View style={styles.disclosureBoxRow}>
+				<SubmissionSection1/>
+				</View>
 
-							<View style={styles.disclosureBoxRow}>
-							<SubmissionSection2/>
-							</View>
+				<View style={styles.disclosureBoxRow}>
+				<SubmissionSection2/>
+				</View>
 
-							<View style={styles.disclosureBoxRow}>
-							<SubmissionSection3/>
-							</View>
-							{ this.hasCoBorr() ? (
-								<View style={styles.disclosureBoxRow}>
-								<SubmissionSection4 />
-								</View>
-							) : null }
-							{ this.hasAssets() ? (
-								<View style={styles.disclosureBoxRow}>
-								<SubmissionSection5 />
-								</View>
-							) : null }
-							{ this.hasLiabilities() ? (
-								<View style={styles.disclosureBoxRow}>
-								<SubmissionSection6 />
-								</View>
-							) : null }
-							{ this.hasEstWklyExp() ? (
-								<View style={styles.disclosureBoxRow}>
-								<SubmissionSection7 />
-								</View>
-							) : null }
-							{ this.hasEstMnthlyExp() ? (
-								<View style={styles.disclosureBoxRow}>
-								<SubmissionSection8 />
-								</View>
-							) : null }
-							{ this.hasEstAnnualExp() ? (
-								<View style={styles.disclosureBoxRow}>
-								<SubmissionSection9 />
-								</View>
-							) : null }
-						</View>
-						}
-						</View>
-						
+				<View style={styles.disclosureBoxRow}>
+				<SubmissionSection3/>
+				</View>
+				{ this.hasCoBorr() ? (
+					<View style={styles.disclosureBoxRow}>
+					<SubmissionSection4 />
 					</View>
-			</>
+				) : null }
+				{ this.hasAssets() ? (
+					<View style={styles.disclosureBoxRow}>
+					<SubmissionSection5 />
+					</View>
+				) : null }
+				{ this.hasLiabilities() ? (
+					<View style={styles.disclosureBoxRow}>
+					<SubmissionSection6 />
+					</View>
+				) : null }
+				{ this.hasEstWklyExp() ? (
+					<View style={styles.disclosureBoxRow}>
+					<SubmissionSection7 />
+					</View>
+				) : null }
+				{ this.hasEstMnthlyExp() ? (
+					<View style={styles.disclosureBoxRow}>
+					<SubmissionSection8 />
+					</View>
+				) : null }
+				{ this.hasEstAnnualExp() ? (
+					<View style={styles.disclosureBoxRow}>
+					<SubmissionSection9 />
+					</View>
+				) : null }
+			</View>
+			}
+			</View>
+			
+		</View>
+		</>
         )	
     }
 

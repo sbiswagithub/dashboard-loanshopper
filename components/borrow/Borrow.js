@@ -67,9 +67,9 @@ class Borrow extends Component {
 
     	return (
 		<View style={{flexDirection:'column',  alignSelf: "stretch", marginLeft:'1%', marginRight:'1%'}}>
-    		<View style={{flexDirection:'row',justifyContent:'space-between', paddingTop:"1%", paddingBottom:"2%"}}>
-				<Text style={styles.textMediumBoldGray} >{BORR_CALC_BANNER}</Text>
-				<View style={{flexDirection:'row',  alignItems:"flex-end" }}>
+			<View style={{justifyContent:"space-between", margin:'1%'}}>
+				<Text style={[styles.textLargeLogoDarkBlue,{alignSelf:"center"} ]} >{BORR_CALC_BANNER}</Text>
+				<View style={{flexDirection:'row', alignSelf:"flex-end",  alignItems:"flex-end" }}>
 					<View style={{marginRight:'2%'}}>
 					<Icon.Button name="cloudupload" size={20} borderRadius={25} 
 						backgroundColor={'#00b4f1'} iconStyle={{margin:8}} 

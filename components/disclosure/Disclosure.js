@@ -8,7 +8,7 @@ import { trackPromise,  } from 'react-promise-tracker';
 import Icon from 'react-native-vector-icons/AntDesign';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
 
-import { onClickDealsButton, toApplication, showApplication, addressOnBlur, clearCoBorr, handleFetchError, loadLoanRequest, 
+import { onClickDealsButton, toApplication, showApplication, addressOnBlur, clearCoBorr, handleFetchError, 
 	closeDisclosure, toggleEditMode, toggleModal, toggleAcceptFlag, messageNext, editMore } from '../../actions';
 import { SHOW_MODAL, HIDE_MODAL, } from '../../actions/types';
 import { DISCLOSURE_BANNER, DISCLOSURE_EDIT_BANNER, DISCLOSURE_SAVE_BANNER, DISCLOSURE_POPUP_TITLE_2_BANNER, 
@@ -144,86 +144,57 @@ class Disclosure extends Component {
 	}
 
 	componentDidMount() {
-			// Load loan request details on load
-			const uri = `${API_LOAN_REQUESTS_URI}`;
-			trackPromise(
-				fetch(uri, {
-				    method: "GET",
-				    headers: { 'Content-Type': 'application/json', 'Authorization': this.props.accessCode },
-				})
-			    .then(response => {
-					if (response.status >= 400 && response.status < 600) {
-		                const error = Object.assign({}, {
-		                    status: response.status,
-		                    statusText: response.statusText,
-		                    showDialog: true, 
-		                    dialogTitle: ERROR_DIALOG_TITLE_1, 
-		                    publicMessage: ERROR_DIALOG_PUBLIC_MSG_1, 
-                    		logMessage: 'Failed to connect to ' + uri
-		                });
-		                return Promise.reject(error);
-					} else
-			    		return response.json();
-			    })
-			    .then((json) => {
-					this.props.loadLoanRequest(json);
-			    })
-			    .catch((error) => {
-				    ////console.log('Boo in GET /loanrequests ');
-				    ////console.log(error);
-				  	this.props.handleFetchError(error);	  						  	
-			    })); 
+
 	}
 
     render () {
 		const styles = getStyleSheet();
 		////console.log(this.props)
     	return (
-    		<View style={{flexDirection:'column', maxWidth:"100%", padding:'1%', justifyContent:'space-between'}}>    		
-				<View style={[styles.disclosureContainer, {flexDirection:'column', height:"88%", margin:'2%'}]}>
+    		<View style={{flexDirection:'column', justifyContent:'space-between'}}>    		
+				<View style={[styles.disclosureContainer, {flexDirection:'column', margin:'2%'}]}>
 					<View style={[styles.stackedSimpleLayout]}>
-						<Text style={styles.textMediumBoldGray} >{DISCLOSURE_BANNER}</Text>
+						<View style={{justifyContent:"space-between"}}>
+							<Text style={[styles.textLargeLogoDarkBlue, {alignSelf:"center"}]} >{DISCLOSURE_BANNER}</Text>
+							<View style={{flexDirection:'row', alignSelf:"flex-end", alignItems:"flex-end", justifyContent:"flex-end", width:"55%" }}>
+								<View style={{flexDirection:'row',justifyContent:'space-between'}}>
+									<View style={{flexDirection:'row',alignItems:"flex-start", justifyContent:"flex-start", width:"45%" }}>
+										<View style={{flexDirection:'row',justifyContent:'space-between'}}>
+											<FAIcon name="lock" size={this.props.editMode ? 20 : 40} color={this.props.editMode ? BACKGROUND_LIGHT_GRAY : LOGO_DARK_BLUE } />
+											<Switch color={LOGO_BRIGHT_BLUE} style={styles.padRight} value={this.props.editMode} color={HIGHLIGHTED_YELLOW}
+												onValueChange={() => {this._onToggleSwitch()}} />
+											<FAIcon name="unlock" size={this.props.editMode ? 40 : 20} color={this.props.editMode ? LOGO_BRIGHT_BLUE : BACKGROUND_LIGHT_GRAY } />
+										</View>
+									</View>
+								</View>
+							{this.props.applicationMode ? 
+								<Icon.Button name="cloudupload" size={20} borderRadius={25}
+									backgroundColor={LOGO_BRIGHT_BLUE} iconStyle={{margin:1}}
+								onPress={() => {
+									this.props.onClickDealsButton();
+									this.props.toApplication();
+									}} 
+									>{PREV}</Icon.Button>
+							: this.props.editMode &&  this.props.edit < 19 ? 
+								<Icon.Button name="forward" size={20} borderRadius={25}
+									backgroundColor={LOGO_BRIGHT_BLUE} iconStyle={{margin:1}}
+									onPress={()=>{this.props.editMore();}}
+									>{MORE}</Icon.Button> 
+							: !this.props.editMode  ? 
+								<Icon.Button name="cloudupload" size={20} borderRadius={25}
+									backgroundColor={LOGO_DARK_BLUE } iconStyle={{margin:1}}
+									onPress={()=>{this.props.messageNext(true);}}
+									>{CLOSE_BUTTON_BANNER}</Icon.Button> : null
+							}
+							</View>
+
+						</View>
 						<View style={styles.space}/>
-						<ScrollView showsVerticalScrollIndicator={false} style={{height:"85%", maxWidth: '95%'}} keyboardShouldPersistTaps='handled'>
+						<ScrollView showsVerticalScrollIndicator={false} style={{maxWidth: '95%'}} keyboardShouldPersistTaps='handled'>
 						<DisclosureSubmission />
 						</ScrollView>
 					</View>
 				</View>
-        		<View style={[styles.disclosureMasthead, {padding:'3%',height:"10%"}]}>
-					<View style={{flexDirection:'row',justifyContent:'space-between'}}>
-						<View style={{flexDirection:'row',alignItems:"flex-start", justifyContent:"flex-start", width:"45%" }}>
-							<View style={{flexDirection:'row',justifyContent:'space-between'}}>
-								<FAIcon name="lock" size={this.props.editMode ? 20 : 40} color={this.props.editMode ? BACKGROUND_LIGHT_GRAY : LOGO_DARK_BLUE } />
-								<Switch color={LOGO_BRIGHT_BLUE} style={styles.padRight} value={this.props.editMode} color={HIGHLIGHTED_YELLOW}
-									onValueChange={() => {this._onToggleSwitch()}} />
-								<FAIcon name="unlock" size={this.props.editMode ? 40 : 20} color={this.props.editMode ? LOGO_BRIGHT_BLUE : BACKGROUND_LIGHT_GRAY } />
-							</View>
-						</View>
-
-						<View style={{flexDirection:'row',alignItems:"flex-end", justifyContent:"flex-end", width:"55%" }}>
-						{this.props.applicationMode ? 
-							<Icon.Button name="cloudupload" size={20} borderRadius={25}
-								backgroundColor={LOGO_BRIGHT_BLUE} iconStyle={{margin:1}}
-							onPress={() => {
-								this.props.onClickDealsButton();
-								this.props.toApplication();
-								}} 
-								>{PREV}</Icon.Button>
-						: this.props.editMode &&  this.props.edit < 19 ? 
-							<Icon.Button name="forward" size={20} borderRadius={25}
-								backgroundColor={LOGO_BRIGHT_BLUE} iconStyle={{margin:1}}
-								onPress={()=>{this.props.editMore();}}
-								>{MORE}</Icon.Button> 
-						: !this.props.editMode  ? 
-							<Icon.Button name="cloudupload" size={20} borderRadius={25}
-								backgroundColor={LOGO_DARK_BLUE } iconStyle={{margin:1}}
-								onPress={()=>{this.props.messageNext(true);}}
-								>{CLOSE_BUTTON_BANNER}</Icon.Button> : null
-						}
-						</View>
-					</View>
-
-    			</View>
 				<Portal>
 					<Dialog visible={this.props.modalVisible} >
 					<Dialog.Title>{DISCLOSURE_POPUP_TITLE_2_BANNER }</Dialog.Title>
@@ -261,4 +232,4 @@ const mapStateToProps = ({ disclosureReducer, authReducer, entryReducer, proposa
   return { displayApplication, applicationMode,  accessCode , borrower, ...disclosureReducer  };
 };
 
-export default connect(mapStateToProps, { onClickDealsButton, toApplication, showApplication, addressOnBlur, clearCoBorr, handleFetchError, loadLoanRequest, closeDisclosure, toggleEditMode, toggleModal, toggleAcceptFlag, messageNext, editMore })(Disclosure);
+export default connect(mapStateToProps, { onClickDealsButton, toApplication, showApplication, addressOnBlur, clearCoBorr, handleFetchError, closeDisclosure, toggleEditMode, toggleModal, toggleAcceptFlag, messageNext, editMore })(Disclosure);
