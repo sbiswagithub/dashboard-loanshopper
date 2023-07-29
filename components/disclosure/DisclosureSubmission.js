@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 
 import getStyleSheet from '../../styles/styles';
@@ -30,7 +30,7 @@ class DisclosureSubmission extends Component {
 
 			{this.props.editMode ? 
 			<DisclosureEditable />	:	
-			<View>
+			<ScrollView showsVerticalScrollIndicator={false} style={{height:"85%", maxWidth: '95%'}} keyboardShouldPersistTaps='handled'>
 				<View style={styles.disclosureBoxRow}>
 				<SubmissionSection1/>
 				</View>
@@ -72,7 +72,7 @@ class DisclosureSubmission extends Component {
 					<SubmissionSection9 />
 					</View>
 				) : null }
-			</View>
+			</ScrollView>
 			}
 			</View>
 			
