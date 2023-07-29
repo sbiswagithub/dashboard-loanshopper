@@ -528,7 +528,7 @@ export default (state = INITIAL_STATE, action) => {
   case ADDRESS_FOUND:
       return { ...state, addressSet: false, addressStart : action.payload.addressStart, addresses : action.payload.addresses, addressSelection: action.payload.addressStart };
   case ADDRESS_SELECTED:
-      return { ...state, addressSet: true, addressIdx: action.payload.addressIdx, previousAddressSelection: action.payload.addressIdx, addressStart: action.payload.addressStart, addresses:[], addressSelection: action.payload.addressSelection };
+      return { ...state, addressSet: true, addressIdx: action.payload.addressIdx, previousAddressSelection: action.payload.addressSelection, addressStart: action.payload.addressStart, addresses:[], addressSelection: action.payload.addressSelection };
   case ADDRESS_UNSELECTED:
       return { ...state, addressSet: false, addressStart: null, addresses:[], addressSelection: null };
   case ADDRESS_BLUR:
@@ -537,7 +537,7 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, mortgageAddressSet: false, mortgageAddressStart : action.payload.addressStart, mortgageAddresses : action.payload.addresses, mortgageAddressSelection: action.payload.addressStart,  };
   case MORTGAGE_ADDRESS_SELECTED:
 	state.mortgageAddressesList.push(action.payload)
-  	return { ...state, mortgageAddressSet: true, mortgageAddressIdx: action.payload.addressIdx, mortgageAddressStart: action.payload.addressStart, mortgageAddressSelection: action.payload.addressSelection, mortgageAddresses:[], };
+  	return { ...state, mortgageAddressSet: true, mortgageAddressIdx: action.payload.addressIdx, previousMortgageAddressIdx: action.payload.addressIdx, mortgageAddressStart: action.payload.addressStart, mortgageAddressSelection: action.payload.addressSelection, mortgageAddresses:[], };
   case MORTGAGE_ADDRESS_UNSELECTED:
       return { ...state, mortgageAddressSet: false, mortgageAddressStart: null, mortgageAddresses:[], mortgageAddressSelection: null };
   case MORTGAGE_ADDRESS_BLUR:
