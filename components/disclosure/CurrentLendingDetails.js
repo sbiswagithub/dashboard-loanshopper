@@ -20,7 +20,8 @@ class CurrentLendingDetails extends Component {
   }
 
   render () {
-  	const styles = getStyleSheet();
+	  const styles = getStyleSheet();
+
     return (
 		<View>
 			<View style={styles.disclosureBoxRow}>

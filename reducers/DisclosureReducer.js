@@ -22,7 +22,7 @@ import {
 	RATE_PREF_UPDATED, FIRST_PREF_UPDATED, SECOND_PREF_UPDATED, REPAYMENT_PREF_UPDATED, EXTRAS_PREF_UPDATED, REDRAW, 
 	CURR_HOMELOAN_UPDATED, CURR_LENDER_UPDATED, CURR_REPAYMENT_UPDATED, CURR_HOME_LOAN_TYPE_UPDATED, 
 	MORTGAGE_ADDRESS_FOUND, MORTGAGE_ADDRESS_SELECTED, MORTGAGE_ADDRESS_UNSELECTED, MORTGAGE_ADDRESS_BLUR, MORTGAGE_ADDRESS_REMOVE,
-	EDIT_MORE, CHECK_ACCOUNT_FOR_MOBILE, CHECK_ACCOUNT_FOR_EMAIL, PROFESSION_BLUR
+	EDIT_MORE, CHECK_ACCOUNT_FOR_MOBILE, CHECK_ACCOUNT_FOR_EMAIL, PROFESSION_BLUR, EDIT_LESS
 	} from '../actions/types';
 import { TITLE_MR, TITLE_MS, TITLE_MRS, PERMANENT, SELF_EMPLOYED, CITIZEN, RESIDENT, WORK_VISA,
 	BOTH_RESI_AND_INVEST, RESIDENTIAL, INVESTMENT, FIRST_MORTGAGE, REFINANCE, LT_4_WEEKS, NORMAL_PERIOD,
@@ -364,7 +364,7 @@ const INITIAL_STATE = {
     email:'',
 	mobile:'',
 
-	lenderChoices: ['ANZ', 'Westpac'],
+	lenderChoices: ['Adelaide Bank','AFG Home Loans','AFM','AIMS Home Loans','AMO','AMP Bank','ANZ','Arab bank Australia','Assured','Athena','Aussie','Austral Mortgage','Australian Military Bank','Australian Mutual Bank','Australian Unity','Auswide Bank','AWA Alliance Bank','Bank Australia','Bank of China','Bank First','Bank of Heritage Isle','Bank of Melbourne','Bank of us','Bank of Sydney','BankSA','BankVic','Bankwest','bcu','BDCU Alliance Bank','Bendigo Bank','Better Choice','Better Mortgage Management','Beyond Bank','Bluestone','BOQ (Bank of Queensland)','Broken Hill Community Credit Union','Catalyst Money','Central West Credit Union','ChoiceLend','Circle Alliance Bank','Citi','ClickLoans','Commonwealth Bank','Community First Credit Union','Credit Union SA','Defence Bank','Easy Street Financial Services','ECU','Family First Credit Union','Fire Service Credit Union','Firefighters Mutual Bank','First Choice Credit Union','First Option Bank','Firstmac','Fox Symes','Freedom Lend','Gateway Bank','G&C Mutual Bank','Geelong Bank','Goldfields Money','Great Southern Bank','Greater Bank','Heritage Bank','Holiday Coast Credit Union','Homeloans.com.au','Homestar Finance','HomeStart Finance','Horizon Bank','HSBC Home Loans','Hume Bank','Hunter United','Illawarra Credit Union','IMB Bank','Indigenous Business Australia','Keystart','La Trobe Financial','Laboratories Credit Union','Liberty','loans.com.au','Lysaght Credit Union','My Credit Union','Macquarie Bank','Macquarie Credit Union','ME Bank','Mortgage Choice','Mortgage House','Mortgageport','MOVE Bank','MyState','NAB','Newcastle Permanent','Northern Inland Credit Union','Nova Alliance Bank','Orange Credit Union','Pacific Mortgage Group','People’s Choice','Pepper Money','P&N Bank','Police Bank','Police Credit Union','Pulse Credit Union','QBANK','Qudos Bank','Queensland Country Bank','Queenslanders Credit Union','RACQ Bank','RAMS','Reduce','Regional Australia Bank','Resi','SCU','SERVICE ONE Alliance Bank','Southern Cross Credit Union','St.George Bank','State Custodians','Summerland Credit Union','Suncorp Bank','The Capricornian','The Mac','The Rock','Teachers Mutual Bank','The Mutual Bank','Tic:Toc Home Loans','Transport Mutual Credit Union','Unibank','Unity Bank','Unloan','Virgin Money','Westpac','WLTH','Woolworths Employees’ Credit Union','Yard','Yellow Brick Road'],
 	currentLender: null,
 };
 
@@ -537,14 +537,13 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, mortgageAddressSet: false, mortgageAddressStart : action.payload.addressStart, mortgageAddresses : action.payload.addresses, mortgageAddressSelection: action.payload.addressStart,  };
   case MORTGAGE_ADDRESS_SELECTED:
 	state.mortgageAddressesList.push(action.payload)
-  	return { ...state, mortgageAddressSet: true, mortgageAddressIdx: action.payload.addressIdx, previousMortgageAddressIdx: action.payload.addressIdx, mortgageAddressStart: action.payload.addressStart, mortgageAddressSelection: action.payload.addressSelection, mortgageAddresses:[], };
+  	return { ...state, mortgageAddressSet: true, mortgageAddressIdx: action.payload.addressIdx, mortgageAddressStart: action.payload.addressStart, mortgageAddressSelection: action.payload.addressSelection, mortgageAddresses:[], };
   case MORTGAGE_ADDRESS_UNSELECTED:
-      return { ...state, mortgageAddressSet: false, mortgageAddressStart: null, mortgageAddresses:[], mortgageAddressSelection: null };
+      return { ...state, mortgageAddressSet: false, mortgageAddressIdx:'', mortgageAddressStart: null, mortgageAddresses:[], mortgageAddressSelection: null };
   case MORTGAGE_ADDRESS_BLUR:
-      return { ...state, mortgageAddressSet: state.previousMortgageAddressIdx != null, mortgageAddressIdx: state.previousMortgageAddressIdx, mortgageAddresses: [], };
+      return { ...state, mortgageAddressSet: false, mortgageAddressIdx:'', mortgageAddressStart: null, mortgageAddresses:[], mortgageAddressSelection: null};
   case MORTGAGE_ADDRESS_REMOVE:
       return { ...state, mortgageAddressesList: state.mortgageAddressesList.filter(address => address.addressIdx != action.payload?.addressIdx), };
-  
   case TITLE_COBORR_SELECTED:
 	  return { ...state, hasCoborrower: true, titleCoBorr: action.payload, titleMrCoBorr: action.payload === TITLE_MR, titleMrsCoBorr: action.payload === TITLE_MRS, titleMsCoBorr: action.payload === TITLE_MS };
   case FNAME_COBORR_UPDATED:
@@ -609,7 +608,7 @@ export default (state = INITIAL_STATE, action) => {
   case CURR_HOMELOAN_UPDATED:
 	  return { ...state, currentHomeLoan: action.payload };	  
   case CURR_LENDER_UPDATED:
-	  return { ...state, currentLender: action.payload.item };	  
+	  return { ...state, currentLender: action?.payload?.item ? action.payload.item : null };	  
   case CURR_REPAYMENT_UPDATED:
 	  return { ...state, currentRepayment: action.payload };	  
   case CURR_HOME_LOAN_TYPE_UPDATED:
@@ -669,6 +668,8 @@ export default (state = INITIAL_STATE, action) => {
   // General actions
   case TOGGLE_EDIT:
 	  return { ...state, editMode: !action.payload, isAccepted: action.payload, edit: EDIT_1 };
+  case EDIT_LESS:
+	  return { ...state, edit: state.edit-1};
   case EDIT_MORE:
 	  return { ...state, edit: state.edit+1};
   case SHOW_MODAL:

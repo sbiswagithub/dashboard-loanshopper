@@ -1,17 +1,16 @@
 import React, { } from 'react';
-import { TextInput, Text, View } from 'react-native';
+import { TextInput, View } from 'react-native';
 import { trackPromise,  } from 'react-promise-tracker';
 
 import getStyleSheet from '../../styles/styles';  
 import { API_ADDRESS_AUTOCOMPLETE_URI } from '../../constants/apiUrls';
 import { ERROR_DIALOG_PUBLIC_MSG_1, ERROR_DIALOG_TITLE_1 } from '../../constants/banners';
-import { TouchableHighlight } from 'react-native-gesture-handler';
 
 export const  AddressSelect = (props) =>  {
 	const styles = getStyleSheet();
-	
+	console.log(props)
     return (
-		<View>
+		<View >
 			<TextInput style={[styles.whiteBgCentredTextInput, styles.disclTextEntryWide, {marginTop:5, marginBottom:5}]} 
 				selectTextOnFocus={true} 
 				onBlur={props.addressOnBlur}
@@ -28,27 +27,21 @@ const AddressOptions = (props) =>  {
 	const styles = getStyleSheet();
     return (
       <View>
-      {
-		props.addresses.map((address) => {
+      {props.addresses.map((address) => {
 			return (
-			<TouchableHighlight  key={'address' + address.externalId} 
-				onPressIn={() => {
-					props.addressSelected({ ...address, addressIdx: address.externalId, addressStart: address.fullAddress, addressSelection: address.fullAddress})
-					}}>
-				<Text style={styles.dropdownOption}>{address.fullAddress == null ? "" : address.fullAddress}</Text>
-			</TouchableHighlight>)
+				<TextInput style={styles.dropdownOption} key={'addressentry' + Date.now() + address.externalId} 
+					editable={false}
+					value={address.fullAddress == null ? "" : address.fullAddress} 
+					onPointerDown={() => {
+						console.log(address)
+						props.addressSelected({ ...address, addressIdx: address.externalId, addressStart: address.fullAddress, addressSelection: address.fullAddress})
+					}}
+					></TextInput>)
 		})}
       </View>
     );
 };
 
-function getAddressText(addresses) {
-	const addressLines = [];
-	for (var index = 0; index < addresses.length; index++) {
-		addressLines.push(addresses[index].fullAddress);
-	}
-	return addressLines;
-}
 
 const getFullAddresses = (props, input) =>   {
 	//console.log(input)
@@ -78,7 +71,8 @@ const getFullAddresses = (props, input) =>   {
 		    		return response.json();
 		    })
 		    .then((addresses) => {
-					props.addressesFound({ addresses, addressStart: input });
+				//console.log(addresses)
+				props.addressesFound({ addresses, addressStart: input });
 		    })
 		    .catch((error) => {
 			    ////console.log('Boo in GET address autocomplete ' + error.statusText);

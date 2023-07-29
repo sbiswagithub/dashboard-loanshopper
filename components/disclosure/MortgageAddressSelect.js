@@ -9,17 +9,15 @@ import { AddressSelect } from './AddressComponentFunctions';
 import { MORTGAGE_ADDRESSES, START_WITH_RES, SELECT_MORTGAGE_ADDR } from '../../constants/banners';
 
 function DeleteFromList(props)  {
-  const list = [];
 	const styles = getStyleSheet();
-	for (const [index, item] of props.items.entries()) {
-		list.push(
-        <Chip icon="delete" style={[styles.chipNormal, {marginTop:"1%", marginBottom:"1%"}]} textStyle={styles.textSmallBoldWhite} 
-          onPress={() => {props.onRemoveItem(item)}}>{item?.fullAddress}</Chip>
-		)
-	}
     return (
       <View style={{maxWidth:"95%", alignContent:"center"}}>
-      {list}
+      {props.items.map((item) => {
+        return (
+          <Chip key={item._id} icon="delete" style={[styles.chipNormal, {marginTop:"1%", marginBottom:"1%"}]} textStyle={styles.textSmallBoldWhite} 
+            onPress={() => {props.onRemoveItem(item)}}>{item?.fullAddress}</Chip>
+        );
+      })}
       </View>
     );
   
@@ -29,21 +27,21 @@ function AddressSelectCart(props) {
 	const styles = getStyleSheet();
 	const [showCart, setShowCart] = useState(true)
   return (
-    <>
+    <View style={showCart ? {marginTop:"1%", marginBottom:"1%"} : {width:'80%'}}>
       { showCart ? 
-      <Chip icon="cart" style={[styles.chipNormal, {marginTop:"1%", marginBottom:"1%"}]} textStyle={styles.textSmallBoldWhite} 
+      <Chip icon="cart" style={[styles.chipNormal]} textStyle={styles.textSmallBoldWhite} 
         onPress={() => {
           setShowCart(false)
           props.addressUnSelected()
         }}>{'+'}</Chip> :
        <AddressSelect {...props} 
-          addressOnBlur={() => {
+          addressSelected={(address) => {
             setShowCart(true)
-            props.addressOnBlur()
+            props.addressSelected(address)
           }} />
         }
 
-    </>
+    </View>
   );
 }
 
@@ -64,8 +62,13 @@ class MortgageAddressSelect extends Component {
       {this.props.isBothResidentialAndInvestment ? 
       <Text style={[styles.textSmallLogoDarkBlue, {alignSelf:'center'}]}>{START_WITH_RES}</Text> : null }
       <View style={styles.space}/>
-
+      {this.props?.mortgageAddressesList && this.props.mortgageAddressesList.length > 0 ? 
 			<View style={styles.disclosureBoxRow}>
+        <DeleteFromList items={this.props.mortgageAddressesList} onRemoveItem={this.props.mortgageAddressRemoved} />
+      </View>: null }
+      <View style={styles.space}/>
+
+			<View style={[styles.disclosureBoxRow]}>
         <AddressSelectCart 
           accessCode={this.props.accessCode}
           addressSet={this.props.mortgageAddressSet}
@@ -83,11 +86,6 @@ class MortgageAddressSelect extends Component {
       </View>
       <View style={styles.space}/>
 
-      {this.props?.mortgageAddressesList && this.props.mortgageAddressesList.length > 0 ? 
-			<View style={styles.disclosureBoxRow}>
-        <DeleteFromList items={this.props.mortgageAddressesList} onRemoveItem={this.props.mortgageAddressRemoved} />
-      </View>: null }
-      <View style={styles.space}/>
 
     </View>
     )

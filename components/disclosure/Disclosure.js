@@ -9,7 +9,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
 
 import { onClickDealsButton, toApplication, showApplication, addressOnBlur, clearCoBorr, handleFetchError, 
-	closeDisclosure, toggleEditMode, toggleModal, toggleAcceptFlag, messageNext, editMore } from '../../actions';
+	closeDisclosure, toggleEditMode, toggleModal, toggleAcceptFlag, messageNext, editMore, editLess } from '../../actions';
 import { SHOW_MODAL, HIDE_MODAL, } from '../../actions/types';
 import { DISCLOSURE_BANNER, DISCLOSURE_EDIT_BANNER, DISCLOSURE_SAVE_BANNER, DISCLOSURE_POPUP_TITLE_2_BANNER, 
 	ACCEPTANCE_BANNER, ERROR_DIALOG_PUBLIC_MSG_1, ERROR_DIALOG_TITLE_1, NEXT, PREV, CLOSE_BUTTON_BANNER, NEXT_TITLE, NEXT_MESSAGE, MORE } from '../../constants/banners';
@@ -21,6 +21,19 @@ import DisclosureSubmission from './DisclosureSubmission';
 import ErrorDialog from '../ErrorDialog';
 import SpinnerHolder from '../common/SpinnerHolder';
 import { LOGO_DARK_BLUE, LOGO_BRIGHT_BLUE, BACKGROUND_LIGHT_GRAY, HIGHLIGHTED_YELLOW } from "../../constants/colors";
+
+const MoveButtons = (props) => {
+	return (
+		<>
+			<View style={{flexDirection:"row"}}>
+			<Icon.Button name="banckward" size={20} borderRadius={25} disabled={props.edit === 1 }
+				backgroundColor={props.edit > 1 ? LOGO_BRIGHT_BLUE : BACKGROUND_LIGHT_GRAY} iconStyle={{margin:1}} onPress={()=>{props.editLess();}}>{"Less"}</Icon.Button>		
+			<Icon.Button name="forward" size={20} borderRadius={25} disabled={props.edit === 19 }
+				backgroundColor={props.edit < 19 ? LOGO_BRIGHT_BLUE : BACKGROUND_LIGHT_GRAY} iconStyle={{margin:1}} onPress={()=>{props.editMore();}}>{MORE}</Icon.Button>		
+			</View>
+		</>
+	)
+}
 
 class Disclosure extends Component {
 
@@ -175,11 +188,8 @@ class Disclosure extends Component {
 									this.props.toApplication();
 									}} 
 									>{PREV}</Icon.Button>
-							: this.props.editMode &&  this.props.edit < 19 ? 
-								<Icon.Button name="forward" size={20} borderRadius={25}
-									backgroundColor={LOGO_BRIGHT_BLUE} iconStyle={{margin:1}}
-									onPress={()=>{this.props.editMore();}}
-									>{MORE}</Icon.Button> 
+							: this.props.editMode  ? 
+								<MoveButtons {...this.props} /> 
 							: !this.props.editMode  ? 
 								<Icon.Button name="cloudupload" size={20} borderRadius={25}
 									backgroundColor={LOGO_DARK_BLUE } iconStyle={{margin:1}}
@@ -194,7 +204,7 @@ class Disclosure extends Component {
 					</View>
 				</View>
 				<Portal>
-					<Dialog visible={this.props.modalVisible} >
+					<Dialog visible={this.props.modalVisible} style={{maxWidth:'50%', alignSelf:"center"}} >
 					<Dialog.Title>{DISCLOSURE_POPUP_TITLE_2_BANNER }</Dialog.Title>
 					<Dialog.Content><Paragraph>{ACCEPTANCE_BANNER}</Paragraph></Dialog.Content>
 					<Dialog.Actions>
@@ -206,7 +216,7 @@ class Disclosure extends Component {
 					</Dialog>
 				</Portal>
 				<Portal>
-					<Dialog visible={this.props.showNext} >
+					<Dialog visible={this.props.showNext} style={{maxWidth:'50%', alignSelf:"center"}} >
 					<Dialog.Title>{NEXT_TITLE}</Dialog.Title>
 					<Dialog.Content><Paragraph>{NEXT_MESSAGE}</Paragraph></Dialog.Content>
 					<Dialog.Actions>
@@ -230,4 +240,5 @@ const mapStateToProps = ({ disclosureReducer, authReducer, entryReducer, proposa
   return { displayApplication, applicationMode,  accessCode , borrower, ...disclosureReducer  };
 };
 
-export default connect(mapStateToProps, { onClickDealsButton, toApplication, showApplication, addressOnBlur, clearCoBorr, handleFetchError, closeDisclosure, toggleEditMode, toggleModal, toggleAcceptFlag, messageNext, editMore })(Disclosure);
+export default connect(mapStateToProps, { onClickDealsButton, toApplication, showApplication, addressOnBlur, clearCoBorr, handleFetchError, closeDisclosure, 
+	toggleEditMode, toggleModal, toggleAcceptFlag, messageNext, editMore, editLess })(Disclosure);

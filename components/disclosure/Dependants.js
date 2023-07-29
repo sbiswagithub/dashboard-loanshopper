@@ -23,7 +23,7 @@ class Dependants extends Component {
 	render () {
     	const styles = getStyleSheet();
     	return (
-    		<View style={{ flex: 0.9, flexDirection:'column'}}>
+		<View style={{ flexDirection:'column', justifyContent: 'space-around', width:'80%' }}>
 
 				<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{DEPENDANTS_BANNER}</Text>
 				<View style={styles.space}/>

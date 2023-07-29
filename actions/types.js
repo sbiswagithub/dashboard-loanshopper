@@ -87,6 +87,7 @@ export const REDRAW = 'redraw';
 export const LOWEST_RATES = 'lowest_rates';
 // For disclosure
 export const EDIT_MORE = 'edit_more';
+export const EDIT_LESS = 'edit_less';
 export const TO_APPLICATION = 'to_application';
 export const FROM_APPLICATION = 'from_application';
 export const LOAD_BORROWER_DETAILS= 'borrower_details';

@@ -17,7 +17,7 @@ class ImmigrationStatus extends Component {
     render () {
     	const styles = getStyleSheet();
     	return (
-        		<View style={{ flex: 0.9, flexDirection:'column'}}>
+		<View style={{ flexDirection:'column', justifyContent: 'space-around', width:'80%' }}>
 
         		<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{IMMIGRATION_STATUS_BANNER_1}</Text>
 				<View style={styles.space}/>
