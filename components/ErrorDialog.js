@@ -6,7 +6,8 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import getStyleSheet from '../styles/styles';  
 import { resetFetchError } from '../actions';
-import { DONE } from '../constants/banners';
+import * as RootNavigation from '../actions/RootNavigation.js';
+
 import { LOGO_DARK_BLUE, WHITE } from "../constants/colors";
 
 class ErrorDialog extends Component {
@@ -32,7 +33,10 @@ class ErrorDialog extends Component {
 						<Icon.Button name="close" size={15} borderRadius={30}
 							color={LOGO_DARK_BLUE} backgroundColor={WHITE}
 							iconStyle={{margin:5,alignContent:'center'}} 
-							onPress={this.props.resetFetchError} >{'Close'}</Icon.Button>
+							onPress={() => {
+								this.props.resetFetchError()
+								RootNavigation.navigate('Landing')
+							}} >{'Close'}</Icon.Button>
 					</Dialog.Actions>
 					</Dialog>
 				</Portal>

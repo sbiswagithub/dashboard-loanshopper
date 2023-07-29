@@ -22,7 +22,7 @@ import {
 	RATE_PREF_UPDATED, FIRST_PREF_UPDATED, SECOND_PREF_UPDATED, REPAYMENT_PREF_UPDATED, EXTRAS_PREF_UPDATED, REDRAW, 
 	CURR_HOMELOAN_UPDATED, CURR_LENDER_UPDATED, CURR_REPAYMENT_UPDATED, CURR_HOME_LOAN_TYPE_UPDATED, 
 	MORTGAGE_ADDRESS_FOUND, MORTGAGE_ADDRESS_SELECTED, MORTGAGE_ADDRESS_UNSELECTED, MORTGAGE_ADDRESS_BLUR, MORTGAGE_ADDRESS_REMOVE,
-	EDIT_MORE, CHECK_ACCOUNT_FOR_MOBILE, CHECK_ACCOUNT_FOR_EMAIL
+	EDIT_MORE, CHECK_ACCOUNT_FOR_MOBILE, CHECK_ACCOUNT_FOR_EMAIL, PROFESSION_BLUR
 	} from '../actions/types';
 import { TITLE_MR, TITLE_MS, TITLE_MRS, PERMANENT, SELF_EMPLOYED, CITIZEN, RESIDENT, WORK_VISA,
 	BOTH_RESI_AND_INVEST, RESIDENTIAL, INVESTMENT, FIRST_MORTGAGE, REFINANCE, LT_4_WEEKS, NORMAL_PERIOD,
@@ -346,11 +346,14 @@ const INITIAL_STATE = {
 
 	// Temporary variables for selecting from list options
 	addressIdx: '',
+	previousAddressSelection: '',
 	addressStart: '',
 	mortgageAddressIdx: '',
+	previousMortgageAddressIdx: '',
 	mortgageAddressStart: '',
 	professionIdx: '',
 	professionPart: '',
+	previousProfession: '',
 
 	
 	// Should be from Auth Reducer borrower
@@ -474,7 +477,9 @@ export default (state = INITIAL_STATE, action) => {
 		    dob: action?.payload?.dateOfBirth == null ? new Date() : new Date(action.payload.dateOfBirth),
 		    addressSelection: action?.payload?.currentAddress?.fullAddress,
 		    addressIdx: action?.payload?.currentAddress?.externalId,
+		    previousAddressSelection: action?.payload?.currentAddress?.fullAddress,
 			profession: action?.payload?.primaryProfession,
+			previousProfession: action?.payload?.primaryProfession,
 		    employmentType: action?.payload?.employmentType == null ? PERMANENT : action.payload.employmentType,
 		    immigrationStatus: action?.payload?.immigrationStatus == null ? CITIZEN : action.payload.immigrationStatus,
 			dependants: action?.payload?.numDependants == null ? 0 : action?.payload?.numDependants, 
@@ -511,21 +516,23 @@ export default (state = INITIAL_STATE, action) => {
 
   // Profession auto complete
   case PROFESSION_FOUND:
-      return { ...state, ...action.payload };
+      return { ...state, professionSet: false, professionIdx : action.payload?.index ? action.payload.index : state.professionIdx, profession : action.payload.professionPart, professionPart: action.payload.professionPart, professions : action.payload.professions.length > 0 ? action.payload.professions : state.professions, };
   case PROFESSION_SELECTED:
-      return { ...state, professionSet: true, professionIdx : action.payload.index, profession : action.payload.profession.name, hasOtherPersonalInfo: true };
+      return { ...state, professionSet: true, professionIdx : action.payload.index, professions: [], profession : action.payload.profession.name, previousProfession: action.payload.profession.name,  hasOtherPersonalInfo: true, };
   case PROFESSION_UNSELECTED:
-      return { ...state, professionSet: false, professionIdx : '', profession : null, professionPart: '', professions:[] };
+      return { ...state, professionSet: false, professionIdx : '', professionPart: '', professions:[], profession : null };
+  case PROFESSION_BLUR:
+      return { ...state, professionSet: state.previousProfession != null, profession : state.previousProfession, professions : [], };
 
   // Address auto complete
   case ADDRESS_FOUND:
       return { ...state, addressSet: false, addressStart : action.payload.addressStart, addresses : action.payload.addresses, addressSelection: action.payload.addressStart };
   case ADDRESS_SELECTED:
-      return { ...state, addressSet: true, addressIdx: action.payload.addressIdx, addressStart: action.payload.addressStart, addressSelection: action.payload.addressSelection, addresses:[] };
+      return { ...state, addressSet: true, addressIdx: action.payload.addressIdx, previousAddressSelection: action.payload.addressIdx, addressStart: action.payload.addressStart, addresses:[], addressSelection: action.payload.addressSelection };
   case ADDRESS_UNSELECTED:
       return { ...state, addressSet: false, addressStart: null, addresses:[], addressSelection: null };
   case ADDRESS_BLUR:
-      return { ...state, addresses:[] };
+      return { ...state, addressSet: state.previousAddressSelection != null, addressSelection: state.previousAddressSelection, addresses: [], };
   case MORTGAGE_ADDRESS_FOUND:
       return { ...state, mortgageAddressSet: false, mortgageAddressStart : action.payload.addressStart, mortgageAddresses : action.payload.addresses, mortgageAddressSelection: action.payload.addressStart,  };
   case MORTGAGE_ADDRESS_SELECTED:
@@ -534,7 +541,7 @@ export default (state = INITIAL_STATE, action) => {
   case MORTGAGE_ADDRESS_UNSELECTED:
       return { ...state, mortgageAddressSet: false, mortgageAddressStart: null, mortgageAddresses:[], mortgageAddressSelection: null };
   case MORTGAGE_ADDRESS_BLUR:
-      return { ...state, mortgageAddresses:[]};
+      return { ...state, mortgageAddressSet: state.previousMortgageAddressIdx != null, mortgageAddressIdx: state.previousMortgageAddressIdx, mortgageAddresses: [], };
   case MORTGAGE_ADDRESS_REMOVE:
       return { ...state, mortgageAddressesList: state.mortgageAddressesList.filter(address => address.addressIdx != action.payload?.addressIdx), };
   

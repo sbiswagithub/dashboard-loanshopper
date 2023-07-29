@@ -122,6 +122,7 @@ export const MORTGAGE_ADDRESS_REMOVE = 'mortgage_address_remove';
 export const PROFESSION_FOUND = 'profession_found';
 export const PROFESSION_SELECTED = 'profession_selected';
 export const PROFESSION_UNSELECTED = 'profession_unselected';
+export const PROFESSION_BLUR = 'profession_blur';
 export const EMPLOYEMENT_TYPE_SELECTED = 'employment_type_selected';
 export const DOB_UPDATED = 'dob_updated';
 export const IMMIGRATION_STATUS_SELECTED = 'immigration_status_selected';

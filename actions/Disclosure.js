@@ -14,7 +14,7 @@ import {
 	LOAD_LOAN_REQUEST, CLEAR_CO_BORR, SHOW_NEXT, DEPENDANTS_UPDATED, LVR_UPDATED, RATE_PREF_UPDATED,
 	FIRST_PREF_UPDATED, SECOND_PREF_UPDATED, REPAYMENT_PREF_UPDATED, EXTRAS_PREF_UPDATED, 
 	MORTGAGE_ADDRESS_UNSELECTED, MORTGAGE_ADDRESS_SELECTED, MORTGAGE_ADDRESS_BLUR, MORTGAGE_ADDRESS_FOUND, MORTGAGE_ADDRESS_REMOVE,
-	EDIT_MORE, CHECK_ACCOUNT_FOR_EMAIL, CHECK_ACCOUNT_FOR_MOBILE
+	EDIT_MORE, CHECK_ACCOUNT_FOR_EMAIL, CHECK_ACCOUNT_FOR_MOBILE, PROFESSION_BLUR
 } from './types';
 
 
@@ -218,10 +218,15 @@ export const mortgageAddressRemoved = (addressData) => {
 };
 
 
+export const professionsOnBlur = () => {
+  return {
+	    type: PROFESSION_BLUR,
+	  };
+};
 export const professionsFound = (professionsArray, input) => {
   return {
 	    type: PROFESSION_FOUND,
-	    payload: { professions : JSON.parse(professionsArray) , professionPart : input} 
+	    payload: { professions : professionsArray , professionPart : input} 
 	  };
 };
 export const professionSelected = (profession) => {

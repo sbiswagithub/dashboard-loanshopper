@@ -1039,7 +1039,7 @@ const styles = StyleSheet.create({
   disclosureBoxWideRow: { justifyContent: "space-around", marginTop: 5 },
   disclTextEntry100: { width: 100, marginBottom: 3 },
   disclTextEntry: { width: 150, marginBottom: 3 },
-  disclTextEntryWide: { width: 250, padding: 10 },
+  disclTextEntryWide: { width: '100%', padding: 10 },
   disclDivider: {
     marginTop: 10,
     borderWidth: 0.5,

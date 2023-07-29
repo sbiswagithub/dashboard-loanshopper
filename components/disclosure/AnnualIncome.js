@@ -7,7 +7,7 @@ import getStyleSheet from '../../styles/styles';
 
 import { GROSS_INC_BANNER, } from '../../constants/banners';
 import { THUMB_COLOR } from '../../constants/common';
-import { GROSS_INC_SLIDER_MAX, GROSS_INC_DEFAULT } from '../../constants/disclosure';
+import { GROSS_INC_SLIDER_MAX, } from '../../constants/disclosure';
 import { grossAnnualIncomeUpdated, currencyToNumber  } from '../../actions';
 
 class AnnualIncome extends Component {
@@ -26,7 +26,7 @@ class AnnualIncome extends Component {
 	render () {
     	const styles = getStyleSheet();
     	return (
-    		<View style={{ flex: 0.9, flexDirection:'column'}}>
+    		<View style={{ flexDirection:'column', width:'80%', }}>
 
 				<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{GROSS_INC_BANNER}</Text>
 	   			<View style={styles.boxRow}>

@@ -24,7 +24,7 @@ class DisclosureSubmission extends Component {
     	const styles = getStyleSheet();
     	return (
 		<>
-		<View style={this.props.editMode ? [{maxWidth:"80%", alignSelf:"center"}] : [styles.disclosureBoxBlue]}>
+		<View style={this.props.editMode ? [{ width:'75%', alignSelf:"center"}] : [styles.disclosureBoxBlue]}>
 			
 			<View style={[styles.disclosureBoxColumn]}>
 

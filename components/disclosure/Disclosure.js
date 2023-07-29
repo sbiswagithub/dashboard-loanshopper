@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Constants from 'expo-constants';
-import { Keyboard, View, Text, Alert, ScrollView  } from 'react-native';
+import { Keyboard, View, Text, Alert,   } from 'react-native';
 import { Switch, Button, Paragraph, Dialog, Portal, } from 'react-native-paper';
 import { connect } from 'react-redux';
 import Moment from 'moment';
@@ -157,7 +157,7 @@ class Disclosure extends Component {
 						<View style={{justifyContent:"space-between"}}>
 							<Text style={[styles.textLargeLogoDarkBlue, {alignSelf:"center"}]} >{DISCLOSURE_BANNER}</Text>
 							<View style={{flexDirection:'row', alignSelf:"flex-end", alignItems:"flex-end", justifyContent:"flex-end", width:"55%" }}>
-								<View style={{flexDirection:'row',justifyContent:'space-between'}}>
+								<View style={{flexDirection:'row',justifyContent:'space-between', marginRight:'2%'}}>
 									<View style={{flexDirection:'row',alignItems:"flex-start", justifyContent:"flex-start", width:"45%" }}>
 										<View style={{flexDirection:'row',justifyContent:'space-between'}}>
 											<FAIcon name="lock" size={this.props.editMode ? 20 : 40} color={this.props.editMode ? BACKGROUND_LIGHT_GRAY : LOGO_DARK_BLUE } />
@@ -190,9 +190,7 @@ class Disclosure extends Component {
 
 						</View>
 						<View style={styles.space}/>
-						<ScrollView showsVerticalScrollIndicator={false} style={{maxWidth: '95%'}} keyboardShouldPersistTaps='handled'>
 						<DisclosureSubmission />
-						</ScrollView>
 					</View>
 				</View>
 				<Portal>

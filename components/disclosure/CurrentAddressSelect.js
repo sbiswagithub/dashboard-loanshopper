@@ -16,7 +16,7 @@ class CurrentAddressSelect extends Component {
   render () {
   	const styles = getStyleSheet();
     return (
-		<View style={{ flexDirection:'column', justifyContent: 'space-around' }}>
+		<View style={{ flexDirection:'column', justifyContent: 'space-around', width:'80%' }}>
         	<AddressSelect {...this.props}
         		addressPlaceholder={CURRENT_ADDRESS_DEFAULT} />
         </View>

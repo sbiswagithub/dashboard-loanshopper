@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 
 import getStyleSheet from '../../styles/styles';  
@@ -24,9 +24,9 @@ class MinimumRequiredDetails extends Component {
     render () {
     	const styles = getStyleSheet();
     	return (
-	        	<View>
+			<ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='handled'>
 	    		<View style={styles.space}/>
-				<Text style={[styles.textMediumLogoDarkBlue,{ alignSelf:"center" }]} >Lets start with some basic details</Text>
+				<Text style={[styles.textMediumLogoDarkBlue,{ alignSelf:"center" }]} >Lets start with some minimum required information</Text>
 				<View style={styles.space}/>
 	    		
 				<Text style={[styles.textSmallBoldGray, { alignSelf:"center" }]}>Current residential address</Text>
@@ -60,7 +60,7 @@ class MinimumRequiredDetails extends Component {
 		    	<Dependants  />
     		    </View>			    
 			    
-    		    </View>
+			</ScrollView>
         )
     }
 }

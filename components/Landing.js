@@ -1,7 +1,6 @@
 import {
   View,
   Text,
-  TouchableHighlight,
   Image,
 } from "react-native";
 
@@ -54,6 +53,7 @@ export default function Landing({ navigation }) {
                   alignItems: 'flex-start',
                   justifyContent: 'space-between', }}>
                 <Image style={[styles.tabIcon, {marginRight:10,}]} source={require('../assets/home.png')} />
+               
                 <View style={{flex: 1,
                   flexDirection:'column',
                   alignItems: 'flex-start',
