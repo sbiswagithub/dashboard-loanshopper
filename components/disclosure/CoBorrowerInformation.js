@@ -25,12 +25,16 @@ class CoBorrowerInformation extends Component {
         		<Text style={[styles.textMediumBoldGray]}>{CO_BORR_BANNER}</Text>
     		    </View>
 
+    		    <View style={styles.disclosureBoxRow}>
+				<Text style={[styles.textMediumLogoDarkBlue,{ alignSelf:"center" }]} >If the application includes more than one applicant, include the second applicant's name, email contact and estimated gross annual income.</Text>
+    		    </View>
+
+
 	    		<View style={styles.disclosureBoxRow}>
 			    <CoBorrowerName />
     		    </View>
+				<View style={styles.space} />
 
-				<View style={styles.hrLight}/>
-    		    
     		    <View style={[styles.disclosureBoxRow, {width:'80%', alignSelf:"center"}]}>
 				<TextInput 
 				    	style={this.props.hasValidCoborrowerEmail ? 
@@ -43,8 +47,8 @@ class CoBorrowerInformation extends Component {
   		      			value={this.props.coBorrowerEmail}  />
     		    </View>
 
-				<View style={styles.hrLight}/>
-
+				<View style={styles.space} />
+				
 	    		<View style={styles.disclosureBoxRow, {width:'80%', alignSelf:"center"}}>
 			    <CoBorrowerAnnualIncome />
     		    </View>

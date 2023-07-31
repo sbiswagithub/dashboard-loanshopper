@@ -57,6 +57,10 @@ class LoanInformation extends Component {
 		    		<View style={{ flex: 0.9, flexDirection:'column'}}>
 		    		<View style={styles.space}/>
 					<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{LOAN_AMOUNT}</Text>
+						<View style={styles.space}/>
+						<Text style={[styles.textMediumLogoDarkBlue,{ alignSelf:"center" }]} >Choose the amount you are looking to borrow. For investors, at this time, please set an estimated total amount of borrowing</Text>
+						<View style={styles.space}/>
+
 			   			<View style={styles.boxRow}>
 				    		<View style={styles.boxCol60}>
 				    		<Slider thumbStyle={styles.thumb} thumbTintColor={THUMB_COLOR}  
@@ -77,6 +81,10 @@ class LoanInformation extends Component {
 		    		<View style={{ flex: 0.9, flexDirection:'column'}}>
 		    		<View style={styles.space}/>
 					<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{LVR}</Text>
+						<View style={styles.space}/>
+						<Text style={[styles.textMediumLogoDarkBlue,{ alignSelf:"center" }]} >LVR (or Loan Value Ratio) is the loan amount divided by the total estimated value of the property. For investors, please set the LVR of your residential property or skip and move to the next detail</Text>
+						<View style={styles.space}/>
+
 			   			<View style={styles.boxRow}>
 				    		<View style={styles.boxCol60}>
 				    		<Slider thumbStyle={styles.thumb} thumbTintColor={THUMB_COLOR}  
@@ -94,9 +102,11 @@ class LoanInformation extends Component {
 
 				{this.props.edit === 4 ? 
     		    <View style={styles.disclosureBoxRow}>
-		    		<View style={styles.stackedSimpleLayout}>
+		    		<View style={{ flex: 0.9, flexDirection:'column'}}>
 						<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{LOAN_PROCESSING}</Text>
-			    		<View style={styles.space}/>
+						<View style={styles.space}/>
+						<Text style={[styles.textMediumLogoDarkBlue,{ alignSelf:"center" }]} >Processing time may vary, however you may use this section to highlight special circumstances, for example loan approval required in under 4 weeks</Text>
+						<View style={styles.space}/>
 			    		<View style={styles.chipsLayout}>
 					    	<Chip style={this.props.isNormal ? styles.chipNormal : null} textStyle={this.props.isNormal ? styles.textSmallBoldWhite : null}
 					    		selected={this.props.isNormal} onPress={() => this.props.loanProcessingSelected(NORMAL_PERIOD)}>{NORMAL_PERIOD}</Chip>
@@ -110,9 +120,11 @@ class LoanInformation extends Component {
 				{this.props.edit === 5 ? 
 				<View>
     		    <View style={styles.disclosureBoxRow}>
-		    		<View style={styles.stackedSimpleLayout}>
+		    		<View style={{ flex: 0.9, flexDirection:'column'}}>
 						<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{LOAN_PROFILE}</Text>
-			    		<View style={styles.space}/>
+						<View style={styles.space}/>
+						<Text style={[styles.textMediumLogoDarkBlue,{ alignSelf:"center" }]} >Some loans may be eligible for first home buyer grants and other assistance. You may use this section to indicate if you would like to be considered for these conditions</Text>
+						<View style={styles.space}/>
 			    		<View style={styles.chipsLayout}>
 					    	<Chip style={this.props.isFirstMortgage ? styles.chipNormal : null} textStyle={this.props.isFirstMortgage ? styles.textSmallBoldWhite : null}
 					    		selected={this.props.isFirstMortgage} onPress={() => this.props.loanProfileSelected(FIRST_MORTGAGE)}>{FIRST_MORTGAGE}</Chip>
@@ -131,10 +143,12 @@ class LoanInformation extends Component {
 
 				{this.props.edit === 6 ? 
     		    <View style={styles.disclosureBoxRow}>
-		    		<View style={styles.stackedSimpleLayout}>
+		    		<View style={{ flex: 0.9, flexDirection:'column'}}>
 						<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{LOAN_PURPOSE}</Text>
 						<View style={styles.space}/>
-			    		<View style={styles.chipsStackedLayout}>
+						<Text style={[styles.textMediumLogoDarkBlue,{ alignSelf:"center" }]} >Select the purpose of borrowing</Text>
+						<View style={styles.space}/>
+			    		<View style={[styles.chipsStackedLayout, {alignSelf:"center" }]}>
 					    	<Chip style={this.props.isResidential ? styles.chipNormal : null} textStyle={this.props.isResidential ? styles.textSmallBoldWhite : null}
 					    		selected={this.props.isResidential} onPress={() => this.props.loanPurposeSelected(RESIDENTIAL)}>{RESIDENTIAL}</Chip>
 						<View style={styles.space}/>
@@ -157,16 +171,18 @@ class LoanInformation extends Component {
 
 				{this.props.edit === 8 ? 
     		    <View style={styles.disclosureBoxRow}>
-		    		<View style={styles.stackedSimpleLayout}>
+		    		<View style={{ flex: 0.9, flexDirection:'column'}}>
 					<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{RATE_PREFERENCE}</Text>
 		    		<View style={styles.space}/>
-			    		<View style={styles.chipsStackedLayout}>
+					<Text style={[styles.textMediumLogoDarkBlue,{ alignSelf:"center" }]} >Indicate your prefered rate type</Text>
+					<View style={styles.space}/>
+			    		<View style={[styles.chipsStackedLayout, {alignSelf:"center" }]}>
 					    	<Chip style={this.props.ratePreference == FIXED ? styles.chipNormal : null} textStyle={this.props.ratePreference == FIXED ? styles.textSmallBoldWhite : null}
 					    		selected={this.props.ratePreference == FIXED} onPress={() => this.props.ratePreferenceUpdated(FIXED)}>{FIXED}</Chip>
-						<View style={styles.space}/>
+							<View style={styles.space}/>
 					    	<Chip style={this.props.ratePreference == VARIABLE ? styles.chipNormal : null} textStyle={this.props.ratePreference == VARIABLE ? styles.textSmallBoldWhite : null}
 					    		selected={this.props.ratePreference == VARIABLE} onPress={() => this.props.ratePreferenceUpdated(VARIABLE)}>{VARIABLE}</Chip>
-						<View style={styles.space}/>
+							<View style={styles.space}/>
 					    	<Chip style={this.props.ratePreference == SPLIT ? styles.chipNormal : null} textStyle={this.props.ratePreference == SPLIT ? styles.textSmallBoldWhite : null}
 					    		selected={this.props.ratePreference == SPLIT} onPress={() => this.props.ratePreferenceUpdated(SPLIT)}>{SPLIT}</Chip>
 				        </View>
@@ -176,19 +192,21 @@ class LoanInformation extends Component {
 
 				{this.props.edit === 9 ? 
     		    <View style={styles.disclosureBoxRow}>
-		    		<View style={styles.stackedSimpleLayout}>
+		    		<View style={{ flex: 0.9, flexDirection:'column'}}>
 					<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{FIRST_PREFERENCE}</Text>
 		    		<View style={styles.space}/>
-			    		<View style={styles.chipsStackedLayout}>
+					<Text style={[styles.textMediumLogoDarkBlue,{ alignSelf:"center" }]} >You may use this section to indicate the key factor you look for when choosing a home loan product</Text>
+		    		<View style={styles.space}/>
+			    		<View style={[styles.chipsStackedLayout, {alignSelf:"center" }]}>
 					    	<Chip style={this.props.firstPreference == LEAST_INTEREST_RATE ? styles.chipNormal : null} textStyle={this.props.firstPreference == LEAST_INTEREST_RATE ? styles.textSmallBoldWhite : null}
 					    		selected={this.props.firstPreference == LEAST_INTEREST_RATE} onPress={() => this.props.loanPreferenceUpdated(1,LEAST_INTEREST_RATE)}>{LEAST_INTEREST_RATE}</Chip>
-						<View style={styles.space}/>
+							<View style={styles.space}/>
 					    	<Chip style={this.props.firstPreference == LOWER_REPAYMENTS ? styles.chipNormal : null} textStyle={this.props.firstPreference == LOWER_REPAYMENTS ? styles.textSmallBoldWhite : null}
 					    		selected={this.props.firstPreference == LOWER_REPAYMENTS} onPress={() => this.props.loanPreferenceUpdated(1,LOWER_REPAYMENTS)}>{LOWER_REPAYMENTS}</Chip>
-						<View style={styles.space}/>
+							<View style={styles.space}/>
 					    	<Chip style={this.props.firstPreference == LONGER_FIXED_TERM ? styles.chipNormal : null} textStyle={this.props.firstPreference == LONGER_FIXED_TERM ? styles.textSmallBoldWhite : null}
 					    		selected={this.props.firstPreference == LONGER_FIXED_TERM} onPress={() => this.props.loanPreferenceUpdated(1,LEAST_INTEREST_RATE)}>{LONGER_FIXED_TERM}</Chip>
-						<View style={styles.space}/>
+							<View style={styles.space}/>
 					    	<Chip style={this.props.firstPreference == SHORTER_LOAN_DURATION ? styles.chipNormal : null} textStyle={this.props.firstPreference == SHORTER_LOAN_DURATION ? styles.textSmallBoldWhite : null}
 					    		selected={this.props.firstPreference == SHORTER_LOAN_DURATION} onPress={() => this.props.loanPreferenceUpdated(1,LEAST_INTEREST_RATE)}>{SHORTER_LOAN_DURATION}</Chip>
 				        </View>
@@ -200,16 +218,18 @@ class LoanInformation extends Component {
 		    		<View style={styles.stackedSimpleLayout}>
 						<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{SECOND_PREFERENCE}</Text>
 						<View style={styles.space}/>
-			    		<View style={styles.chipsStackedLayout}>
+						<Text style={[styles.textMediumLogoDarkBlue,{ alignSelf:"center" }]} >Choose if you have a second preference for home loan selection</Text>
+						<View style={styles.space}/>
+			    		<View style={[styles.chipsStackedLayout, {alignSelf:"center" }]}>
 					    	<Chip style={this.props.secondPreference == LEAST_INTEREST_RATE ? styles.chipNormal : null} textStyle={this.props.secondPreference == LEAST_INTEREST_RATE ? styles.textSmallBoldWhite : null}
 					    		selected={this.props.secondPreference == LEAST_INTEREST_RATE} onPress={() => this.props.loanPreferenceUpdated(2,LEAST_INTEREST_RATE)}>{LEAST_INTEREST_RATE}</Chip>
-						<View style={styles.space}/>
+							<View style={styles.space}/>
 					    	<Chip style={this.props.secondPreference == LOWER_REPAYMENTS ? styles.chipNormal : null} textStyle={this.props.secondPreference == LOWER_REPAYMENTS ? styles.textSmallBoldWhite : null}
 					    		selected={this.props.secondPreference == LOWER_REPAYMENTS} onPress={() => this.props.loanPreferenceUpdated(2,LOWER_REPAYMENTS)}>{LOWER_REPAYMENTS}</Chip>
-						<View style={styles.space}/>
+							<View style={styles.space}/>
 					    	<Chip style={this.props.secondPreference == LONGER_FIXED_TERM ? styles.chipNormal : null} textStyle={this.props.secondPreference == LONGER_FIXED_TERM ? styles.textSmallBoldWhite : null}
 					    		selected={this.props.secondPreference == LONGER_FIXED_TERM} onPress={() => this.props.loanPreferenceUpdated(2,LONGER_FIXED_TERM)}>{LONGER_FIXED_TERM}</Chip>
-						<View style={styles.space}/>
+							<View style={styles.space}/>
 					    	<Chip style={this.props.secondPreference == SHORTER_LOAN_DURATION ? styles.chipNormal : null} textStyle={this.props.secondPreference == SHORTER_LOAN_DURATION ? styles.textSmallBoldWhite : null}
 					    		selected={this.props.secondPreference == SHORTER_LOAN_DURATION} onPress={() => this.props.loanPreferenceUpdated(2,SHORTER_LOAN_DURATION)}>{SHORTER_LOAN_DURATION}</Chip>
 				        </View>
@@ -221,16 +241,18 @@ class LoanInformation extends Component {
 					<View style={[styles.stackedSimpleLayout]}>
 						<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{REPAYMENT_FREQUENCY}</Text>
 						<View style={styles.space}/>
-			    		<View style={styles.chipsStackedLayout}>
+						<Text style={[styles.textMediumLogoDarkBlue,{ alignSelf:"center" }]} >Choose your prefered loan instalement frequency.</Text>
+						<View style={styles.space}/>
+			    		<View style={[styles.chipsStackedLayout, {alignSelf:"center" }]}>
 					    	<Chip style={this.props.repaymentPreference == REPAYMENT_TYPE_Y ? styles.chipNormal : null} textStyle={this.props.repaymentPreference == REPAYMENT_TYPE_Y ? styles.textSmallBoldWhite : null}
 					    		selected={this.props.repaymentPreference == REPAYMENT_TYPE_Y} onPress={() => this.props.repaymentPreferenceUpdated(REPAYMENT_TYPE_Y)}>{REPAYMENT_Y}</Chip>
-						<View style={styles.space}/>
+							<View style={styles.space}/>
 					    	<Chip style={this.props.repaymentPreference == REPAYMENT_TYPE_M ? styles.chipNormal : null} textStyle={this.props.repaymentPreference == REPAYMENT_TYPE_M ? styles.textSmallBoldWhite : null}
 					    		selected={this.props.repaymentPreference == REPAYMENT_TYPE_M} onPress={() => this.props.repaymentPreferenceUpdated(REPAYMENT_TYPE_M)}>{REPAYMENT_M}</Chip>
-						<View style={styles.space}/>
+							<View style={styles.space}/>
 					    	<Chip style={this.props.repaymentPreference == REPAYMENT_TYPE_F ? styles.chipNormal : null} textStyle={this.props.repaymentPreference == REPAYMENT_TYPE_F ? styles.textSmallBoldWhite : null}
 					    		selected={this.props.repaymentPreference == REPAYMENT_TYPE_F} onPress={() => this.props.repaymentPreferenceUpdated(REPAYMENT_TYPE_F)}>{REPAYMENT_F}</Chip>
-						<View style={styles.space}/>
+							<View style={styles.space}/>
 					    	<Chip style={this.props.repaymentPreference == REPAYMENT_TYPE_W ? styles.chipNormal : null} textStyle={this.props.repaymentPreference == REPAYMENT_TYPE_W ? styles.textSmallBoldWhite : null}
 					    		selected={this.props.repaymentPreference == REPAYMENT_TYPE_W} onPress={() => this.props.repaymentPreferenceUpdated(REPAYMENT_TYPE_W)}>{REPAYMENT_W}</Chip>
 				        </View>
@@ -242,31 +264,33 @@ class LoanInformation extends Component {
 					<View style={styles.stackedSimpleLayout}>
 						<Text style={[styles.textSmallBoldGray, {alignSelf:'center',}]}>{EXTRAS}</Text>
 						<View style={styles.space}/>
-			    		<View style={styles.chipsStackedLayout}>
+						<Text style={[styles.textMediumLogoDarkBlue,{ alignSelf:"center" }]} >Choose if you require specific features from the home loan product or could be included as extras in your home loan package.</Text>
+						<View style={styles.space}/>
+			    		<View style={[styles.chipsStackedLayout, {alignSelf:"center" }]}>
 					    	<Chip mode={'outlined'} theme={theme} style={this.props?.includeBridgingFinance ? styles.chipNormal : null} textStyle={this.props?.includeBridgingFinance ? styles.textSmallBoldWhite : null}
 					    		selected={this.props?.includeBridgingFinance } onPress={() => this.props.extrasUpdated(BRIDGING_FINANCE, !this.props.includeBridgingFinance)}>{BRIDGING_FINANCE}</Chip>
-						<View style={styles.space}/>
+							<View style={styles.space}/>
 					    	<Chip mode={'outlined'} theme={theme} style={this.props?.offsetAccount ? styles.chipNormal : null} textStyle={this.props?.offsetAccount ? styles.textSmallBoldWhite : null}
 					    		selected={this.props?.offsetAccount } onPress={() => this.props.extrasUpdated(OFFSET_ACCOUNT, !this.props.offsetAccount)}>{OFFSET_ACCOUNT}</Chip>
-						<View style={styles.space}/>
+							<View style={styles.space}/>
 					    	<Chip mode={'outlined'} theme={theme} style={this.props?.homeInsurance ? styles.chipNormal : null} textStyle={this.props?.homeInsurance ? styles.textSmallBoldWhite : null}
 					    		selected={this.props?.homeInsurance } onPress={() => this.props.extrasUpdated(HOME_INSURANCE, !this.props.homeInsurance)}>{HOME_INSURANCE}</Chip>
-						<View style={styles.space}/>
+							<View style={styles.space}/>
 					    	<Chip mode={'outlined'} theme={theme} style={this.props?.creditCard ? styles.chipNormal : null} textStyle={this.props?.creditCard ? styles.textSmallBoldWhite : null}
 					    		selected={this.props?.creditCard } onPress={() => this.props.extrasUpdated(CREDIT_CARD, !this.props.creditCard)}>{CREDIT_CARD}</Chip>
-						<View style={styles.space}/>
+							<View style={styles.space}/>
 					    	<Chip mode={'outlined'} theme={theme} style={this.props?.transactionsAccount ? styles.chipNormal : null} textStyle={this.props?.transactionsAccount ? styles.textSmallBoldWhite : null}
 					    		selected={this.props?.transactionsAccount } onPress={() => this.props.extrasUpdated(TX_ACCOUNT, !this.props.transactionsAccount)}>{TX_ACCOUNT}</Chip>
-						<View style={styles.space}/>
+							<View style={styles.space}/>
 					    	<Chip mode={'outlined'} theme={theme} style={this.props?.savingsAccount ? styles.chipNormal : null} textStyle={this.props?.savingsAccount ? styles.textSmallBoldWhite : null}
 					    		selected={this.props?.savingsAccount } onPress={() => this.props.extrasUpdated(SAV_ACCOUNT, !this.props.savingsAccount)}>{SAV_ACCOUNT}</Chip>
-						<View style={styles.space}/>
+							<View style={styles.space}/>
 					    	<Chip mode={'outlined'} theme={theme} style={this.props?.homeAndLandPackage ? styles.chipNormal : null} textStyle={this.props?.homeAndLandPackage ? styles.textSmallBoldWhite : null}
 					    		selected={this.props?.homeAndLandPackage } onPress={() => this.props.extrasUpdated(HOME_AND_LAND_PKG, !this.props.homeAndLandPackage)}>{HOME_AND_LAND_PKG}</Chip>
-						<View style={styles.space}/>
+							<View style={styles.space}/>
 					    	<Chip mode={'outlined'} theme={theme} style={this.props?.homeImprovementPackage ? styles.chipNormal : null} textStyle={this.props?.homeImprovementPackage ? styles.textSmallBoldWhite : null}
 					    		selected={this.props?.homeImprovementPackage } onPress={() => this.props.extrasUpdated(HOME_IMPROV_PKG, !this.props.homeImprovementPackage)}>{HOME_IMPROV_PKG}</Chip>
-						<View style={styles.space}/>
+							<View style={styles.space}/>
 					    	<Chip mode={'outlined'} theme={theme} style={this.props?.redraw ? styles.chipNormal : null} textStyle={this.props?.redraw ? styles.textSmallBoldWhite : null}
 					    		selected={this.props?.redraw } onPress={() => this.props.extrasUpdated(REDRAW_FACILITY, !this.props.redraw)}>{REDRAW_FACILITY}</Chip>
 				        </View>

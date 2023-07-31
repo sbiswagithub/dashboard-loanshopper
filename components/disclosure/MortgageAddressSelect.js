@@ -58,6 +58,8 @@ class MortgageAddressSelect extends Component {
 		<View style={{ flexDirection:'column', justifyContent: 'space-around', flex:1, flexGrow:1 }}>
       <Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{MORTGAGE_ADDRESSES}</Text>
       <View style={styles.space}/>
+      <Text style={[styles.textMediumLogoDarkBlue,{ alignSelf:"center" }]} >Choose addresses of properties to be included in the home loan borrowing application</Text>
+      <View style={styles.space}/>
 
       {this.props.isBothResidentialAndInvestment ? 
       <Text style={[styles.textSmallLogoDarkBlue, {alignSelf:'center'}]}>{START_WITH_RES}</Text> : null }
