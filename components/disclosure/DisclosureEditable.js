@@ -87,10 +87,10 @@ class DisclosureEditable extends Component {
 				{this.props.edit == 19 ? 
 		        	<View style={styles.disclosurePanel}>
 						<View style={{ flexDirection:'row', width:'80%', alignSelf:"center", justifyContent:'space-between'}}>
+						<Text style={[styles.textMediumBoldLogoDarkBlue, {marginRight:'1%'}] }>{ ACCEPTANCE_BANNER }</Text>
 						<TouchableHighlight  onPressIn={() => {_onToggleAccept(!this.props.isAccepted);}}>
 							<CheckBox disabled={true} value={this.props.isAccepted} />
 						</TouchableHighlight>
-						<Text style={[styles.textMediumBoldLogoDarkBlue, {marginLeft:'1%'}] }>{ ACCEPTANCE_BANNER }</Text>
 						</View>
     	    		</View>
 				: null }
