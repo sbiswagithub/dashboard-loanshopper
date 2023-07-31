@@ -218,7 +218,7 @@ class LoanInformation extends Component {
 				: null }
 				{this.props.edit === 11 ? 
     		    <View style={styles.disclosureBoxRow}>
-					<View style={styles.singleColumn}>
+					<View style={[styles.stackedSimpleLayout]}>
 						<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{REPAYMENT_FREQUENCY}</Text>
 						<View style={styles.space}/>
 			    		<View style={styles.chipsStackedLayout}>
@@ -239,8 +239,8 @@ class LoanInformation extends Component {
 				: null }
 				{this.props.edit === 12 ? 
     		    <View style={styles.disclosureBoxRow}>
-					<View style={styles.singleColumn}>
-						<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{EXTRAS}</Text>
+					<View style={styles.stackedSimpleLayout}>
+						<Text style={[styles.textSmallBoldGray, {alignSelf:'center',}]}>{EXTRAS}</Text>
 						<View style={styles.space}/>
 			    		<View style={styles.chipsStackedLayout}>
 					    	<Chip mode={'outlined'} theme={theme} style={this.props?.includeBridgingFinance ? styles.chipNormal : null} textStyle={this.props?.includeBridgingFinance ? styles.textSmallBoldWhite : null}

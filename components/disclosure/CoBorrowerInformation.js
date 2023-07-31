@@ -19,7 +19,7 @@ class CoBorrowerInformation extends Component {
     render () {
     	const styles = getStyleSheet();
     	return (
-	        	<View>
+	        	<View >
 
     		    <View style={styles.disclosureBoxRow}>
         		<Text style={[styles.textMediumBoldGray]}>{CO_BORR_BANNER}</Text>
@@ -31,7 +31,7 @@ class CoBorrowerInformation extends Component {
 
 				<View style={styles.hrLight}/>
     		    
-    		    <View style={styles.disclosureBoxRow}>
+    		    <View style={[styles.disclosureBoxRow, {width:'80%', alignSelf:"center"}]}>
 				<TextInput 
 				    	style={this.props.hasValidCoborrowerEmail ? 
 				    			[styles.whiteBgCentredTextInput, styles.disclTextEntryWide, styles.centreAligned] : 
@@ -45,7 +45,7 @@ class CoBorrowerInformation extends Component {
 
 				<View style={styles.hrLight}/>
 
-	    		<View style={styles.disclosureBoxRow}>
+	    		<View style={styles.disclosureBoxRow, {width:'80%', alignSelf:"center"}}>
 			    <CoBorrowerAnnualIncome />
     		    </View>
 			    

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Dimensions, View, Text, Alert  } from 'react-native';
-import CheckBox from 'react-native-check-box';
+import { CheckBox, View, Text, } from 'react-native';
+import { TouchableHighlight } from "react-native-gesture-handler";
+
 import { connect } from 'react-redux';
 
 import { closeDisclosure, toggleEditMode, toggleModal, toggleAcceptFlag,  } from '../../actions';
@@ -14,7 +15,6 @@ import Liabilities from  './Liabilities';
 import WeeklySpend from  './WeeklySpend';
 import MonthlySpend from  './MonthlySpend';
 import AnnualSpend from  './AnnualSpend';
-import CurrentLendingDetails from "./CurrentLendingDetails";
 
 class DisclosureEditable extends Component {
 
@@ -86,9 +86,11 @@ class DisclosureEditable extends Component {
 
 				{this.props.edit == 19 ? 
 		        	<View style={styles.disclosurePanel}>
-						<View style={{ flexDirection:'column', margin:10,justifyContent:'center', alignContent:'center'}}>
-						<CheckBox isChecked={this.props.isAccepted} onClick={() => {_onToggleAccept(!this.props.isAccepted);}} />
-						<Text style={[styles.textMediumBoldLogoDarkBlue] }>{ ACCEPTANCE_BANNER }</Text>
+						<View style={{ flexDirection:'row', width:'80%', alignSelf:"center", justifyContent:'space-between'}}>
+						<TouchableHighlight  onPressIn={() => {_onToggleAccept(!this.props.isAccepted);}}>
+							<CheckBox disabled={true} value={this.props.isAccepted} />
+						</TouchableHighlight>
+						<Text style={[styles.textMediumBoldLogoDarkBlue, {marginLeft:'1%'}] }>{ ACCEPTANCE_BANNER }</Text>
 						</View>
     	    		</View>
 				: null }

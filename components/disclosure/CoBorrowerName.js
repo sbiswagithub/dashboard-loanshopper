@@ -17,7 +17,7 @@ class CoBorrowerName extends Component {
     render () {
     	const styles = getStyleSheet();
     	return (
-    		<View style={styles.stackedSimpleLayout}>
+    		<View style={[styles.stackedSimpleLayout, {width:'80%'}]}>
 	    		<View style={styles.chipsLayout}>
 		    		<Chip style={this.props.titleMrCoBorr ? styles.chipNormal : null} textStyle={this.props.titleMrCoBorr ? styles.textSmallBoldWhite : null} selected={this.props.titleMrCoBorr} onPress={() => this.props.titleCoBorrSelected(TITLE_MR)}>{TITLE_MR}</Chip>
 		    		<Chip style={this.props.titleMsCoBorr ? styles.chipNormal : null} textStyle={this.props.titleMsCoBorr ? styles.textSmallBoldWhite : null} selected={this.props.titleMsCoBorr}  onPress={() => this.props.titleCoBorrSelected(TITLE_MS)}>{TITLE_MS}</Chip>

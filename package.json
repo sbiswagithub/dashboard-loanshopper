@@ -13,6 +13,7 @@
     "@aws-sdk/client-cognito-identity-provider": "^3.378.0",
     "@expo/webpack-config": "^18.1.2",
     "@react-native-async-storage/async-storage": "1.18.2",
+    "@react-native-community/checkbox": "^0.5.16",
     "@react-native-community/datetimepicker": "7.2.0",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-native-community/netinfo": "9.3.10",

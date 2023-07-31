@@ -11,8 +11,8 @@ import FAIcon from 'react-native-vector-icons/FontAwesome';
 import { onClickDealsButton, toApplication, showApplication, addressOnBlur, clearCoBorr, handleFetchError, 
 	closeDisclosure, toggleEditMode, toggleModal, toggleAcceptFlag, messageNext, editMore, editLess } from '../../actions';
 import { SHOW_MODAL, HIDE_MODAL, } from '../../actions/types';
-import { DISCLOSURE_BANNER, DISCLOSURE_EDIT_BANNER, DISCLOSURE_SAVE_BANNER, DISCLOSURE_POPUP_TITLE_2_BANNER, 
-	ACCEPTANCE_BANNER, ERROR_DIALOG_PUBLIC_MSG_1, ERROR_DIALOG_TITLE_1, NEXT, PREV, CLOSE_BUTTON_BANNER, NEXT_TITLE, NEXT_MESSAGE, MORE } from '../../constants/banners';
+import { DISCLOSURE_BANNER, DISCLOSURE_POPUP_TITLE_2_BANNER, ACCEPTANCE_BANNER, 
+	ERROR_DIALOG_PUBLIC_MSG_1, ERROR_DIALOG_TITLE_1, NEXT, PREV, CLOSE_BUTTON_BANNER, NEXT_TITLE, NEXT_MESSAGE, MORE } from '../../constants/banners';
 import { API_LOAN_REQUESTS_URI } from '../../constants/apiUrls';
 import { ALERT_CLOSE_BUTTON_LABEL, ALERT_YES_BUTTON_LABEL, ALERT_NO_BUTTON_LABEL, 
 	HOME_ALERT_1_TITLE, DISC_SAVE_ALERT_2_TITLE, DISC_SAVE_ALERT_2_MSG, DISC_SAVE_ALERT_3_MSG, DISC_SAVE_ALERT_4_MSG } from '../../constants/alerts';
