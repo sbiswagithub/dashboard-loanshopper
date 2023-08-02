@@ -30,7 +30,13 @@ function DateEntryWithError(props) {
 					onBlur={() => {
 						if (new RegExp('\\d+/\\d+\/\\d{4}').test(dobText)) {
 							const dob = Moment(dobText,'DD/MM/YYYY')
-							if (Moment(new Date()).subtract('18','years').isBefore(dob)) {
+							if (!dob.isValid()) {
+								setDobText('')
+								setError('Invalid date entered')
+							} else if (Moment(new Date()).subtract('70','years').isAfter(dob)) {
+								setDobText('')
+								setError('Outside accepted date range for home loan applications')
+							} else if (Moment(new Date()).subtract('18','years').isBefore(dob)) {
 								setDobText('')
 								setError('Age must be at least 18 years to apply for home loan')
 							} else {
