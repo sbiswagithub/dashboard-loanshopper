@@ -3,7 +3,7 @@ import {
 	TITLE_SELECTED, FNAME_UPDATED, LNAME_UPDATED, EMAIL_UPDATED, MOBILE_UPDATED, 
 	DOB_UPDATED, DATE_PICKER_TOGGLE,
 	TITLE_COBORR_SELECTED, FNAME_COBORR_UPDATED, LNAME_COBORR_UPDATED, CO_BORR_EMAIL_UPDATED,
-	COBORR_DOB_UPDATED, COBORR_DOB_PICKER_TOGGLE, COBORR_GR_ANN_INC_UPDATED,
+	COBORR_GR_ANN_INC_UPDATED,
 	ADDRESS_FOUND, ADDRESS_SELECTED, ADDRESS_UNSELECTED,ADDRESS_BLUR,
 	PROFESSION_FOUND, PROFESSION_SELECTED, PROFESSION_UNSELECTED,
 	EMPLOYEMENT_TYPE_SELECTED,
@@ -22,7 +22,7 @@ import {
 	RATE_PREF_UPDATED, FIRST_PREF_UPDATED, SECOND_PREF_UPDATED, REPAYMENT_PREF_UPDATED, EXTRAS_PREF_UPDATED, REDRAW, 
 	CURR_HOMELOAN_UPDATED, CURR_LENDER_UPDATED, CURR_REPAYMENT_UPDATED, CURR_HOME_LOAN_TYPE_UPDATED, 
 	MORTGAGE_ADDRESS_FOUND, MORTGAGE_ADDRESS_SELECTED, MORTGAGE_ADDRESS_UNSELECTED, MORTGAGE_ADDRESS_BLUR, MORTGAGE_ADDRESS_REMOVE,
-	EDIT_MORE, CHECK_ACCOUNT_FOR_MOBILE, CHECK_ACCOUNT_FOR_EMAIL, PROFESSION_BLUR, EDIT_LESS
+	EDIT_MORE, CHECK_ACCOUNT_FOR_MOBILE, CHECK_ACCOUNT_FOR_EMAIL, PROFESSION_BLUR, EDIT_LESS, TOGGLE_ALERT
 	} from '../actions/types';
 import { TITLE_MR, TITLE_MS, TITLE_MRS, PERMANENT, SELF_EMPLOYED, CITIZEN, RESIDENT, WORK_VISA,
 	BOTH_RESI_AND_INVEST, RESIDENTIAL, INVESTMENT, FIRST_MORTGAGE, REFINANCE, LT_4_WEEKS, NORMAL_PERIOD,
@@ -211,6 +211,7 @@ const INITIAL_STATE = {
 	updateMode: false,
 	modalVisible: false,
 	showNext: false,
+	showAlert: false,
 	addressSet: false,
 	mortgageAddressSet:false,
 	professionSet: false,
@@ -224,7 +225,7 @@ const INITIAL_STATE = {
 	titleMsCoBorr:false,
 	isPermanent: true, 
 	isSelfEmployed: false,
-	isCitizen: true, 
+	isCitizen: false, 
 	isResident: false, 
 	isWorkVisa: false,
 	isResidential: true,
@@ -375,7 +376,9 @@ export default (state = INITIAL_STATE, action) => {
 		  	editMode: action?.payload?._id == null, // Loan request does not exist
 		  	updateMode: action?.payload?._id != null, 
 		  	loanRequest: action.payload, 
-			
+			addressSet: true,
+			professionSet: true,
+			hasGrossIncAnn: true,
 		    grossIncAnn: action?.payload?.financials?.annualIncome == null ? 0 : action.payload.financials.annualIncome.value,
 		    borrowing: action?.payload?.loanAmount == null ? 0 : action.payload.loanAmount.value,
 			isResidential: action?.payload?.loanPurpose == null ||  action.payload.loanPurpose == RESIDENTIAL,
@@ -491,10 +494,10 @@ export default (state = INITIAL_STATE, action) => {
 		    titleMrs: action?.payload?.title == TITLE_MRS,
 			titleMs: action?.payload?.title == TITLE_MS,
 			
-			isPermanent: action?.payload?.employmentType == null || action?.payload?.employmentType == PERMANENT, 
+			isPermanent: action?.payload?.employmentType != null && action?.payload?.employmentType == PERMANENT, 
 			isSelfEmployed: action?.payload?.employmentType != null && action?.payload?.employmentType == SELF_EMPLOYED,
 
-			isCitizen:  action?.payload?.immigrationStatus ==  null || action?.payload?.immigrationStatus == CITIZEN,
+			isCitizen:  action?.payload?.immigrationStatus !=  null && action?.payload?.immigrationStatus == CITIZEN,
 			isResident: action?.payload?.immigrationStatus != null && action?.payload?.immigrationStatus == RESIDENT,  
 			isWorkVisa: action?.payload?.immigrationStatus != null && action?.payload?.immigrationStatus == WORK_VISA,
 
@@ -668,6 +671,8 @@ export default (state = INITIAL_STATE, action) => {
   // General actions
   case TOGGLE_EDIT:
 	  return { ...state, editMode: !action.payload, isAccepted: action.payload, edit: EDIT_1 };
+  case TOGGLE_ALERT:
+	  return { ...state, showAlert: !state.showAlert };
   case EDIT_LESS:
 	  return { ...state, edit: state.edit-1};
   case EDIT_MORE:

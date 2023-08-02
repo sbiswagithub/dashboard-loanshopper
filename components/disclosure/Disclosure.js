@@ -9,7 +9,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
 
 import { onClickDealsButton, toApplication, showApplication, addressOnBlur, clearCoBorr, handleFetchError, 
-	closeDisclosure, toggleEditMode, toggleModal, toggleAcceptFlag, messageNext, editMore, editLess } from '../../actions';
+	closeDisclosure, toggleEditMode, toggleModal, toggleAlert, toggleAcceptFlag, messageNext, editMore, editLess } from '../../actions';
 import { SHOW_MODAL, HIDE_MODAL, } from '../../actions/types';
 import { DISCLOSURE_BANNER, DISCLOSURE_POPUP_TITLE_2_BANNER, ACCEPTANCE_BANNER, 
 	ERROR_DIALOG_PUBLIC_MSG_1, ERROR_DIALOG_TITLE_1, NEXT, PREV, CLOSE_BUTTON_BANNER, NEXT_TITLE, NEXT_MESSAGE, MORE } from '../../constants/banners';
@@ -45,6 +45,7 @@ class Disclosure extends Component {
 	_onToggleSwitch () {
 		// Hide keyboard if visible
 		if (!Constants.platform.web) Keyboard.dismiss();
+		console.log(this.props);
 		// Remove co borrower if full name is not set
     	if (this.props.editMode && 
     		!this.props.checkFullName(this.props.titleCoBorr, this.props.firstNameCoBorr, this.props.lastNameCoBorr)){
@@ -58,16 +59,13 @@ class Disclosure extends Component {
 					this.props.employmentType === null || this.props.immigrationStatus === null  || 
 					!this.props.professionSet || !this.props.hasGrossIncAnn ) {
 			// Missing mandatory details, unable to proceed
-			////console.log('Address ' + this.props.addressSet);
-			////console.log('DOB ' + this.props.dob);
-			////console.log('Employment Type ' + this.props.employmentType);
-			////console.log('Immigration status ' + this.props.immigrationStatus);
-			////console.log('Profession ' + this.props.professionIdx);
-			////console.log('Gross Inc ' + this.props.hasGrossIncAnn);
+			//console.log('Address ' + this.props.addressSet);
+			//console.log('DOB ' + this.props.dob);
+			//console.log('Employment Type ' + this.props.employmentType);
+			//console.log('Immigration status ' + this.props.immigrationStatus);
+			//console.log('Profession ' + this.props.professionIdx);
+			//console.log('Gross Inc ' + this.props.hasGrossIncAnn);
 			this.alertMinimumDetails();
-		} else if (Moment(this.props.dob).isAfter(Moment(new Date()).subtract(20,'years'))) {
-			// Incorrect date, unable to proceed
-			this.alertDOBError();
 		} else if (this.props.borrower.email == this.props.coBorrowerEmail) {
 			this.alertCoBorrowerError();
 		} else if (!this.props.isAccepted) {
@@ -81,7 +79,7 @@ class Disclosure extends Component {
 	createOrUpdateLoanRequest(props, onSuccess, onError){
 		// Load loan request details on load
 		const loanRequest = props.propsToLoanRequest(props);
-		////console.log(loanRequest)
+		//console.log(loanRequest)
 		const body = JSON.stringify(loanRequest);
     	const uri = props.updateMode ? `${API_LOAN_REQUESTS_URI}/`+ props.loanRequest._id : `${API_LOAN_REQUESTS_URI}`;
 		trackPromise(
@@ -108,23 +106,26 @@ class Disclosure extends Component {
 				onSuccess(props);
 		    })
 		    .catch((error) => {
-			    ////console.log('Boo in POST loanrequests');
-			    ////console.log(error);
+			    //console.log('Boo in POST loanrequests');
+			    //console.log(error);
 				props.toggleModal(HIDE_MODAL);
 			  	onError(error);	  						  	
 		    }));
 	}
 	alertMinimumDetails () {
-	    Alert.alert(
-	      DISC_SAVE_ALERT_2_TITLE,
-	      DISC_SAVE_ALERT_2_MSG,
-	      [
-	        {
-	          text: ALERT_CLOSE_BUTTON_LABEL,
-	          style: "close"
-	        }			      ],
-	      { cancelable: false } 
-	    );
+		if (Constants.platform.web)
+			this.props.toggleAlert()
+		else
+			Alert.alert(
+			DISC_SAVE_ALERT_2_TITLE,
+			DISC_SAVE_ALERT_2_MSG,
+			[
+				{
+				text: ALERT_CLOSE_BUTTON_LABEL,
+				style: "close"
+				}			      ],
+			{ cancelable: false } 
+			);
 	}
 	alertDOBError () {
 	    Alert.alert(
@@ -139,16 +140,19 @@ class Disclosure extends Component {
 	    );
 	}
 	alertCoBorrowerError () {
-	    Alert.alert(
-	      HOME_ALERT_1_TITLE,
-	      DISC_SAVE_ALERT_4_MSG,
-	      [
-	        {
-	          text: ALERT_CLOSE_BUTTON_LABEL,
-	          style: "close"
-	        }			      ],
-	      { cancelable: false } 
-	    );
+		if (Constants.platform.web)
+			this.props.toggleAlert()	
+		else
+			Alert.alert(
+			HOME_ALERT_1_TITLE,
+			DISC_SAVE_ALERT_4_MSG,
+			[
+				{
+				text: ALERT_CLOSE_BUTTON_LABEL,
+				style: "close"
+				}			      ],
+			{ cancelable: false } 
+			);
 	}	
 	onSaveLoanRequest (props) {
 		props.toggleEditMode(props.editMode);
@@ -162,7 +166,6 @@ class Disclosure extends Component {
 
     render () {
 		const styles = getStyleSheet();
-		////console.log(this.props)
     	return (
     		<View style={{flexDirection:'column', justifyContent:'space-between'}}>    		
 				<View style={[styles.disclosureContainer, {flexDirection:'column', margin:'2%'}]}>
@@ -216,6 +219,15 @@ class Disclosure extends Component {
 					</Dialog>
 				</Portal>
 				<Portal>
+					<Dialog visible={this.props.showAlert} style={{maxWidth:'50%', alignSelf:"center"}} >
+					<Dialog.Title>{"Oops, did you forget something"}</Dialog.Title>
+					<Dialog.Content><Paragraph>{"Required minimum details"}</Paragraph></Dialog.Content>
+					<Dialog.Actions>
+						<Button onPress={this.props.toggleAlert}>{ALERT_NO_BUTTON_LABEL}</Button>
+					</Dialog.Actions>
+					</Dialog>
+				</Portal>				
+				<Portal>
 					<Dialog visible={this.props.showNext} style={{maxWidth:'50%', alignSelf:"center"}} >
 					<Dialog.Title>{NEXT_TITLE}</Dialog.Title>
 					<Dialog.Content><Paragraph>{NEXT_MESSAGE}</Paragraph></Dialog.Content>
@@ -241,4 +253,4 @@ const mapStateToProps = ({ disclosureReducer, authReducer, entryReducer, proposa
 };
 
 export default connect(mapStateToProps, { onClickDealsButton, toApplication, showApplication, addressOnBlur, clearCoBorr, handleFetchError, closeDisclosure, 
-	toggleEditMode, toggleModal, toggleAcceptFlag, messageNext, editMore, editLess })(Disclosure);
+	toggleEditMode, toggleModal, toggleAlert, toggleAcceptFlag, messageNext, editMore, editLess })(Disclosure);

@@ -15,7 +15,6 @@ import Dependants from './Dependants';
 
 import { emailUpdated, mobileUpdated, } from '../../actions';
 import { } from '../../constants/disclosure';
-import { MAIN_BORR_HDR, BASIC_DETAILS } from '../../constants/banners';
 
 class MinimumRequiredDetails extends Component {
 

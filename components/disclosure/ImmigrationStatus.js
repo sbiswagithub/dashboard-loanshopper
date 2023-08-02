@@ -22,7 +22,7 @@ class ImmigrationStatus extends Component {
         		<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{IMMIGRATION_STATUS_BANNER_1}</Text>
 				<View style={styles.space}/>
 			    
-	    		<View style={{ flex:1, flexDirection:"column", justifyContent: 'space-evenly', alignItems: 'stretch' }}>
+	    		<View style={{ flex:1, flexDirection:"column", justifyContent: 'space-evenly', alignItems: 'center' }}>
 	    		<Chip style={this.props.isCitizen ? styles.chipNormal : null} textStyle={this.props.isCitizen ? styles.textSmallBoldWhite : null} selected={this.props.isCitizen} onPress={() => this.props.immigrationStatusSelected(CITIZEN)}>{CITIZEN}</Chip>
 	    		<Chip style={this.props.isResident ? styles.chipNormal : null} textStyle={this.props.isResident ? styles.textSmallBoldWhite : null} selected={this.props.isResident} onPress={() => this.props.immigrationStatusSelected(RESIDENT)}>{RESIDENT}</Chip>
 	    		<Chip style={this.props.isWorkVisa ? styles.chipNormal : null} textStyle={this.props.isWorkVisa ? styles.textSmallBoldWhite : null} selected={this.props.isWorkVisa} onPress={() => this.props.immigrationStatusSelected(WORK_VISA)}>{WORK_VISA}</Chip>

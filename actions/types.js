@@ -92,6 +92,7 @@ export const TO_APPLICATION = 'to_application';
 export const FROM_APPLICATION = 'from_application';
 export const LOAD_BORROWER_DETAILS= 'borrower_details';
 export const TOGGLE_EDIT = 'toggle_edit';
+export const TOGGLE_ALERT = 'toggle_alert';
 export const SHOW_MODAL = 'show_modal';
 export const SHOW_NEXT = 'show_next';
 export const HIDE_MODAL = 'hide_modal';

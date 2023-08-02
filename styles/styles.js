@@ -921,11 +921,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#dd2c00",
   },
   chipNormal: {
-    marginLeft: 3,
-    marginRight: 3,
     borderColor: "#ffffff",
     backgroundColor: "#8d93ab",
-    padding:"2%", 
   },
   chipNoticeable: {
     marginLeft: 3,
