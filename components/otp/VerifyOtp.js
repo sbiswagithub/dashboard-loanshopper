@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Keyboard, Text, TextInput, View, Image, SafeAreaView,TouchableWithoutFeedback } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import { connect } from 'react-redux';
-import { trackPromise, usePromiseTracker  } from 'react-promise-tracker';
-import * as Updates from 'expo-updates';
+import { trackPromise,  } from 'react-promise-tracker';
+import Constants from 'expo-constants';
 import getStyleSheet from '../../styles/styles';  
 import { ERROR_DIALOG_PUBLIC_MSG_1, ERROR_DIALOG_PUBLIC_MSG_2, ERROR_DIALOG_TITLE_1 } from '../../constants/banners';
 import { API_BORROWER_URI, } from '../../constants/apiUrls';
@@ -23,7 +23,8 @@ class VerifyOtp extends Component {
 	verifyOtpAction(input, props) {
 	    if (input.length === 5) {
 	    	// Hide keyboard to stop further user input
-	        Keyboard.dismiss();
+			if (!Constants.platform.web)
+				Keyboard.dismiss();
 	    	const body = JSON.stringify({ otpCode: input, operationId: 'verifyOtp', });
 	    	const uri = `${API_BORROWER_URI}/`+ props.borrower._id;
 			trackPromise(
@@ -69,7 +70,8 @@ class VerifyOtp extends Component {
 
 	resendOtp(props) {
 		// Hide keyboard to stop further user input
-		Keyboard.dismiss();
+		if (!Constants.platform.web)
+			Keyboard.dismiss();
 		const body = JSON.stringify({ operationId: 'resendOtp', });
 		const uri = `${API_BORROWER_URI}/`+ props.borrower._id;
 		trackPromise(
@@ -109,7 +111,7 @@ class VerifyOtp extends Component {
     	const styles = getStyleSheet();
     	return (
         <SafeAreaView  style={styles.container}>
-			<TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+			<TouchableWithoutFeedback onPress={() => {if (!Constants.platform.web) Keyboard.dismiss()}} accessible={false}>
 	    		<View style={styles.box}>
 			    	<View style={styles.stackedLayout}>
 						<Image source={require('../../assets/LoanShopper_LR.png')}  style={styles.logoMastheadWide} />

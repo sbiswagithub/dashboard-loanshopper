@@ -72,7 +72,7 @@ export const fetchLoanRequest = (onSuccess, onError) => (dispatch) => {
 				return response.json();
 		})
 		.then((json) => {
-			console.log(json)
+			//console.log(json)
 			if (onSuccess)
 				onSuccess(json);
 		})

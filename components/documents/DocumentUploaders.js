@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { Keyboard, Dimensions, View, Text, Alert, ScrollView, TouchableWithoutFeedback, } from 'react-native';
-import { Switch, IconButton, Button, Paragraph, Dialog, Portal,  } from 'react-native-paper';
+import { View, } from 'react-native';
+import { Portal,  } from 'react-native-paper';
 import { connect } from 'react-redux';
-import Icon from 'react-native-vector-icons/AntDesign';
 
 import getStyleSheet from '../../styles/styles';  
 import { toEmailMode, toGoogleDriveMode, toDropboxMode, hideDocumentUploaderModal } from '../../actions';
@@ -12,8 +11,6 @@ import {  } from '../../constants/colors';
 import ErrorDialog from '../ErrorDialog';
 import SpinnerHolder from '../common/SpinnerHolder';
 import EmailUploader from "./EmailUploader";
-import ChooseUploaderView from "./ChooseUploaderView";
-import DropboxUploader from "./DropboxUploader";
 
   
 class DocumentUploaders extends Component {

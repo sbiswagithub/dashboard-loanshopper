@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { View, Text, ScrollView } from 'react-native';
+import Constants from 'expo-constants';
 import { connect } from 'react-redux';
 
 import getStyleSheet from '../../styles/styles';  
 import DateOfBirth from './DateOfBirth';
+import DateOfBirthWeb from './DateOfBirthWeb';
 import AnnualIncome from  './AnnualIncome';
 import EmploymentType from './EmploymentType';  
 import ImmigrationStatus from './ImmigrationStatus';
@@ -35,7 +37,7 @@ class MinimumRequiredDetails extends Component {
     		    </View>
 				<View style={styles.hrLight}/>
 	    		<View style={styles.disclosureBoxWideRow}>
-			    <DateOfBirth />
+					{Constants.platform.web ? <DateOfBirthWeb />: <DateOfBirth /> }
     		    </View>
 				<View style={styles.hrLight}/>
 	    		<View style={[styles.disclosureBoxRow]}>

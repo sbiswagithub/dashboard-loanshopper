@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { trackPromise  } from 'react-promise-tracker';
+import Constants from 'expo-constants';
 
 import getStyleSheet from '../styles/styles';  
 import { EMAIL_DEFAULT, MOBILE_DEFAULT } from '../constants/disclosure';
@@ -96,7 +97,7 @@ class UserRegistration extends Component {
     	const styles = getStyleSheet();
     	return (
         <SafeAreaView style={styles.container}>
-			<TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+			<TouchableWithoutFeedback onPress={() => {if (!Constants.platform.web) Keyboard.dismiss()}} accessible={false}>
 	        <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='handled'>
 		    	<View style={styles.stackedLayout}>
 		    		<View style={styles.space}/>

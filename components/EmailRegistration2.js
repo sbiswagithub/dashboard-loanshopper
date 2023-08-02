@@ -3,6 +3,7 @@ import { Keyboard,TouchableWithoutFeedback,Text, TextInput, View, ScrollView, Sa
 import { Dialog, Portal, Paragraph } from 'react-native-paper';
 import { connect } from 'react-redux';
 import { trackPromise  } from 'react-promise-tracker';
+import Constants from 'expo-constants';
 
 import getStyleSheet from '../styles/styles';  
 import {  } from '../constants/disclosure';
@@ -54,7 +55,7 @@ class EmailRegistration2 extends Component {
 		const ready = hidePasswordRules && this.props.passwordRepeat === this.props.password 
     	return (
         <SafeAreaView style={styles.container}>
-			<TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+			<TouchableWithoutFeedback onPress={() => { if(!Constants.platform.web) Keyboard.dismiss() }} accessible={false}>
 			<View style={styles.stackedLayout}>
 				<View style={styles.space}/>
 				<Image source={require('../assets/LoanShopper_LR.png')}  style={styles.logoMastheadWide} />

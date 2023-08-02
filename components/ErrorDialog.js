@@ -3,6 +3,7 @@ import { SafeAreaView, Keyboard, View, Alert } from 'react-native';
 import { connect, useDispatch } from 'react-redux';
 import { Button, Paragraph, Dialog, Portal } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Constants from 'expo-constants';
 
 import getStyleSheet from '../styles/styles';  
 import { resetFetchError } from '../actions';
@@ -17,7 +18,8 @@ class ErrorDialog extends Component {
     }
     
     componentDidMount(){
-        Keyboard.dismiss();
+		if (!Constants.platform.web)
+			Keyboard.dismiss();
     }
 
     render () {
