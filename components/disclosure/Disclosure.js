@@ -40,12 +40,16 @@ class Disclosure extends Component {
 	constructor(props) {
         super(props);
     }
-    
+	_missingMinimumRequiredDetails() {
+		return !this.props.addressSet || this.props.dob == null || 
+					this.props.employmentType === null || this.props.immigrationStatus === null  || 
+					!this.props.professionSet || !this.props.hasGrossIncAnn 
+	}
+	
     // Save switch 
 	_onToggleSwitch () {
 		// Hide keyboard if visible
 		if (!Constants.platform.web) Keyboard.dismiss();
-		console.log(this.props);
 		// Remove co borrower if full name is not set
     	if (this.props.editMode && 
     		!this.props.checkFullName(this.props.titleCoBorr, this.props.firstNameCoBorr, this.props.lastNameCoBorr)){
@@ -55,9 +59,7 @@ class Disclosure extends Component {
 		if (!this.props.editMode) {
 			// Open for editing
  			this.props.toggleEditMode(this.props.editMode);
-		} else if (!this.props.addressSet || this.props.dob == null || 
-					this.props.employmentType === null || this.props.immigrationStatus === null  || 
-					!this.props.professionSet || !this.props.hasGrossIncAnn ) {
+		} else if (this._missingMinimumRequiredDetails() ) {
 			// Missing mandatory details, unable to proceed
 			//console.log('Address ' + this.props.addressSet);
 			//console.log('DOB ' + this.props.dob);
@@ -78,6 +80,7 @@ class Disclosure extends Component {
 
 	createOrUpdateLoanRequest(props, onSuccess, onError){
 		// Load loan request details on load
+		//console.log(props)
 		const loanRequest = props.propsToLoanRequest(props);
 		//console.log(loanRequest)
 		const body = JSON.stringify(loanRequest);
@@ -176,10 +179,11 @@ class Disclosure extends Component {
 								<View style={{flexDirection:'row',justifyContent:'space-between', marginRight:'2%'}}>
 									<View style={{flexDirection:'row',alignItems:"flex-start", justifyContent:"flex-start", width:"45%" }}>
 										<View style={{flexDirection:'row',justifyContent:'space-between'}}>
+											{this.props.editMode ? <Text style={[styles.textMediumBoldLogoBrightBlue, {alignSelf:"center"}]} >{'Save'}</Text> : null}
 											<FAIcon name="lock" size={this.props.editMode ? 20 : 40} color={this.props.editMode ? BACKGROUND_LIGHT_GRAY : LOGO_DARK_BLUE } />
-											<Switch color={LOGO_BRIGHT_BLUE} style={styles.padRight} value={this.props.editMode} color={HIGHLIGHTED_YELLOW}
-												onValueChange={() => {this._onToggleSwitch()}} />
+											<Switch color={LOGO_BRIGHT_BLUE} style={styles.padRight} value={this.props.editMode} color={HIGHLIGHTED_YELLOW} onValueChange={() => {this._onToggleSwitch()}} />
 											<FAIcon name="unlock" size={this.props.editMode ? 40 : 20} color={this.props.editMode ? LOGO_BRIGHT_BLUE : BACKGROUND_LIGHT_GRAY } />
+											{this.props.editMode ? null : <Text style={[styles.textMediumBoldLogoDarkBlue, {alignSelf:"center"}]} >{'Edit'}</Text>}
 										</View>
 									</View>
 								</View>
@@ -192,7 +196,12 @@ class Disclosure extends Component {
 									}} 
 									>{PREV}</Icon.Button>
 							: this.props.editMode  ? 
-								<MoveButtons {...this.props} /> 
+							<View style={{flexDirection:"row"}}>
+							<Icon.Button name="banckward" size={20} borderRadius={25} disabled={this.props.edit === 1 }
+								backgroundColor={this.props.edit > 1 ? LOGO_BRIGHT_BLUE : BACKGROUND_LIGHT_GRAY} iconStyle={{margin:1}} onPress={()=>{this.props.editLess();}}>{"Less"}</Icon.Button>		
+							<Icon.Button name="forward" size={20} borderRadius={25} disabled={this.props.edit === 19 || this._missingMinimumRequiredDetails()}
+								backgroundColor={this.props.edit < 19 && !this._missingMinimumRequiredDetails() ? LOGO_BRIGHT_BLUE : BACKGROUND_LIGHT_GRAY} iconStyle={{margin:1}} onPress={()=>{this.props.editMore();}}>{MORE}</Icon.Button>		
+							</View>
 							: !this.props.editMode  ? 
 								<Icon.Button name="cloudupload" size={20} borderRadius={25}
 									backgroundColor={LOGO_DARK_BLUE } iconStyle={{margin:1}}

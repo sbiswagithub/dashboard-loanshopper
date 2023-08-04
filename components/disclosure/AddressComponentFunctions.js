@@ -8,7 +8,6 @@ import { ERROR_DIALOG_PUBLIC_MSG_1, ERROR_DIALOG_TITLE_1 } from '../../constants
 
 export const  AddressSelect = (props) =>  {
 	const styles = getStyleSheet();
-	//console.log(props)
     return (
 		<View >
 			<TextInput style={[styles.whiteBgCentredTextInput, styles.disclTextEntryWide, {marginTop:5, marginBottom:5}]} 

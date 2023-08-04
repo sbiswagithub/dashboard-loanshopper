@@ -35,13 +35,17 @@ const renderProposalCard = (props) => {
 					<View style={[{flexDirection: "column", justifyContent: "space-between", }]}>
 						<View style={styles.tableColumn}>
 						<View style={[styles.tableRow]}>
-							<Text style={[styles.textMediumBoldWhite,{padding:'2%',  }]}>{props?.proposal?.agent?.firstName} from {props?.proposal?.agency?.companyDetails?.companyName} sent you a loan proposal for {props?.proposal?.lender?.name} home loans</Text>
+							<Text style={[styles.textMediumBoldWhite,{padding:'2%',  }]}>{props?.proposal?.loanPackageSummary?.label} at {props?.proposal?.loanPackageSummary?.interestRate}%</Text>
+						</View>
+						<View style={[styles.tableRow]}>
+							<Text style={[styles.textMediumLogoBrightBlue,{padding:'2%',  }]}>Loan proposal from {props?.proposal?.agent?.firstName} of {props?.proposal?.agency?.companyDetails?.companyName} </Text>
 						</View>
 						</View>
 					</View>
 
 					<View style={[{flexDirection: "column", justifyContent: "space-between"}]}>
 						<View style={styles.hr} />
+						<View style={styles.space} />
 						<Icon.Button name="arrow-expand-all" size={15} borderRadius={30}
 							color={LOGO_DARK_BLUE} backgroundColor={WHITE}
 							iconStyle={{margin:5,alignContent:'center'}} 
@@ -84,8 +88,10 @@ class ProposalListView extends Component {
     render () {
 		const styles = getStyleSheet();
 		
-    	const proposal = this.props.proposalsInView.find((proposal) => proposal._id === this.props.proposalId);
+		const proposal = this.props.proposalsInView.find((proposal) => proposal._id === this.props.proposalId);
+		console.log(proposal)
 		const brokerAgent = this.props.brokerAgentsInView.find((agent) => agent._id === proposal?.agentId);
+		console.log(brokerAgent)
     	return (
 		<View style={{flexDirection:'column',margin:2 }}>
 			{renderProposalCard(

@@ -56,9 +56,9 @@ class ProposalCalendarView extends Component {
 
 					{
 						this.props?.proposalsInView?.length === 0 ? null : 
-							this.props.reviewPeriod == WEEKLY_VIEW ? <Text style={styles.textSmallLogoDarkBlue}>{SHOWING_PROPOSALS_FOR_DATE_BANNER  }</Text> : 
-							this.props.filter == FILTER_LIKED ? <Text style={styles.textSmallLogoDarkBlue}>{SHOWING_LIKED_BANNER}</Text> :
-							this.props.filter == FILTER_NONE ? <Text style={styles.textSmallLogoDarkBlue}>{SHOWING_ALL_BANNER}</Text> :
+							this.props.reviewPeriod == WEEKLY_VIEW ? <Text style={styles.textMediumBoldGray}>{SHOWING_PROPOSALS_FOR_DATE_BANNER  }</Text> : 
+							this.props.filter == FILTER_LIKED ? <Text style={styles.textMediumBoldGray}>{SHOWING_LIKED_BANNER}</Text> :
+							this.props.filter == FILTER_NONE ? <Text style={styles.textMediumBoldGray}>{SHOWING_ALL_BANNER}</Text> :
 							null  
 						}
 					<View style={styles.space} />
@@ -67,6 +67,7 @@ class ProposalCalendarView extends Component {
 					<Text style={styles.largeGrayButtonText}>{this.props.reviewPeriod == QUARTERLY_VIEW ? NO_LOANS_AT_ALL : NO_LOANS_TO_DISPLAY}</Text>
 					:
 					<FlatList
+						style={{alignSelf:"flex-start", maxWidth:'30%'}}
 						data={this.props.proposalsInView}
 						renderItem={renderProposal}
 						keyExtractor={(item) => item._id}

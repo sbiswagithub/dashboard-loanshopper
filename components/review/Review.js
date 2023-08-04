@@ -24,7 +24,7 @@ class Review extends Component {
     render () {
     	const styles = getStyleSheet();
     	return (
-		<View style={[styles.stretchedWideVerticalLayout, {padding:'1%'}]}>
+		<View style={[{padding:'1%'}]}>
 			<View style={styles.space}/>
 			<View style={[{flexDirection:'column', height:"100%"}]} >
 				{ this.props.mode == CALENDAR_MODE ? <ProposalCalendarView /> :

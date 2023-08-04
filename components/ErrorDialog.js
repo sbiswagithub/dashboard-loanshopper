@@ -26,7 +26,7 @@ class ErrorDialog extends Component {
     	const styles = getStyleSheet();
     	return (
 				<Portal>
-					<Dialog visible={this.props.error.showDialog} onDismiss={this.props.resetFetchError}  >
+					<Dialog visible={this.props.error.showDialog} onDismiss={this.props.resetFetchError} style={{maxWidth:'50%', alignSelf:"center"}}  >
 					<Dialog.Title>{this.props.error.dialogTitle}</Dialog.Title>
 					<Dialog.Content>
 						<Paragraph>{this.props.error.publicMessage}</Paragraph>

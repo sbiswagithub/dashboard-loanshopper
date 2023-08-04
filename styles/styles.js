@@ -492,6 +492,7 @@ const styles = StyleSheet.create({
   textMediumGray: { color: "#999999", fontSize: 16 },
   textMediumLogoDarkBlue: { color: "#1f215e", fontSize: 16 },
   textMediumLogoPaleBlue: { color: "#21b7d3", fontSize: 16 },
+  textMediumLogoBrightBlue: { color: LOGO_BRIGHT_BLUE, fontSize: 16 },
   textMediumBoldLogoPaleBlue: {
     color: "#21b7d3",
     fontSize: 16,

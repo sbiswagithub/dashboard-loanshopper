@@ -8,7 +8,7 @@ function TextStack(props) {
 	const stack = [];
 	props.choices.forEach(element => {
 			stack.push(
-			<View key={new Date().getMilliseconds}>
+			<View key={element + new Date().getMilliseconds()}>
 				<Text style={[element == props.selected?  styles.textMediumSmallLogoDarkBlue : styles.textSmallGray]}>{element}</Text>
 				<View style={styles.space}/>
 			</View>)
@@ -22,7 +22,7 @@ function TextStackFromMap(props) {
 	const stack = [];
 	Object.entries(props.choiceMap).map(([key, value])  => {
 			stack.push(
-			<View key={new Date().getMilliseconds}>
+			<View key={key + new Date().getMilliseconds()}>
 				<Text style={[key == props.selected?  styles.textMediumSmallLogoDarkBlue : styles.textSmallGray]}>{value}</Text>
 				<View style={styles.space}/>
 			</View>)
@@ -35,7 +35,7 @@ function TextStackFromBooleanMap(props) {
 	const stack = [];
 	Object.entries(props.choiceMap).map(([key, value])  => {
 			stack.push(
-			<View key={new Date().getMilliseconds}>
+			<View key={key + new Date().getMilliseconds()}>
 				<Text style={[value ?  styles.textMediumSmallLogoDarkBlue : styles.textSmallGray]}>{key}</Text>
 				<View style={styles.space}/>
 			</View>)

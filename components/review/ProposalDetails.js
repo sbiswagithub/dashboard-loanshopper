@@ -61,7 +61,7 @@ class ProposalDetails extends Component {
     	const styles = getStyleSheet();
 		const data = this.getTableData(this.props.selectedView, this.props.proposalDetails);
     	return (
-    		<View>
+    		<View style={{borderWidth:1}}>
 			{ 
 			data.length == 0 ? this.getEmptyPlaceholder() :
     		<View elevation={10} style={[styles.viewStyle]}>

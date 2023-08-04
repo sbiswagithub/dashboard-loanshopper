@@ -708,11 +708,13 @@ export const fetchClientConnections = (onSuccess, onError) => (dispatch) => {
 
 export const getBorrower = (onSuccess, onError)  =>  (dispatch) => {
   const borrowerUri = `${API_BORROWER_URI}`;
+	console.log(borrowerUri)
   return fetch(borrowerUri, {
 				method: "GET",
 				headers: { 'Content-Type': 'application/json',  'Authorization': store.getState().authReducer.accessCode  },
 			})
 			.then(response => {
+				//console.log(response)
 				if (response.status >= 400 && response.status < 600) {
 					const error = Object.assign({}, {
 						status: response.status,
@@ -727,6 +729,7 @@ export const getBorrower = (onSuccess, onError)  =>  (dispatch) => {
 					return response.json();
 			})
 			.then((json) => {
+				//console.log(json)
 				if(onSuccess)
 					return onSuccess(json);
 			})

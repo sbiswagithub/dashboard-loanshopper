@@ -12,7 +12,7 @@ const styles = getStyleSheet();
 
 function DateEntryWithError(props) {
 	const [error,setError] = useState()
-	const [dobText,setDobText] = useState()
+	const [dobText,setDobText] = useState(props?.dob ? Moment(props.dob).format('DD/MM/YYYY') : null)
 	return (
 		<>
 		<View style={{ flexDirection:'column', alignItems:"center" }}>

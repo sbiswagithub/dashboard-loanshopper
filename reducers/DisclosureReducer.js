@@ -196,6 +196,7 @@ const propsToLoanRequest = props => {
 			loanType: props.currentHomeLoanType,
 			averageMonthlyRepayment: {value: props.currentRepayment},
 		};
+
 	return loanRequest;
 };
 
@@ -370,6 +371,7 @@ const INITIAL_STATE = {
 };
 
 export default (state = INITIAL_STATE, action) => {
+
   switch (action.type) {
   case LOAD_LOAN_REQUEST:
 	  return { ...state, 
@@ -468,6 +470,7 @@ export default (state = INITIAL_STATE, action) => {
 	  };
 
   case LOAD_BORROWER_DETAILS:
+	  //console.log(action.payload)
 	  return { ...state, 
 		    addresses: [],
 		    professions: [],
