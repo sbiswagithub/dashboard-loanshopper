@@ -246,6 +246,9 @@ const INITIAL_STATE = {
 	isDeleteConfirmed: false,
 	showDeleteWarning: false,
 	showNewApplicationMessage: false,
+
+	showOverview:true,
+	showBrokerInfo: false,
 	showNextSteps: false,
 	showApplicationStatus: false,
 	showClaimCashback: false,

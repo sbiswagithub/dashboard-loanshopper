@@ -44,6 +44,8 @@ export const SELECT_UPLOAD_DOCUMENT = 'select_upload_document';
 export const CLOSE_UPLOAD_DOCUMENT = 'close_upload_document';
 export const DOCUMENT_UPLOAD_RESULT = 'document_upload_result';
 export const SET_PROPOSAL_DOCUMENTS = 'set_proposal_documents';
+export const SHOW_PROPOSAL_OVERVIEW = 'show_proposal_overview';
+export const SHOW_BROKER_OVERVIEW = 'show_broker_overview';
 // For Deals
 export const TOGGLE_LOAN_PACKAGE = 'toggle_loan_package';
 export const TOGGLE_AGENT_DTLS = 'toggle_agent_details';

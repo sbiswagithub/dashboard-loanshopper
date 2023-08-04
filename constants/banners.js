@@ -254,7 +254,7 @@ export const SELECT_LENDER = 'Select lender';
 export const MORTGAGE_ADDRESSES = 'Mortgage addresses';
 export const START_WITH_RES = 'Starting with residence address';
 export const SELECT_MORTGAGE_ADDR = 'Select mortgage address';
-export const CASBACK_DISCLAIMER = 'Loanshopper cashback rewards are available on eligible loan proposals. Cashback reward amounts can vary and are based on the actual loan amount at the time of disbursement. For more info, please refer Terms and conditions on the LoanShopper application.'
+export const CASBACK_DISCLAIMER = 'Loanshopper cashback rewards are available only on eligible loan proposals. Cashback reward amounts can vary and are based on the actual loan amount at the time of disbursement. For more info, please refer https://www.loanshopper.com.au/terms-and-conditions/'
 // Entry
 export const BUTTON_1_BANNER = "My borrowing position";
 export const BUTTON_2_BANNER = "My financial details";
