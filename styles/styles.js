@@ -1168,8 +1168,7 @@ const styles = StyleSheet.create({
     borderColor: "grey",
     elevation: 4,
     margin: 5,
-    width: '95%',
-    backgroundColor: BACKGROUND_LIGHT_BLUE
+    backgroundColor: WHITE
   },
   disappear: { height: 0, width: 0, borderWidth: 0, display:"none" },
   B: {

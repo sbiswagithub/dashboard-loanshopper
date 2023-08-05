@@ -13,7 +13,7 @@ import TableRowTwinCells from '../common/TableRowTwinCells';
 const renderItem = ({ item }) => {
 	const styles = getStyleSheet();
     return (
-      <View>
+      <View key={new Date().getMilliseconds() + item.label}>
       	{ item?.text != null ? 
 	      	<View style={[styles.tableRow]}>    		
     		<Text style={[styles.textMediumLogoDarkBlue]}>- {item.text}</Text>
@@ -61,7 +61,7 @@ class ProposalDetails extends Component {
     	const styles = getStyleSheet();
 		const data = this.getTableData(this.props.selectedView, this.props.proposalDetails);
     	return (
-    		<View style={{borderWidth:1}}>
+    		<View>
 			{ 
 			data.length == 0 ? this.getEmptyPlaceholder() :
     		<View elevation={10} style={[styles.viewStyle]}>

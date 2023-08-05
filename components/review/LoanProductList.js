@@ -17,7 +17,7 @@ const LoanProductPreview = (props) => {
 	const styles = getStyleSheet();
 	return (
 		<View style={{flexDirection:'column'}}>
-				<Icon.Button name="eye-check" size={30} borderRadius={30}
+				<Icon.Button name={props.expanded ? 'eye-minus-outline' : 'eye-plus'} size={30} borderRadius={30}
 					color={colors.LOGO_BRIGHT_BLUE} backgroundColor={props.expanded ? colors.HIGHLIGHTED_YELLOW : colors.WHITE}
 					iconStyle={{margin:5,alignContent:'center'}}  
 					onPress={() => {

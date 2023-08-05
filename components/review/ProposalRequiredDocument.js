@@ -59,7 +59,7 @@ class ProposalRequiredDocument extends Component {
 			<ErrorDialog />
 			<Portal>
 				<Dialog 
-					style={{maxWidth:'50%', alignSelf:"center"}} 
+					style={{width:'50%', alignSelf:"center"}} 
 					visible={this.state.show} onDismiss={() => this.setState({show : false})}  >
 				<Dialog.Title style={styles.textLargeBlue}>{this.props.requiredDocument.item.description}</Dialog.Title>
 				<Dialog.Content>
@@ -75,22 +75,22 @@ class ProposalRequiredDocument extends Component {
 					}
 				</Dialog.Content>
 				<Dialog.Actions>
-					<View style={{width:'75%'}}>
-					<Icon.Button name="clouduploado" size={20} borderRadius={25}
-					backgroundColor={LOGO_BRIGHT_BLUE} color={LOGO_DARK_BLUE} 
-					onPress={()=>{
-						this.setState({show:false})
-						if (isSelectedDocument)
-							this.props.setDocumentTypeToUpload(undefined)
-						else {
-							this.props.setDocumentTypeToUpload(this.props.requiredDocument)
-							this.props.showSelectUploadDocumentModal()
-						}
-					}} >{'Upload'}</Icon.Button>
-					<Icon.Button name="close" size={15} borderRadius={30}
-						color={LOGO_BRIGHT_BLUE} backgroundColor={BLACK}
-						iconStyle={{margin:5,alignContent:'center'}} 
-						onPress={() => {this.setState({show:false})}} >{'Close'}</Icon.Button>						
+					<View style={{flexDirection:"row", alignSelf:"stretch", alignItems:"stretch", justifyContent:"space-between"}}>
+						<Icon.Button name="clouduploado" size={20} borderRadius={25}
+							backgroundColor={LOGO_BRIGHT_BLUE} color={LOGO_DARK_BLUE} 
+							onPress={()=>{
+								this.setState({show:false})
+								if (isSelectedDocument)
+									this.props.setDocumentTypeToUpload(undefined)
+								else {
+									this.props.setDocumentTypeToUpload(this.props.requiredDocument)
+									this.props.showSelectUploadDocumentModal()
+								}
+							}} >{'Upload'}</Icon.Button>
+						<Icon.Button name="close" size={15} borderRadius={30}
+							color={LOGO_BRIGHT_BLUE} backgroundColor={BLACK}
+							iconStyle={{margin:5,alignContent:'center'}} 
+							onPress={() => {this.setState({show:false})}} >{'Close'}</Icon.Button>	
 					</View>
 				</Dialog.Actions>
 				</Dialog>

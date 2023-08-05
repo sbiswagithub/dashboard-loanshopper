@@ -3,15 +3,14 @@ import { View,  } from 'react-native';
 import { Subheading, Card, } from 'react-native-paper';
 import { connect } from 'react-redux';
 import { trackPromise } from "react-promise-tracker";
-import * as Linking from 'expo-linking';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
 import Moment from 'moment';
 import getStyleSheet from '../../styles/styles';  
-import { deleteDocument, fetchStoredDocuments, setProposalDocuments, openDocument  } from '../../actions';
-import { EXPIRES_DATE, FILENAME, } from '../../constants/banners';
+import { deleteDocument, fetchStoredDocuments, setProposalDocuments, openDocument,  } from '../../actions';
+import { EXPIRES_DATE, } from '../../constants/banners';
 import { } from '../../constants/documents';
-import { LOGO_BRIGHT_BLUE, LOGO_DARK_BLUE, BACKGROUND_LIGHT_BLUE, BLACK, TRANSPARENT,  } from '../../constants/colors';
+import { LOGO_BRIGHT_BLUE, LOGO_DARK_BLUE, TRANSPARENT,  } from '../../constants/colors';
 import { } from '../../constants/apiUrls';
 
 import ErrorDialog from '../ErrorDialog';
@@ -26,7 +25,7 @@ class ProposalDocumentThumbnail extends Component {
 	render () {
 		const styles = getStyleSheet();
 		return (
-			<View>
+			<View style={{alignSelf:"flex-start"}}>
 				<Card style={styles.fileDetailsCard }>
 					<Card.Content >
 						<Subheading style={styles.textSmallBoldLogoDarkBlue}>{this.props.item.filename}</Subheading>
@@ -43,25 +42,21 @@ class ProposalDocumentThumbnail extends Component {
 						</View>
 						<View style={styles.hr} />
 						<View style={styles.space} />
-						<View style={{flexDirection:"row", alignSelf:"stretch", justifyContent:"space-between"}}>
-							<FAIcon name="external-link" 
-								size={35} 
-								color={LOGO_BRIGHT_BLUE}
-								style={{borderColor:LOGO_BRIGHT_BLUE}}
-								iconStyle={{margin:3,alignContent:'center'}} 
-								onPress={ () => this.props.openDocument(this.props.item) } 
-								/>
-							<Icon name="delete" 
-								size={35} 
-								color={BLACK}
-								style={{borderColor:LOGO_DARK_BLUE}}
-								iconStyle={{margin:3,alignContent:'center'}} 
+						<View style={{flexDirection:"row", alignSelf:"stretch", justifyContent:"flex-start"}}>
+
+							<FAIcon.Button name="external-link" size={20} borderRadius={25} 
+								backgroundColor={LOGO_BRIGHT_BLUE} color={LOGO_DARK_BLUE} 
+								onPress={ () => this.props.openDocument(this.props.item) }  >{'Open'}</FAIcon.Button>	
+
+							<Icon.Button name="delete" size={20} borderRadius={25} 
+								backgroundColor={LOGO_BRIGHT_BLUE} color={LOGO_DARK_BLUE} 
 								onPress={() => 
 									{
 										trackPromise(this.props.deleteDocument(this.props.item))
 										trackPromise(this.props.fetchStoredDocuments(this.props.setProposalDocuments))
-									}} 
-								/>							
+									}}  >{'Remove'}</Icon.Button>	
+
+
 						</View>
 						<View style={styles.space}/>
 						<View style={styles.space}/>
@@ -74,9 +69,10 @@ class ProposalDocumentThumbnail extends Component {
     }
 }
 
-const mapStateToProps = ({ authReducer }) => {
+const mapStateToProps = ({ authReducer, proposalReducer }) => {
+  const { selectedDocumentTypeForUpload } = proposalReducer;
   const { accessCode } = authReducer;
-  return { accessCode };
+  return { accessCode, selectedDocumentTypeForUpload };
 };
 
-export default connect(mapStateToProps, { deleteDocument, fetchStoredDocuments, setProposalDocuments, openDocument })(ProposalDocumentThumbnail);
+export default connect(mapStateToProps, { deleteDocument, fetchStoredDocuments, setProposalDocuments, openDocument,  })(ProposalDocumentThumbnail);

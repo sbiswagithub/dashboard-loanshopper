@@ -77,15 +77,15 @@ export default function FileUploadButton(props) {
 					})
 					console.log(result);
 					if (Constants.platform.web && !result?.canceled) {
-						let { name, size, uri, mimeType } = !result?.canceled ? result.assets.pop() : {};
+						let asset = result?.assets ? result.assets[0] : {}
 						metadata = {
 							...fileMetadata, 
-							filename: name, 
-							filesize: '' + size,
-							contentType: mimeType,
+							filename: asset?.name, 
+							filesize: '' + asset?.size,
+							contentType: asset?.mimeType,
 						}
 						console.log(metadata)
-						trackPromise(bufferedUpload(uri, metadata))
+						trackPromise(uploadToS3(asset?.file, metadata))
 							.then((result) => {
 								console.log('In uploader')
 								console.log(result)
