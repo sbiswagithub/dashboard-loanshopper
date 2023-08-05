@@ -42,7 +42,8 @@ class Proposal extends Component {
 				<ProposalHeader/>
 				{
 				this.props.displayProposal === undefined ? 
-					null :
+					null : 
+				this.props.showNextSteps ? <ProposedNextSteps /> : 
 				this.props.showOverview ? 
 					<View style={{flexDirection:'column',paddingBottom:'1%'}}>
 						{this.props.displayStep == 1 ? 
@@ -87,7 +88,7 @@ class Proposal extends Component {
 							<LoanProductList />						
 						</View> 
 						: 
-						<ProposedNextSteps /> 
+						null
 						}
 						<View style={styles.chipsLayout}>
 							<Icon.Button name="banckward" size={20} borderRadius={25}
@@ -126,9 +127,7 @@ class Proposal extends Component {
 				this.props.showDocumentsUpload ? 
 					<View  style={[{height:'100%', flexDirection:"row"}]}>
 						<ProposalRequiredDocumentsList /> 
-					</View>				
-				: 
-				this.props.showNextSteps ? <ProposedNextSteps /> : null
+					</View> :  null
 				}
 			</View>
 

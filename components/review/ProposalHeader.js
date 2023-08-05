@@ -10,7 +10,7 @@ import { trackPromise } from "react-promise-tracker";
 import getStyleSheet from '../../styles/styles';  
 import { CALENDAR_MODE, PROPOSAL_RECIEVED_ON, QUARTERLY_VIEW } from '../../constants/review';
 import { DELETE_PROPOSAL_TITLE_BANNER, DELETE_PROPOSAL_TEXT_BANNER } from '../../constants/banners';
-import { WHITE, LOGO_DARK_BLUE, } from '../../constants/colors';
+import { WHITE, LOGO_DARK_BLUE, LOGO_BRIGHT_BLUE, } from '../../constants/colors';
 import { ALERT_YES_BUTTON_LABEL, ALERT_NO_BUTTON_LABEL, } from '../../constants/alerts';
 import { handleFetchError, refreshProposal, setViewMode, closeReview, toggleLikeProposal, showModal, hideModal, 
 	loadProposals, toggleNextSteps, toggleBrokerMessages, toggleDocumentsUpload, fetchStoredDocuments, setProposalDocuments,
@@ -36,10 +36,16 @@ class ProposalHeader extends Component {
 	    		<View style={[{flexDirection:"row", justifyContent:"space-between", alignSelf:"stretch"}]}>
 					<Text style={styles.textMediumBoldGray} >{PROPOSAL_RECIEVED_ON + Moment(this.props.displayProposal.createdTs).format('MMM Do YY')}</Text>
 					<View style={styles.chipsLayout}>
+						<Icon name={"cogs"}
+							size={30} borderRadius={30}
+							color={this.props.showNextSteps ? LOGO_BRIGHT_BLUE : LOGO_DARK_BLUE} backgroundColor={WHITE}
+							style={{marginLeft:'5%'}}
+							iconStyle={{alignContent:'center'}}
+							onPress={this.props.toggleNextSteps} />
 						<Icon name={this.props.displayProposal.liked ? "thumb-up" : "thumb-up-outline"}
 							size={30} borderRadius={30}
 							color={LOGO_DARK_BLUE} backgroundColor={WHITE}
-							style={{marginLeft:'3%'}}
+							style={{marginLeft:'5%'}}
 							iconStyle={{alignContent:'center'}}
 							onPress={() => {
 										this.props.toggleLikeProposal(
@@ -48,16 +54,18 @@ class ProposalHeader extends Component {
 						<Icon name="delete" size={30} borderRadius={30}
 							color={'red'} backgroundColor={WHITE}
 							iconStyle={{alignContent:'center'}} 
-							style={{marginLeft:'3%'}}
+							style={{marginLeft:'5%'}}
 							onPress={this.props.showModal} />
 
 						<AntDesign name="shrink" size={30} borderRadius={30}
 							color={LOGO_DARK_BLUE} backgroundColor={WHITE}
-							style={{marginLeft:'3%'}}
+							style={{marginLeft:'5%'}}
 							iconStyle={{alignContent:'center'}} 
 							onPress={() => this.props.setViewMode(CALENDAR_MODE)} />
 					</View>
 				</View>
+				{this.props.showNextSteps ? null : 
+				<View>
 				<View style={styles.hrLight} />
 	    		<View style={styles.chipsLayout}>
 			    	<Icon.Button name={"barcode"} size={30} borderRadius={30}
@@ -85,9 +93,10 @@ class ProposalHeader extends Component {
 						disabled={this.props.showNextSteps}
 				    	onPress={this.props.toggleBrokerMessages} />
 
-
+				</View>
 				</View>
 				
+				}
 			  <Portal>
 			    <Dialog visible={this.props.showDeleteWarning} style={{backgroundColor:WHITE}} >
 			      <Dialog.Title>{DELETE_PROPOSAL_TITLE_BANNER }</Dialog.Title>

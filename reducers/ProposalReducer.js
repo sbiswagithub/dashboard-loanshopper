@@ -293,7 +293,7 @@ export default (state = INITIAL_STATE, action) => {
 	case NEXT_DISPLAY_STEP:
 	  return { ...state, displayStep : action.payload === true ? state.displayStep + 1 : state.displayStep - 1,};
 	case SHOW_NEXT_STEPS:
-	  return { ...state, showNextSteps: !state.showNextSteps, showClaimCashback: false, showApplicationStatus: false, showDocumentsUpload: false, showBrokerMessages: false};
+	  return { ...state, showNextSteps: !state.showNextSteps, };
 	case TOGGLE_CLAIM_CASHBACK:
 	  return { ...state, showClaimCashback: !state.showClaimCashback, showApplicationStatus: false, showDocumentsUpload: false, showBrokerMessages: false};
 	case TOGGLE_APPLICATION_STATUS:
