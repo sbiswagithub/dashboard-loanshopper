@@ -262,7 +262,7 @@ const INITIAL_STATE = {
 	proposalDocuments: [],
 };
 export default (state = INITIAL_STATE, action) => {
-	console.log(action)
+	//console.log(action)
   switch (action.type) {
     case SHOW_MODAL:
 	  return { ...state, showDeleteWarning: true };

@@ -39,7 +39,8 @@ class Proposal extends Component {
 		const disableNext = this.props.displayStep == 4 || (this.props.selectedLoanProduct && this.props.displayStep == 3)
 		const styles = getStyleSheet();
 		const totalLending = this.props?.displayProposal?.loanPackage?.loanProducts.reduce((loanAmount, link) => loanAmount + link.loanAmount.value, 0)
-    	return (
+		console.log(this.props?.displayProposal)
+		return (
 		<View style={{flexDirection:'column', alignSelf:"stretch", alignContent:"space-between",}}>
 			<View style={[{flexDirection:'column', padding:'2%',  borderColor: LOGO_BRIGHT_BLUE,  borderWidth: 2.0, borderRadius: 20, height:'100%'}]}>
 				<ProposalHeader/>
@@ -107,6 +108,18 @@ class Proposal extends Component {
 					</View>  : 
 				this.props.showBrokerInfo ? 
 					<View  style={[{height:'100%', flexDirection:"row"}]}>
+						<View style={{width:'100%'}}>
+							<Text style={styles.textMediumBoldPurple}>About your broker</Text>
+							<View style={styles.space} />
+							<View style={[styles.chipsLayout, {margin:'0', alignSelf: "stretch", justifyContent:"flex-start"}]}>
+								<Text style={styles.textMediumLogoDarkBlue}>{this.props?.displayProposal?.agent?.title} {this.props?.displayProposal?.agent?.firstName} {this.props?.displayProposal?.agent?.lastName} from </Text> 
+								<Text style={styles.textMediumGray}>{this.props?.displayProposal?.agency?.companyDetails?.companyName}</Text>
+							</View>
+							<View style={styles.space} />
+							<Text style={styles.textMediumLogoBrightBlue}>{this.props?.displayProposal?.agent?.contact?.primaryEmail}</Text>
+							<View style={styles.space} />
+							<Text style={styles.textMediumLogoBrightBlue}>{this.props?.displayProposal?.agent?.contact?.primaryPhone}</Text>
+						</View>
 					</View> : 
 				this.props.showBrokerMessages ? 
 					<View  style={[{height:'100%', flexDirection:"row"}]}>
