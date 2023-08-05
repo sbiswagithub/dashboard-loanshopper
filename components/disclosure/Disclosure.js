@@ -190,11 +190,11 @@ class Disclosure extends Component {
 							{this.props.applicationMode ? 
 								<Icon.Button name="cloudupload" size={20} borderRadius={25}
 									backgroundColor={LOGO_BRIGHT_BLUE} iconStyle={{margin:1}}
-								onPress={() => {
-									this.props.onClickDealsButton();
-									this.props.toApplication();
-									}} 
-									>{PREV}</Icon.Button>
+									onPress={() => {
+										this.props.onClickDealsButton();
+										this.props.toApplication();
+										}} 
+										>{PREV}</Icon.Button>
 							: this.props.editMode  ? 
 							<View style={{flexDirection:"row"}}>
 							<Icon.Button name="banckward" size={20} borderRadius={25} disabled={this.props.edit === 1 }

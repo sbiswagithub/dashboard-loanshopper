@@ -26,10 +26,10 @@ class ProposalRequiredDocument extends Component {
 		const styles = getStyleSheet();
 		const proposalDocuments = this.props.proposalDocuments === undefined ? [] : this.props.proposalDocuments.filter(document => document.metadata.documentTypeId == this.props.requiredDocument.item._id);
     	return (
-		<View  style={[{flexDirection:"row", width:'100%',alignSelf:"stretch" }]}>
-			<View style={{flexDirection:"column", width:'100%',}}>
+		<View  style={[{flexDirection:"row", flexGrow:1,alignSelf:"stretch" }]}>
+			<View style={{flexDirection:"column", flexGrow:1}}>
 				<View  style={[{flexDirection:"row", alignItems:"stretch", justifyContent:"space-between", }]}>
-					<View  style={[{flexDirection:"column", width:'60%', paddingRight:'1%'}]}>
+					<View  style={[{flexDirection:"column", flexGrow:1, paddingRight:'1%'}]}>
 						<Text style={[styles.textSmallBoldLogoDarkBlue, {paddingLeft:'1%'}]}>{this.props.requiredDocument.item.description}</Text>
 					</View>
 					<View  style={[{flexDirection:"column",alignSelf:"flex-end"}]}>
@@ -59,22 +59,23 @@ class ProposalRequiredDocument extends Component {
 			<ErrorDialog />
 			<Portal>
 				<Dialog 
-					style={{backgroundColor:WHITE}}
+					style={{maxWidth:'50%', alignSelf:"center"}} 
 					visible={this.state.show} onDismiss={() => this.setState({show : false})}  >
 				<Dialog.Title style={styles.textLargeBlue}>{this.props.requiredDocument.item.description}</Dialog.Title>
 				<Dialog.Content>
 						{proposalDocuments.length > 1 ? 
-					<ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-						{proposalDocuments.map((document) => {
-							return (<ProposalDocumentThumbnail item={document} />)
-						})}
-					</ScrollView> : 
+						<ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+							{proposalDocuments.map((document) => {
+								return (<ProposalDocumentThumbnail item={document} />)
+							})}
+						</ScrollView> : 
 						<>{proposalDocuments.map((document) => {
 							return (<ProposalDocumentThumbnail item={document} />)
 						})}</>						
 					}
 				</Dialog.Content>
 				<Dialog.Actions>
+					<View style={{width:'75%'}}>
 					<Icon.Button name="clouduploado" size={20} borderRadius={25}
 					backgroundColor={LOGO_BRIGHT_BLUE} color={LOGO_DARK_BLUE} 
 					onPress={()=>{
@@ -89,7 +90,8 @@ class ProposalRequiredDocument extends Component {
 					<Icon.Button name="close" size={15} borderRadius={30}
 						color={LOGO_BRIGHT_BLUE} backgroundColor={BLACK}
 						iconStyle={{margin:5,alignContent:'center'}} 
-						onPress={() => {this.setState({show:false})}} >{'Close'}</Icon.Button>
+						onPress={() => {this.setState({show:false})}} >{'Close'}</Icon.Button>						
+					</View>
 				</Dialog.Actions>
 				</Dialog>
 			</Portal>

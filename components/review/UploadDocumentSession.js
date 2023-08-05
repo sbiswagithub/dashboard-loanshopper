@@ -27,7 +27,7 @@ const UploadPortal = (props) => {
 	return (
 		<>
 		<Portal>
-			<Dialog visible={props.showConfirmUploadToS3} onDismiss={props.closeUploadDocument}  >
+			<Dialog visible={props.showConfirmUploadToS3} onDismiss={props.closeUploadDocument} style={{maxWidth:'50%', alignSelf:"center"}}  >
 			<Dialog.Title  style={styles.textMediumBoldLogoPaleBlue}>Select file to upload</Dialog.Title>
 			<Dialog.Content>
 				{page == 1 ? 
@@ -68,7 +68,7 @@ const UploadPortal = (props) => {
 						<FAIcon name={'star'} size={20} 
 							color={LOGO_DARK_BLUE} backgroundColor={TRANSPARENT} iconStyle={{alignContent:'center', }}  
 							></FAIcon>
-						<Paragraph style={[styles.textMediumSmallLogoDarkBlue,{marginLeft:'5%'}]}>Hint - Click icons to change selection. 'Replace' will remove previous documents of this type. 'Exclusive' will mean only this broker can access this document</Paragraph>
+						<Paragraph style={[styles.textMediumSmallLogoDarkBlue,{marginLeft:'5%'}]}>Hint - 'Replace' will remove previous documents of this type. 'Exclusive' will mean only this broker can access this document</Paragraph>
 					</View> 
 				</View>	: null}
 				{page == 3 ? 
@@ -140,7 +140,7 @@ class UploadDocumentSession extends Component {
 				<UploadPortal {...this.props} />
 				: this.props?.documentUploadResult?.success == true ?
 				<Portal>
-					<Dialog visible={this.props.showConfirmUploadToS3 && session != undefined} onDismiss={this.props.closeUploadDocument}  >
+					<Dialog visible={this.props.showConfirmUploadToS3 && session != undefined} onDismiss={this.props.closeUploadDocument} style={{maxWidth:'50%', alignSelf:"center"}}  >
 					<Dialog.Title  style={styles.textLargeLogoDarkBlue}>Upload successful</Dialog.Title>
 					<Dialog.Content>
 						<Paragraph>File {this.props?.documentUploadResult?.filename} uploaded.</Paragraph>
@@ -159,7 +159,7 @@ class UploadDocumentSession extends Component {
 				</Portal> 
 				: this.props?.documentUploadResult?.success == false ?
 				<Portal>
-					<Dialog visible={this.props.showConfirmUploadToS3 && session != undefined} onDismiss={this.props.closeUploadDocument}  >
+					<Dialog visible={this.props.showConfirmUploadToS3 && session != undefined} onDismiss={this.props.closeUploadDocument} style={{maxWidth:'50%', alignSelf:"center"}}  >
 					<Dialog.Title style={styles.textLargeBoldPurple}>Upload failed</Dialog.Title>
 					<Dialog.Content><Paragraph>File upload error. Please try again in a short while and if problem persists, contact support.</Paragraph></Dialog.Content>
 					<Dialog.Actions>
