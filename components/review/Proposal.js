@@ -31,8 +31,8 @@ class Proposal extends Component {
 	}
 
 	render () {
-		const disablePrev = this.props.displayStep == 1 || (this.props.selectedLoanProduct && this.props.displayStep == 3)
-		const disableNext = this.props.displayStep == 4 || (this.props.selectedLoanProduct && this.props.displayStep == 3)
+		const disablePrev = this.props.displayStep == 1 || (this.props.selectedLoanProduct && this.props.displayStep == 1)
+		const disableNext = this.props.displayStep == 3 || (this.props.selectedLoanProduct && this.props.displayStep == 2)
 		const styles = getStyleSheet();
 		const totalLending = this.props?.displayProposal?.loanPackage?.loanProducts.reduce((loanAmount, link) => loanAmount + link.loanAmount.value, 0)
 		//console.log(this.props?.displayProposal)
