@@ -1,23 +1,21 @@
 import React, { Component } from "react";
-import { SafeAreaView, Text, View, TouchableOpacity, Button, ScrollView } from 'react-native';
+import { Text, View, TouchableOpacity, } from 'react-native';
 import { LinearGradient } from "expo-linear-gradient";
 import { Avatar,  } from 'react-native-paper';
 import { connect } from 'react-redux';
-import { useNavigation } from '@react-navigation/native';
 import { trackPromise, } from 'react-promise-tracker';
 
 import getStyleSheet from '../../styles/styles';  
-import { HOME_BANNER_1, HOME_BANNER_2, HOME_BANNER_3, BUTTON_1_BANNER, BUTTON_2_BANNER, BUTTON_3_BANNER, BUTTON_4_BANNER } from '../../constants/banners';
+import { HOME_BANNER_1, HOME_BANNER_2, BUTTON_1_BANNER, BUTTON_2_BANNER, BUTTON_3_BANNER, BUTTON_4_BANNER } from '../../constants/banners';
 import { setViewMode, onClickBorrowButton, onClickApplyButton, onClickReviewButton, onClickDealsButton, 
 	authenticatedBorrower, loadBorrowerDetails, handleFetchError, getLoanRequest, toApply } from '../../actions';
-import { CALENDAR_MODE, DEALS_MODE, PROPOSAL_MODE } from '../../constants/review';
+import { CALENDAR_MODE, } from '../../constants/review';
 
 import Borrow from '../borrow/Borrow';
 import Disclosure from '../disclosure/Disclosure';
 import Review from '../review/Review';
-import Deals from '../deals/Deals';
 import ErrorDialog from '../ErrorDialog'
-import { LOGO_BRIGHT_BLUE, LOGO_DARK_BLUE, BACKGROUND_LIGHT_GRAY, WHITE } from '../../constants/colors';
+import { LOGO_BRIGHT_BLUE, LOGO_DARK_BLUE, WHITE } from '../../constants/colors';
 
 function AButton (props) {
 

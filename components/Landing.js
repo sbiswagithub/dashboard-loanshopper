@@ -4,7 +4,6 @@ import {
   Image,
 } from "react-native";
 
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 import { LOGO_BRIGHT_BLUE, LOGO_DARK_BLUE, WHITE } from "./../constants/colors";
 import * as banners from "./../constants/banners";
@@ -12,7 +11,6 @@ import * as banners from "./../constants/banners";
 import getStyleSheet from "./../styles/styles";
 
 import { LinearGradient } from "expo-linear-gradient";
-import { colors } from "react-native-elements";
 import EmailSignIn from './EmailSignIn'
 
 export default function Landing({ navigation }) {

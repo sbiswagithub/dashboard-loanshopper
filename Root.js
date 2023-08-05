@@ -8,6 +8,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { navigationRef } from "./actions/RootNavigation";
 
 import Landing from "./components/Landing";
+import ClientConnections from "./components/clientConnections";
 import Menu from "./components/menu/Menu";
 import VerifyOtp from "./components/otp/VerifyOtp";
 import UserRegistration from "./components/UserRegistration";

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Linking, View } from 'react-native';
+import { Linking, } from 'react-native';
 import {
 	createDrawerNavigator,
 	DrawerContentScrollView,
@@ -8,24 +8,23 @@ import {
 } from '@react-navigation/drawer';
 import { getHeaderTitle } from '@react-navigation/elements';
 import { connect } from 'react-redux';
-import { trackPromise, } from 'react-promise-tracker';
 import * as RootNavigation from '../../actions/RootNavigation.js';
 
 import Header from './Header';
 import Home from '../home/Home';
-import ResetPassword from '../ResetPassword'
-import DocumentLanding from "../documents/DocumentLanding";
+import ClientConnections from '../clientConnections';
 import { onRegistrationInProgress, handleFetchError, onLogout,getMe, getBorrower, authenticatedBorrower, loadBorrowerDetails, 
 	fetchClientConnections, showResetPassword } from "../../actions";
 
-import { HOME, SHARED_DOCUMENTS, ABOUT_US, T_AND_C, PRIVACY_POLICY, LOGOUT } from '../../constants/banners';
-import { about_us_url, privacy_policy_url, t_and_c_url, color_active, color_inactive } from '../../constants/home';
+import { HOME, T_AND_C, PRIVACY_POLICY, LOGOUT } from '../../constants/banners';
+import { privacy_policy_url, t_and_c_url, color_active, color_inactive } from '../../constants/home';
 
 const Drawer = createDrawerNavigator();
 function DrawerActionContent(props) {
 	return (
 		<DrawerContentScrollView {...props}>
-			<DrawerItemList {...props} />
+			<DrawerItem label={"Home"} onPress={() => RootNavigation.navigate('Home')} activeTintColor={color_active} inactiveTintColor={color_inactive} />
+			<DrawerItem label={"My connections"} onPress={() => RootNavigation.navigate('ClientConnections')} activeTintColor={color_active} inactiveTintColor={color_inactive} />
 			<DrawerItem label={T_AND_C} onPress={() => Linking.openURL(t_and_c_url)} activeTintColor={color_active} inactiveTintColor={color_inactive} />
 			<DrawerItem label={PRIVACY_POLICY} onPress={() => Linking.openURL(privacy_policy_url)} activeTintColor={color_active} inactiveTintColor={color_inactive} />
 			<DrawerItem label={LOGOUT} onPress={() => {
@@ -42,15 +41,13 @@ class Menu extends Component {
 		super(props);
 	}
 
-
 	render() {
 		return (
 		<Drawer.Navigator 
 			screenListeners={({ navigation }) => ({
 				state: (e) => {
 				// Do something with the state
-				//console.log('state changed', e.data);
-
+				console.log('state changed', e.data);
 				if (e.data.state.index == 1) {
 					// In Change Password state
 					const drawer = e.data.state.history.find(o => o.type == 'drawer')
@@ -59,6 +56,7 @@ class Menu extends Component {
 					}
 				},
 			})}		
+			backBehavior={"none"}
 			drawerContent={props => <DrawerActionContent {...props} {...this.props} />}
 			initialRouteName={HOME}
 			screenOptions={{
@@ -71,7 +69,6 @@ class Menu extends Component {
 				headerShown: 'true',
 				header: ({ navigation, route, options }) => {
 					const title = getHeaderTitle(options, route.name);
-
 					return (
 						<Header title={title} style={options.headerStyle}
 							onTogglePress={navigation.toggleDrawer} />
@@ -82,9 +79,10 @@ class Menu extends Component {
 				<Drawer.Screen
 					name={HOME}
 					component={Home}
-					options={{ drawerLabel: HOME }}
-				/>
-
+					options={{ drawerLabel: HOME }} />
+				<Drawer.Screen
+					name={"ClientConnections"}
+					component={ClientConnections} />
 			</Drawer.Navigator>
 		);
 	}

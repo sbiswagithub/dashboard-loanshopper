@@ -32,7 +32,7 @@ function BrokerConnection(props) {
         })) 
 
    return (
-    <Card style={{elevation: 4, width:"100%", alignSelf:"center", borderWidth:0.1, borderColor:{LOGO_DARK_BLUE}, borderRadius:15, marginBottom:"2%" }}>
+    <Card key={new Date().getMilliseconds() + brokerConnection.brokerAgentId} style={{elevation: 4, width:"100%", alignSelf:"center", borderWidth:0.1, borderColor:{LOGO_DARK_BLUE}, borderRadius:15, marginBottom:"2%" }}>
 					<LinearGradient
 							colors={[
 							LOGO_DARK_BLUE,
@@ -150,7 +150,7 @@ class ClientConnections extends Component {
     	return (
 			  <View style={{height:"95%", width:"90%", alignItems:'center'}}>
           <View style={styles.space} />
-          <Text style={styles.textMediumBoldLogoDarkBlue}>Someone wants to connect with you!</Text>
+          {this.props?.clientConnections && this.props?.clientConnections.length > 0 ? <Text style={styles.textMediumBoldLogoDarkBlue}>Someone wants to connect with you!</Text> : null }
           <View style={styles.space} />
           <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='handled' style={{maxHeight:"90%", paddingBottom:"5%"}} >
             {items}

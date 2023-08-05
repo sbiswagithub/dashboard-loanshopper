@@ -3,11 +3,11 @@ import { View, } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Card } from 'react-native-elements';
-import { Switch, Button, Paragraph, Dialog, Portal, } from 'react-native-paper';
+import { Button, Paragraph, Dialog, Portal, } from 'react-native-paper';
 import Moment from 'moment';
 
 import getStyleSheet from '../styles/styles';  
-import { LOGO_DARK_BLUE, LOGO_BRIGHT_BLUE, WHITE, TRANSPARENT } from "../constants/colors";
+import { LOGO_DARK_BLUE, LOGO_BRIGHT_BLUE, WHITE,  } from "../constants/colors";
 import { showResetPassword } from '../actions';
 import * as RootNavigation from '../actions/RootNavigation.js';
 import LoanShopperLogin from './common/LoanShopperLogin';
@@ -50,7 +50,7 @@ class EmailSignIn extends Component {
     render () {
 		const styles = getStyleSheet();
 		//console.log(this.props)
-		console.log(Moment('12/08/2023','DD/MM/YYYY').isBefore(Moment(new Date())))
+		//console.log(Moment('12/08/2023','DD/MM/YYYY').isBefore(Moment(new Date())))
     	return (
 			<Card containerStyle={[styles.brokerCard, {backgroundColor:LOGO_BRIGHT_BLUE}]} 
 				title={'Title'} titleStyle={styles.cardTitle} >

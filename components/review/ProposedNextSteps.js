@@ -30,7 +30,7 @@ class ProposedNextSteps extends Component {
     	return (
 			<View>
 				<View style={styles.space}/>
-				<Card style={{elevation: this.props.showClaimCashback ? 0 : 5, backgroundColor:TRANSPARENT}}>
+				<Card style={{backgroundColor:TRANSPARENT}}>
 					<Card.Title title={NEXT_STEPS} titleStyle={styles.textMediumBoldLogoDarkBlue} />
 					<Card.Content>
 						{
