@@ -26,73 +26,74 @@ class ProposalRequiredDocument extends Component {
 		const styles = getStyleSheet();
 		const proposalDocuments = this.props.proposalDocuments === undefined ? [] : this.props.proposalDocuments.filter(document => document.metadata.documentTypeId == this.props.requiredDocument.item._id);
     	return (
-		<View>
-			<View  style={[{flexDirection:"row", justifyContent:"space-between"}]}>
-				<View  style={[{flexDirection:"column", width:'65%', paddingRight:'1%'}]}>
-					<Text style={[styles.textSmallBoldLogoDarkBlue, {paddingLeft:'1%'}]}>{this.props.requiredDocument.item.description}</Text>
-				</View>
-				<View  style={[{flexDirection:"column",width:'35%',  alignContent:"flex-end"}]}>
-					{proposalDocuments.length > 0 ? 
-					<Icon.Button name="link" size={20} borderRadius={25}
-									backgroundColor={LOGO_DARK_BLUE} iconStyle={{margin:1}} 
-									onPress={()=> {this.setState({show:true})}}
-									></Icon.Button> 
-					: 
-					<Icon.Button name="clouduploado" size={20} borderRadius={25}
-						backgroundColor={WHITE} color={LOGO_DARK_BLUE} 
-						onPress={()=>{
-							if (isSelectedDocument)
-								this.props.setDocumentTypeToUpload(undefined)
-							else {
-								this.props.setDocumentTypeToUpload(this.props.requiredDocument)
-								this.props.showSelectUploadDocumentModal()
-							}
-						}} >{'Upload'}</Icon.Button>}
+		<View  style={[{flexDirection:"row", width:'100%',alignSelf:"stretch" }]}>
+			<View style={{flexDirection:"column", width:'100%',}}>
+				<View  style={[{flexDirection:"row", alignItems:"stretch", justifyContent:"space-between", }]}>
+					<View  style={[{flexDirection:"column", width:'60%', paddingRight:'1%'}]}>
+						<Text style={[styles.textSmallBoldLogoDarkBlue, {paddingLeft:'1%'}]}>{this.props.requiredDocument.item.description}</Text>
+					</View>
+					<View  style={[{flexDirection:"column",alignSelf:"flex-end"}]}>
+						{proposalDocuments.length > 0 ? 
+						<Icon.Button name="link" size={20} borderRadius={25}
+										backgroundColor={LOGO_DARK_BLUE} iconStyle={{margin:1}} 
+										onPress={()=> {this.setState({show:true})}}
+										></Icon.Button> 
+						: 
+						<Icon.Button name="clouduploado" size={20} borderRadius={25}
+							backgroundColor={WHITE} color={LOGO_DARK_BLUE} 
+							onPress={()=>{
+								if (isSelectedDocument)
+									this.props.setDocumentTypeToUpload(undefined)
+								else {
+									this.props.setDocumentTypeToUpload(this.props.requiredDocument)
+									this.props.showSelectUploadDocumentModal()
+								}
+							}} >{'Upload'}</Icon.Button>}
+					</View>
 				</View>
 
-			</View>
+				<View style={styles.hr}/>
+			</View>			
 
-	    	<View style={styles.hr}/>
 			<SpinnerHolder />
 			<ErrorDialog />
 			<Portal>
-					<Dialog 
-						style={{backgroundColor:WHITE}}
-						visible={this.state.show} onDismiss={() => this.setState({show : false})}  >
-					<Dialog.Title style={styles.textLargeBlue}>{this.props.requiredDocument.item.description}</Dialog.Title>
-					<Dialog.Content>
-							{proposalDocuments.length > 1 ? 
-						<ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-							{proposalDocuments.map((document) => {
-								return (<ProposalDocumentThumbnail item={document} />)
-							})}
-						</ScrollView> : 
-							<>{proposalDocuments.map((document) => {
-								return (<ProposalDocumentThumbnail item={document} />)
-							})}</>						
+				<Dialog 
+					style={{backgroundColor:WHITE}}
+					visible={this.state.show} onDismiss={() => this.setState({show : false})}  >
+				<Dialog.Title style={styles.textLargeBlue}>{this.props.requiredDocument.item.description}</Dialog.Title>
+				<Dialog.Content>
+						{proposalDocuments.length > 1 ? 
+					<ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+						{proposalDocuments.map((document) => {
+							return (<ProposalDocumentThumbnail item={document} />)
+						})}
+					</ScrollView> : 
+						<>{proposalDocuments.map((document) => {
+							return (<ProposalDocumentThumbnail item={document} />)
+						})}</>						
+					}
+				</Dialog.Content>
+				<Dialog.Actions>
+					<Icon.Button name="clouduploado" size={20} borderRadius={25}
+					backgroundColor={LOGO_BRIGHT_BLUE} color={LOGO_DARK_BLUE} 
+					onPress={()=>{
+						this.setState({show:false})
+						if (isSelectedDocument)
+							this.props.setDocumentTypeToUpload(undefined)
+						else {
+							this.props.setDocumentTypeToUpload(this.props.requiredDocument)
+							this.props.showSelectUploadDocumentModal()
 						}
-					</Dialog.Content>
-					<Dialog.Actions>
-						<Icon.Button name="clouduploado" size={20} borderRadius={25}
-						backgroundColor={LOGO_BRIGHT_BLUE} color={LOGO_DARK_BLUE} 
-						onPress={()=>{
-							this.setState({show:false})
-							if (isSelectedDocument)
-								this.props.setDocumentTypeToUpload(undefined)
-							else {
-								this.props.setDocumentTypeToUpload(this.props.requiredDocument)
-								this.props.showSelectUploadDocumentModal()
-							}
-						}} >{'Upload'}</Icon.Button>
-						<Icon.Button name="close" size={15} borderRadius={30}
-							color={LOGO_BRIGHT_BLUE} backgroundColor={BLACK}
-							iconStyle={{margin:5,alignContent:'center'}} 
-							onPress={() => {this.setState({show:false})}} >{'Close'}</Icon.Button>
-					</Dialog.Actions>
-					</Dialog>
-				</Portal>
+					}} >{'Upload'}</Icon.Button>
+					<Icon.Button name="close" size={15} borderRadius={30}
+						color={LOGO_BRIGHT_BLUE} backgroundColor={BLACK}
+						iconStyle={{margin:5,alignContent:'center'}} 
+						onPress={() => {this.setState({show:false})}} >{'Close'}</Icon.Button>
+				</Dialog.Actions>
+				</Dialog>
+			</Portal>
 
-			
 		</View>
         )
     }

@@ -15,27 +15,26 @@ import { LOGO_BRIGHT_BLUE, BACKGROUND_LIGHT_GRAY, LOGO_DARK_BLUE, TRANSPARENT, W
 
 const renderRequiredDocument = (item) => {
 	return (
-		<ProposalRequiredDocument requiredDocument={item} />
+		<View style={{flexDirection:"row", alignSelf:"stretch"}}>
+			<ProposalRequiredDocument requiredDocument={item} />
+
+		</View>
 	);
 }
 
 const renderRequiredDocumentGroup = (displayProposal, groupType, groupLabel) => {
 	const styles = getStyleSheet();
 	return (
-		<View>
+		<View style={{alignSelf:"stretch",}}>
 			<Text style={[styles.textSmallBoldPurple]} >{groupLabel}</Text>
 			<View style={styles.space}/>
-			<View style={styles.tableRow}>
-				<View style={styles.tableColumn}>
-					<FlatList
-						data={displayProposal.requiredDocs.filter(d => d.type === groupType)}
-						renderItem={renderRequiredDocument}
-						keyExtractor={(item) => item._id}
-						keyboardShouldPersistTaps='handled' 
-						showsVerticalScrollIndicator={false} 
-					/>
-				</View>
-			</View>
+			<FlatList
+				data={displayProposal.requiredDocs.filter(d => d.type === groupType)}
+				renderItem={renderRequiredDocument}
+				keyExtractor={(item) => item._id}
+				keyboardShouldPersistTaps='handled' 
+				showsVerticalScrollIndicator={false} 
+			/>
 
 		</View>
 	);
@@ -51,14 +50,14 @@ class ProposalRequiredDocumentsList extends Component {
     render () {
 		const styles = getStyleSheet();
     	return (
-			<View  style={[{height:'100%', flexDirection:"row", justifyContent:"space-between"}]}>
-				<View style={{maxHeight:'75%'}}>
+			<View  style={[{flexDirection:"row",  flexGrow: 1}]}>
+				<View style={{maxHeight:'75%', width:'100%'}}>
 					<Text style={styles.textMediumBoldGray}>Required documents</Text>
-					<ScrollView  showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='handled' >
+					<ScrollView  showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='handled'  >
 						{ this.props.displayProposal?.requiredDocs != null && this.props.displayProposal?.requiredDocs.length > 0 ? 
-						<View>
-						<Card style={{backgroundColor:{TRANSPARENT}}}>
+						<Card style={{backgroundColor:{TRANSPARENT}, width:'100%', alignSelf:"stretch"}}>
 							<Card.Content>
+								<View style={{alignSelf:"stretch"}}>
 								{
 									this.props.displayProposal.requiredDocs.find(d => d.type === 'id_proof') !== undefined ?
 									renderRequiredDocumentGroup(this.props.displayProposal, 'id_proof', 'Identity documents') : null
@@ -80,10 +79,10 @@ class ProposalRequiredDocumentsList extends Component {
 								{
 									this.props.displayProposal.requiredDocs.find(d => d.type === 'other_docs') !== undefined ?
 									renderRequiredDocumentGroup(this.props.displayProposal, 'other_docs', 'Other relevant documents') : null
-								}
+								}									
+								</View>
 							</Card.Content>
 						</Card>
-						</View>
 						: null }
 					</ScrollView>
 				</View>
