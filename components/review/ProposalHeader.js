@@ -10,10 +10,11 @@ import { trackPromise } from "react-promise-tracker";
 import getStyleSheet from '../../styles/styles';  
 import { CALENDAR_MODE, PROPOSAL_RECIEVED_ON, QUARTERLY_VIEW } from '../../constants/review';
 import { DELETE_PROPOSAL_TITLE_BANNER, DELETE_PROPOSAL_TEXT_BANNER } from '../../constants/banners';
-import { WHITE, LOGO_DARK_BLUE, BACKGROUND_LIGHT_GRAY } from '../../constants/colors';
+import { WHITE, LOGO_DARK_BLUE, } from '../../constants/colors';
 import { ALERT_YES_BUTTON_LABEL, ALERT_NO_BUTTON_LABEL, } from '../../constants/alerts';
 import { handleFetchError, refreshProposal, setViewMode, closeReview, toggleLikeProposal, showModal, hideModal, 
-	loadProposals, toggleNextSteps, toggleBrokerMessages, toggleDocumentsUpload, fetchStoredDocuments, setProposalDocuments, } from '../../actions';
+	loadProposals, toggleNextSteps, toggleBrokerMessages, toggleDocumentsUpload, fetchStoredDocuments, setProposalDocuments,
+	switchToBrokerOverview, switchToProposalOverview } from '../../actions';
 
 class ProposalHeader extends Component {
 
@@ -34,22 +35,40 @@ class ProposalHeader extends Component {
     		<View>
 	    		<View style={[{flexDirection:"row", justifyContent:"space-between", alignSelf:"stretch"}]}>
 					<Text style={styles.textMediumBoldGray} >{PROPOSAL_RECIEVED_ON + Moment(this.props.displayProposal.createdTs).format('MMM Do YY')}</Text>
-					<AntDesign name="shrink" size={30} borderRadius={30}
+					<View style={styles.chipsLayout}>
+						<Icon name={this.props.displayProposal.liked ? "thumb-up" : "thumb-up-outline"}
+							size={30} borderRadius={30}
 							color={LOGO_DARK_BLUE} backgroundColor={WHITE}
+							style={{marginLeft:'3%'}}
+							iconStyle={{alignContent:'center'}}
+							onPress={() => {
+										this.props.toggleLikeProposal(
+											{ ...this.props, proposalId: this.props.displayProposal._id, liked: !this.props.displayProposal.liked });
+									}} />
+						<Icon name="delete" size={30} borderRadius={30}
+							color={'red'} backgroundColor={WHITE}
+							iconStyle={{alignContent:'center'}} 
+							style={{marginLeft:'3%'}}
+							onPress={this.props.showModal} />
+
+						<AntDesign name="shrink" size={30} borderRadius={30}
+							color={LOGO_DARK_BLUE} backgroundColor={WHITE}
+							style={{marginLeft:'3%'}}
 							iconStyle={{alignContent:'center'}} 
 							onPress={() => this.props.setViewMode(CALENDAR_MODE)} />
+					</View>
 				</View>
 				<View style={styles.hrLight} />
 	    		<View style={styles.chipsLayout}>
 			    	<Icon.Button name={"barcode"} size={30} borderRadius={30}
 			    		color={this.props.showOverview ? WHITE : LOGO_DARK_BLUE } backgroundColor={this.props.showOverview ? LOGO_DARK_BLUE : WHITE }
 			    		iconStyle={{margin:5,alignContent:'center'}} 
-				    	onPress={this.props.toggleNextSteps } />
+				    	onPress={this.props.switchToProposalOverview } />
 
 			    	<Icon.Button name={"account-tie"} size={30} borderRadius={30}
 			    		color={this.props.showBrokerInfo ? WHITE : LOGO_DARK_BLUE } backgroundColor={this.props.showBrokerInfo ? LOGO_DARK_BLUE : WHITE }
 			    		iconStyle={{margin:5,alignContent:'center'}} 
-				    	onPress={this.props.toggleNextSteps } />
+				    	onPress={this.props.switchToBrokerOverview } />
 
 			    	<Icon.Button name={"folder-upload"} size={30} borderRadius={30}
 			    		color={this.props.showDocumentsUpload ? WHITE : LOGO_DARK_BLUE} backgroundColor={this.props.showDocumentsUpload ? LOGO_DARK_BLUE : WHITE}
@@ -66,20 +85,6 @@ class ProposalHeader extends Component {
 						disabled={this.props.showNextSteps}
 				    	onPress={this.props.toggleBrokerMessages} />
 
-			    	<Icon.Button 
-			    	    name={this.props.displayProposal.liked ? "thumb-up" : "thumb-up-outline"}
-			    	    size={30} borderRadius={30}
-			    		color={LOGO_DARK_BLUE} backgroundColor={WHITE}
-						iconStyle={{margin:5,alignContent:'center'}}
-			    		onPress={() => {
-					    			this.props.toggleLikeProposal(
-										{ ...this.props, proposalId: this.props.displayProposal._id, liked: !this.props.displayProposal.liked });
-				    			}} />
-
-			    	<Icon.Button name="delete" size={30} borderRadius={30}
-			    		color={LOGO_DARK_BLUE} backgroundColor={WHITE}
-			    		iconStyle={{margin:5,alignContent:'center'}} 
-				    	onPress={this.props.showModal} />
 
 				</View>
 				
@@ -116,14 +121,16 @@ class ProposalHeader extends Component {
 }
 
 const mapStateToProps = ({ authReducer, proposalCalendarReducer, proposalReducer }) => {
-  const { proposalId, isDeleteConfirmed, showDeleteWarning, deleteBrokerProposal, showNextSteps, showBrokerMessages, showDocumentsUpload, showOverview, showBrokerInfo } = proposalReducer;
+  const { proposalId, isDeleteConfirmed, showDeleteWarning, deleteBrokerProposal, showNextSteps, showBrokerMessages, 
+	showDocumentsUpload, showOverview, showBrokerInfo } = proposalReducer;
   const { qParams, proposalsInView, displayProposal, updated, fetchProposals, getQParams, fetchProposal } = proposalCalendarReducer;
   const { accessCode, borrower } = authReducer;
   return { accessCode, borrower, 
     qParams, proposalsInView, displayProposal, updated, fetchProposals, fetchProposal, 
-    proposalId, isDeleteConfirmed, showDeleteWarning, deleteBrokerProposal, getQParams, showNextSteps, showBrokerMessages, showDocumentsUpload, showOverview, showBrokerInfo };
+	proposalId, isDeleteConfirmed, showDeleteWarning, deleteBrokerProposal, getQParams, showNextSteps, showBrokerMessages, 
+	showDocumentsUpload, showOverview, showBrokerInfo, switchToBrokerOverview, switchToProposalOverview };
 };
 
 export default connect(mapStateToProps, { loadProposals, handleFetchError, refreshProposal, closeReview, 
 	toggleLikeProposal, toggleNextSteps, toggleBrokerMessages, toggleDocumentsUpload, showModal, hideModal, 
-	fetchStoredDocuments, setProposalDocuments, setViewMode })(ProposalHeader);
+	fetchStoredDocuments, setProposalDocuments, setViewMode, switchToBrokerOverview, switchToProposalOverview })(ProposalHeader);

@@ -90,11 +90,7 @@ class Proposal extends Component {
 							<LoanProductList />						
 						</View> 
 						: 
-						<View>
-							<Text style={styles.textMediumBoldPurple}>Compare proposals</Text>
-							<View style={styles.space} />
-							<Text style={styles.textMediumBoldGray}>Coming soon</Text>
-						</View> 
+						<ProposedNextSteps /> 
 						}
 						<View style={styles.chipsLayout}>
 							<Icon.Button name="banckward" size={20} borderRadius={25}
@@ -109,6 +105,9 @@ class Proposal extends Component {
 								>{MORE}</Icon.Button> 
 						</View>	
 					</View>  : 
+				this.props.showBrokerInfo ? 
+					<View  style={[{height:'100%', flexDirection:"row"}]}>
+					</View> : 
 				this.props.showBrokerMessages ? 
 					<View  style={[{height:'100%', flexDirection:"row"}]}>
 						<BrokerMessages />
@@ -131,13 +130,13 @@ class Proposal extends Component {
 
 const mapStateToProps = ({ authReducer, proposalCalendarReducer, proposalReducer, loanProductReducer,  }) => {
   const { documentUploadSessions, showNextSteps, displayStep, showBrokerMessages, 
-	showDocumentsUpload, selectedDocumentTypeForUpload, showOverview } = proposalReducer;
+	showDocumentsUpload, selectedDocumentTypeForUpload, showOverview, showBrokerInfo } = proposalReducer;
   const { selectedLoanProduct } = loanProductReducer;
   const { displayProposal } = proposalCalendarReducer;
   const { accessCode, borrower } = authReducer;
   return { accessCode, borrower, displayProposal, showNextSteps, displayStep, 
 	selectedLoanProduct, showBrokerMessages, showDocumentsUpload, selectedDocumentTypeForUpload, 
-	documentUploadSessions, showOverview };
+	documentUploadSessions, showOverview, showBrokerInfo };
 };
 
 export default connect(mapStateToProps, { changeDisplay, toggleBrokerMessages, 

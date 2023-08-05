@@ -7,8 +7,21 @@ import { SELECT_DETAILS_PANEL, SWITCH_PERIOD, SELECT_DATE, SWITCH_MODE,
   LOAD_BROKERAGENT, SELECT_DISPLAY_PRODUCT, NEXT_DISPLAY_STEP, TOGGLE_CLAIM_CASHBACK, 
   TOGGLE_APPLICATION_STATUS, TOGGLE_BROKER_MESSAGES, TOGGLE_DOCUMENTS_UPLOAD, 
   PICK_DOCUMENT_TYPE, LOAD_DOCUMENT_SESSION, SELECT_UPLOAD_DOCUMENT, 
-  CLOSE_UPLOAD_DOCUMENT, DOCUMENT_UPLOAD_RESULT, SET_PROPOSAL_DOCUMENTS } from '../actions/types';
+  CLOSE_UPLOAD_DOCUMENT, DOCUMENT_UPLOAD_RESULT, SET_PROPOSAL_DOCUMENTS,
+  SHOW_PROPOSAL_OVERVIEW, SHOW_BROKER_OVERVIEW } from '../actions/types';
 import {L,R} from '../constants/common';
+
+export const switchToProposalOverview = () => {
+  return {
+    type : SHOW_PROPOSAL_OVERVIEW,
+  }
+}
+
+export const switchToBrokerOverview = () => {
+  return {
+    type : SHOW_BROKER_OVERVIEW,
+  }
+}
 
 export const setProposalDocuments = (result) => {
   return {

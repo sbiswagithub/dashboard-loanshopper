@@ -6,7 +6,7 @@ import { LOAD_PROPOSAL_DETAILS, SELECT_DETAILS_PANEL, UPDATED_PROPOSAL, SHOW_MOD
 	SHOW_SUBMITTED_APPLICATION_MODAL, HIDE_SUBMITTED_APPLICATION_MODAL, SHOW_NEXT_STEPS, NEXT_DISPLAY_STEP, 
 	TOGGLE_CLAIM_CASHBACK, TOGGLE_APPLICATION_STATUS, TOGGLE_BROKER_MESSAGES, TOGGLE_DOCUMENTS_UPLOAD, 
 	PICK_DOCUMENT_TYPE, LOAD_DOCUMENT_SESSION, SELECT_UPLOAD_DOCUMENT, CLOSE_UPLOAD_DOCUMENT, 
-	DOCUMENT_UPLOAD_RESULT, SET_PROPOSAL_DOCUMENTS } from '../actions/types';
+	DOCUMENT_UPLOAD_RESULT, SET_PROPOSAL_DOCUMENTS, SHOW_BROKER_OVERVIEW, SHOW_PROPOSAL_OVERVIEW } from '../actions/types';
 import { FEATURES, } from '../constants/review';
 import { API_MORTGAGE_APPLICATIONS_URI, API_LOAN_PACKAGES_URI, API_PROPOSALS_URI } from '../constants/apiUrls';
 import { ERROR_DIALOG_PUBLIC_MSG_1, ERROR_DIALOG_TITLE_1 } from '../constants/banners';
@@ -262,6 +262,7 @@ const INITIAL_STATE = {
 	proposalDocuments: [],
 };
 export default (state = INITIAL_STATE, action) => {
+	console.log(action)
   switch (action.type) {
     case SHOW_MODAL:
 	  return { ...state, showDeleteWarning: true };
@@ -269,7 +270,19 @@ export default (state = INITIAL_STATE, action) => {
 	  return { ...state, showDeleteWarning: false };
   	case UPDATED_PROPOSAL:
       return { ...state, updatedProposal: Moment() };
-  	case SELECT_DETAILS_PANEL:
+
+	case SHOW_PROPOSAL_OVERVIEW:
+	  return { ...state, showOverview: true, showBrokerInfo: false, showBrokerMessages: false, showDocumentsUpload: false,  };
+	case SHOW_BROKER_OVERVIEW:
+	  return { ...state, showOverview: false, showBrokerInfo: true, showBrokerMessages: false, showDocumentsUpload: false,  };
+	case TOGGLE_BROKER_MESSAGES:
+	  return { ...state, showOverview: false, showBrokerInfo: false, showBrokerMessages: true, showDocumentsUpload: false,
+		showClaimCashback: false, showNextSteps: false, showApplicationStatus: false};
+	case TOGGLE_DOCUMENTS_UPLOAD:
+	  return { ...state, showOverview: false, showBrokerInfo: false, showBrokerMessages: false, showDocumentsUpload: true,
+		showClaimCashback: false, showNextSteps: false, showApplicationStatus: false};
+	  
+	case SELECT_DETAILS_PANEL:
       return { ...state, selectedView: action.payload };
   	case LOAD_PROPOSAL_DETAILS:
 	  return { ...state, proposalDetails: action.payload };
@@ -285,10 +298,6 @@ export default (state = INITIAL_STATE, action) => {
 	  return { ...state, showClaimCashback: !state.showClaimCashback, showApplicationStatus: false, showDocumentsUpload: false, showBrokerMessages: false};
 	case TOGGLE_APPLICATION_STATUS:
 	  return { ...state, showApplicationStatus: !state.showApplicationStatus, showDocumentsUpload: false, showBrokerMessages: false};
-	case TOGGLE_BROKER_MESSAGES:
-	  return { ...state, showBrokerMessages: !state.showBrokerMessages,showClaimCashback: false, showNextSteps: false, showApplicationStatus: false, showDocumentsUpload: false};
-	case TOGGLE_DOCUMENTS_UPLOAD:
-	  return { ...state, showDocumentsUpload: !state.showDocumentsUpload,showClaimCashback: false, showNextSteps: false, showApplicationStatus: false, showBrokerMessages: false};
 	case PICK_DOCUMENT_TYPE:
 	  return { ...state, selectedDocumentTypeForUpload : action.payload};
 	case LOAD_DOCUMENT_SESSION:
