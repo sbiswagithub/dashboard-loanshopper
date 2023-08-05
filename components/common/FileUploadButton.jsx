@@ -1,6 +1,6 @@
-import React, { } from 'react';
+import React, { useState } from 'react';
 import { Alert } from 'react-native';
-import { } from 'react-redux';
+import { Dialog, Portal } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/AntDesign';
 import * as DocumentPicker from "expo-document-picker";
 import Constants from 'expo-constants';
@@ -10,9 +10,10 @@ import getStyleSheet from '../../styles/styles';
 import { } from '../../constants/banners';
 import { handleFetchError, uploadToS3,  } from '../../actions';
 import SpinnerHolder from '../common/SpinnerHolder';
-import ErrorDialog from '../ErrorDialog';
 import { LOGO_BRIGHT_BLUE, LOGO_DARK_BLUE, } from '../../constants/colors';
 import { trackPromise } from 'react-promise-tracker';
+
+const styles = getStyleSheet();
 
 const cacheFile = async ({name, uri}) => {
 	var cacheDirPath = FileSystem.cacheDirectory + "uploads/"
@@ -32,15 +33,19 @@ const cacheFile = async ({name, uri}) => {
 }
 
 const readAndUpload = async (uri, metadata) => {
+	console.log(uri)
+	console.log(metadata)
 	return FileSystem.readAsStringAsync(uri, { encoding: FileSystem.EncodingType.Base64 })
 	.then(data => {
 		//console.log('Uploading {uri} to S3'.replaceAll('{uri}', uri))
 		//console.log(metadata)
-		const buffer = Buffer.Buffer.from(data, "base64");
-
-		return uploadToS3(buffer,metadata)
+		return bufferedUpload(data,metadata)
 	});
+}
 
+const bufferedUpload = async (data, metadata) => {
+	const buffer = Buffer.Buffer.from(data, "base64");
+	return uploadToS3(buffer,metadata)
 }
 
 export default function FileUploadButton(props) {
@@ -50,6 +55,17 @@ export default function FileUploadButton(props) {
 				backgroundColor={LOGO_BRIGHT_BLUE} color={LOGO_DARK_BLUE}  
 				iconStyle={{margin:1}} 
 				onPress={async ()=> {
+					let fileMetadata = {
+						borrowerId : props?.borrowerId, 
+						documentType: props?.documentType, 
+						documentTypeId: props?.documentTypeId,
+						brokerId: props?.brokerId,
+						sessionId: props?.sessionId, 
+						sharing: props?.sharing, 
+						source: props?.source, 
+						status: props?.status, 
+						overwrite: '' + props?.overwrite, 
+					}
 					const result = await DocumentPicker.getDocumentAsync({
 						type: [
 							'image/*',
@@ -57,22 +73,36 @@ export default function FileUploadButton(props) {
 							'application/pdf',
 							'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
 							'application/zip'], 
-						copyToCacheDirectory: Constants.platform.ios ? true : false // https://github.com/expo/expo/issues/21792
+						copyToCacheDirectory: Constants.platform.ios  ? true : false // https://github.com/expo/expo/issues/21792
 					})
-
-					if (result?.type == 'success') {
-						console.log(result);
+					console.log(result);
+					if (Constants.platform.web && !result?.canceled) {
+						let { name, size, uri, mimeType } = !result?.canceled ? result.assets.pop() : {};
+						metadata = {
+							...fileMetadata, 
+							filename: name, 
+							filesize: '' + size,
+							contentType: mimeType,
+						}
+						console.log(metadata)
+						trackPromise(bufferedUpload(uri, metadata))
+							.then((result) => {
+								console.log('In uploader')
+								console.log(result)
+								if (props?.onComplete)
+									props.onComplete({...result, ...metadata, success:true})
+							})
+							.catch((error) => {
+								console.log('Read and upload error')
+								console.log(error)
+								if (props?.onComplete)
+									props.onComplete({...error, ...metadata, success:false})
+								Promise.reject(error)
+							})
+					} else if (result?.type == 'success') {
 						let { name, size, uri, mimeType } = result;
-						let metadata = {
-							borrowerId : props?.borrowerId, 
-							documentType: props?.documentType, 
-							documentTypeId: props?.documentTypeId,
-							brokerId: props?.brokerId,
-							sessionId: props?.sessionId, 
-							sharing: props?.sharing, 
-							source: props?.source, 
-							status: props?.status, 
-							overwrite: '' + props?.overwrite, 
+						metadata = {
+							...fileMetadata, 
 							filename: name, 
 							filesize: '' + size,
 							contentType: mimeType,
@@ -94,11 +124,24 @@ export default function FileUploadButton(props) {
 									props.onComplete({...error, ...metadata, success:false})
 								Promise.reject(error)
 							})
-					} else if (result?.type === 'cancel')
-						Alert.alert('Document selection cancelled')
+					} else if (result?.type === 'cancel') {
+						Promise.reject(Object.assign({}, {
+							showDialog: true, 
+							dialogTitle: 'File upload error', 
+							publicMessage: 'File upload cancelled', 
+							logMessage: 'Cancelled'
+						}))
+					} else  {
+						Promise.reject(Object.assign({}, {
+							showDialog: true, 
+							dialogTitle: 'File upload error', 
+							publicMessage: 'File upload error', 
+							logMessage: 'Error'
+						}))
+					}
 				}}>{'Choose file to upload'}</Icon.Button> 
 				<SpinnerHolder />
-				<ErrorDialog />
+
 		</>
 	);
 }

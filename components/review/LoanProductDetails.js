@@ -13,7 +13,7 @@ import TableRowTwinCells from '../common/TableRowTwinCells';
 const renderItem = ({ item }) => {
 	const styles = getStyleSheet();
     return (
-      <View key={Moment()}>
+      <View key={item.label + new Date().getMilliseconds()}>
       	{ item?.text != null ? 
 	      	<View style={[styles.tableRow, { padding:'2%'}]}>    		
     		<Text style={[styles.textMediumLogoDarkBlue]}>{item.text}</Text>
@@ -163,8 +163,6 @@ class LoanProductDetails extends Component {
 		const data = this.getTableData(this.props.selectedView, productDetails);
     	return (
     		<View>
-
-
 			{ 
 			data.length == 0 ? this.getEmptyPlaceholder() :
 				<View elevation={10} style={[]}>
@@ -177,8 +175,6 @@ class LoanProductDetails extends Component {
 					      />
 				    </View>
 	        }
-
-
 	        </View>
         )
     }

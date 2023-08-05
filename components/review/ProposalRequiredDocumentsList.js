@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 import { View, Text, FlatList, ScrollView, Alert } from 'react-native';
 import { connect } from 'react-redux';
-import Icon from 'react-native-vector-icons/AntDesign';
 import { Card, } from 'react-native-paper';
 
 import getStyleSheet from '../../styles/styles';  
 import { } from '../../constants/banners';
-import { addDocumentSession, showSelectUploadDocumentModal, setDocumentTypeToUpload, uploadToS3, 
-	handleFetchError, } from '../../actions';
+import { addDocumentSession, showSelectUploadDocumentModal, setDocumentTypeToUpload, uploadToS3, handleFetchError, } from '../../actions';
 import ProposalRequiredDocument from './ProposalRequiredDocument';
 import UploadDocumentSession from './UploadDocumentSession';
 import SpinnerHolder from '../common/SpinnerHolder';
@@ -15,9 +13,8 @@ import { LOGO_BRIGHT_BLUE, BACKGROUND_LIGHT_GRAY, LOGO_DARK_BLUE, TRANSPARENT, W
 
 const renderRequiredDocument = (item) => {
 	return (
-		<View style={{flexDirection:"row", alignSelf:"stretch"}}>
+		<View key={new Date().getMilliseconds() + item._id} style={{flexDirection:"row", alignSelf:"stretch"}}>
 			<ProposalRequiredDocument requiredDocument={item} />
-
 		</View>
 	);
 }
@@ -46,8 +43,7 @@ class ProposalRequiredDocumentsList extends Component {
         super(props);
 	}
 
-
-    render () {
+	render () {
 		const styles = getStyleSheet();
     	return (
 			<View  style={[{flexDirection:"row",  flexGrow: 1}]}>

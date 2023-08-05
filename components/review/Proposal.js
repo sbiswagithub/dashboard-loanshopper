@@ -1,17 +1,13 @@
 import React, { Component } from "react";
-import { View, Text, FlatList, ScrollView, Alert } from 'react-native';
+import { View, Text, } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/AntDesign';
-import { Card, } from 'react-native-paper';
-import * as DocumentPicker from "expo-document-picker";
 import { trackPromise } from "react-promise-tracker";
 
 import getStyleSheet from '../../styles/styles';  
 import { MORE, PREV, CASBACK_DISCLAIMER } from '../../constants/banners';
-import { numberToCurrency, changeDisplay, toggleBrokerMessages, handleFetchError, 
-	fetchStoredDocuments, setProposalDocuments } from '../../actions';
+import { numberToCurrency, changeDisplay, toggleBrokerMessages, handleFetchError, fetchStoredDocuments, setProposalDocuments } from '../../actions';
 import ProposalHeader from './ProposalHeader';
-import ProposalButtons from './ProposalButtons';
 import ProposedNextSteps from './ProposedNextSteps';
 import ProposalRequiredDocumentsList from './ProposalRequiredDocumentsList';
 import BrokerMessages from './BrokerMessages';
@@ -19,7 +15,7 @@ import BrokerMessages from './BrokerMessages';
 import LoanProductList from './LoanProductList';
 import SpinnerHolder from '../common/SpinnerHolder';
 import ErrorDialog from '../ErrorDialog';
-import { LOGO_BRIGHT_BLUE, BACKGROUND_LIGHT_GRAY, LOGO_DARK_BLUE, TRANSPARENT, WHITE } from '../../constants/colors';
+import { LOGO_BRIGHT_BLUE, BACKGROUND_LIGHT_GRAY, } from '../../constants/colors';
 
 
 
@@ -39,7 +35,7 @@ class Proposal extends Component {
 		const disableNext = this.props.displayStep == 4 || (this.props.selectedLoanProduct && this.props.displayStep == 3)
 		const styles = getStyleSheet();
 		const totalLending = this.props?.displayProposal?.loanPackage?.loanProducts.reduce((loanAmount, link) => loanAmount + link.loanAmount.value, 0)
-		console.log(this.props?.displayProposal)
+		//console.log(this.props?.displayProposal)
 		return (
 		<View style={{flexDirection:'column', alignSelf:"stretch", alignContent:"space-between",}}>
 			<View style={[{flexDirection:'column', padding:'2%',  borderColor: LOGO_BRIGHT_BLUE,  borderWidth: 2.0, borderRadius: 20, height:'100%'}]}>

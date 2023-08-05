@@ -26,7 +26,7 @@ class ProposalRequiredDocument extends Component {
 		const styles = getStyleSheet();
 		const proposalDocuments = this.props.proposalDocuments === undefined ? [] : this.props.proposalDocuments.filter(document => document.metadata.documentTypeId == this.props.requiredDocument.item._id);
     	return (
-		<View  style={[{flexDirection:"row", flexGrow:1,alignSelf:"stretch" }]}>
+		<View key={this.props.requiredDocument.item._id} style={[{flexDirection:"row", flexGrow:1,alignSelf:"stretch" }]}>
 			<View style={{flexDirection:"column", flexGrow:1}}>
 				<View  style={[{flexDirection:"row", alignItems:"stretch", justifyContent:"space-between", }]}>
 					<View  style={[{flexDirection:"column", flexGrow:1, paddingRight:'1%'}]}>

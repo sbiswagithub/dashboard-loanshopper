@@ -89,9 +89,9 @@ class ProposalListView extends Component {
 		const styles = getStyleSheet();
 		
 		const proposal = this.props.proposalsInView.find((proposal) => proposal._id === this.props.proposalId);
-		console.log(proposal)
+		//console.log(proposal)
 		const brokerAgent = this.props.brokerAgentsInView.find((agent) => agent._id === proposal?.agentId);
-		console.log(brokerAgent)
+		//console.log(brokerAgent)
     	return (
 		<View style={{flexDirection:'column',margin:2 }}>
 			{renderProposalCard(
