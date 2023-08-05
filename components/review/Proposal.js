@@ -108,13 +108,15 @@ class Proposal extends Component {
 							<Text style={styles.textMediumBoldPurple}>About your broker</Text>
 							<View style={styles.space} />
 							<View style={[styles.chipsLayout, {margin:'0', alignSelf: "stretch", justifyContent:"flex-start"}]}>
-								<Text style={styles.textMediumLogoDarkBlue}>{this.props?.displayProposal?.agent?.title} {this.props?.displayProposal?.agent?.firstName} {this.props?.displayProposal?.agent?.lastName} from </Text> 
-								<Text style={styles.textMediumGray}>{this.props?.displayProposal?.agency?.companyDetails?.companyName}</Text>
+								<Text style={styles.textMediumLogoDarkBlue}>This proposal presented by </Text> 
+								<Text style={styles.textMediumBoldLogoDarkBlue}>{this.props?.displayProposal?.agent?.title} {this.props?.displayProposal?.agent?.firstName} {this.props?.displayProposal?.agent?.lastName}</Text> 
 							</View>
 							<View style={styles.space} />
-							<Text style={styles.textMediumLogoBrightBlue}>{this.props?.displayProposal?.agent?.contact?.primaryEmail}</Text>
+							<Text style={styles.textMediumLogoDarkBlue}>{this.props?.displayProposal?.agency?.companyDetails?.companyName}</Text>
 							<View style={styles.space} />
-							<Text style={styles.textMediumLogoBrightBlue}>{this.props?.displayProposal?.agent?.contact?.primaryPhone}</Text>
+							<Text style={styles.textMediumLogoBrightBlue}>Email : {this.props?.displayProposal?.agent?.contact?.primaryEmail}</Text>
+							<View style={styles.space} />
+							<Text style={styles.textMediumLogoBrightBlue}>Mobile : {this.props?.displayProposal?.agent?.contact?.primaryPhone}</Text>
 						</View>
 					</View> : 
 				this.props.showBrokerMessages ? 
