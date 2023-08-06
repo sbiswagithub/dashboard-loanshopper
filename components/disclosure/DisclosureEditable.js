@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { CheckBox, View, Text, } from 'react-native';
+import { CheckBox, View, Text, TextInput } from 'react-native';
 import { TouchableHighlight } from "react-native-gesture-handler";
 
 import { connect } from 'react-redux';
@@ -86,6 +86,24 @@ class DisclosureEditable extends Component {
 
 				{this.props.edit == 19 ? 
 		        	<View style={styles.disclosurePanel}>
+						<View style={[styles.tableView, {width:'80%', alignSelf:"center"}]}>
+							<View style={styles.tableRow}>
+									<View style={styles.tableColumn}>    		
+									<Text style={[styles.textMediumGray]}>Promo code</Text>
+									</View>
+						
+									<View style={styles.tableColumn}>    		
+									<TextInput style={[styles.whiteBgCentredTextInput, styles.disclTextEntry100]} 
+										clearTextOnFocus={true} 
+										onFocus={text => {}}
+										onChangeText={text => {}}
+										value={''} />
+									</View>
+								</View>
+						</View>
+						<View style={styles.space} />
+						<View style={styles.hrLight} />
+						<View style={styles.space} />
 						<View style={{ flexDirection:'row', width:'80%', alignSelf:"center", justifyContent:'flex-start'}}>
 						<TouchableHighlight  onPressIn={() => {_onToggleAccept(!this.props.isAccepted);}}>
 							<CheckBox disabled={true} value={this.props.isAccepted} />

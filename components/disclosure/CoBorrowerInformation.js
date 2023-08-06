@@ -26,7 +26,9 @@ class CoBorrowerInformation extends Component {
     		    </View>
 
     		    <View style={styles.disclosureBoxRow}>
+				<View style={{ flex: 0.9, flexDirection:'column'}}>
 				<Text style={[styles.textMediumLogoDarkBlue,{ alignSelf:"center" }]} >If the application includes more than one applicant, include the second applicant's name, email contact and estimated gross annual income.</Text>
+    		    </View>
     		    </View>
 
 

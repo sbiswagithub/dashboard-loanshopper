@@ -215,7 +215,7 @@ class LoanInformation extends Component {
 				: null }
 				{this.props.edit === 10 ? 
     		    <View style={styles.disclosureBoxRow}>
-		    		<View style={styles.stackedSimpleLayout}>
+		    		<View style={{ flex: 0.9, flexDirection:'column'}}>
 						<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{SECOND_PREFERENCE}</Text>
 						<View style={styles.space}/>
 						<Text style={[styles.textMediumLogoDarkBlue,{ alignSelf:"center" }]} >Choose if you have a second preference for home loan selection</Text>
@@ -238,7 +238,7 @@ class LoanInformation extends Component {
 				: null }
 				{this.props.edit === 11 ? 
     		    <View style={styles.disclosureBoxRow}>
-					<View style={[styles.stackedSimpleLayout]}>
+		    		<View style={{ flex: 0.9, flexDirection:'column'}}>
 						<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{REPAYMENT_FREQUENCY}</Text>
 						<View style={styles.space}/>
 						<Text style={[styles.textMediumLogoDarkBlue,{ alignSelf:"center" }]} >Choose your prefered loan instalement frequency.</Text>
@@ -261,7 +261,7 @@ class LoanInformation extends Component {
 				: null }
 				{this.props.edit === 12 ? 
     		    <View style={styles.disclosureBoxRow}>
-					<View style={styles.stackedSimpleLayout}>
+		    		<View style={{ flex: 0.9, flexDirection:'column'}}>
 						<Text style={[styles.textSmallBoldGray, {alignSelf:'center',}]}>{EXTRAS}</Text>
 						<View style={styles.space}/>
 						<Text style={[styles.textMediumLogoDarkBlue,{ alignSelf:"center" }]} >Choose if you require specific features from the home loan product or could be included as extras in your home loan package.</Text>
