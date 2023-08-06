@@ -29,7 +29,7 @@ class Account extends Component {
 					colors={[WHITE,BACKGROUND_LIGHT_BLUE]} style={styles.background}
 					start={{x:0,y:1}} end={{x:0,y:0}} />
 
-				<View style={{flexDirection:"row", justifyContent:"space-evenly", alignSelf:"stretch", alignItems:"center"}}>
+				<View style={{flexDirection:"row", justifyContent:"space-evenly", alignSelf:"stretch", alignItems:"center", paddingTop:'1%'}}>
 					{this.props.modeMyBrokerConnections ? 
 					<View style={{alignContent:"stretch"}}>
 					<Card containerStyle={[styles.brokerCard, {backgroundColor:LOGO_BRIGHT_BLUE, alignSelf:"stretch"}]}  titleStyle={styles.cardTitle} >
