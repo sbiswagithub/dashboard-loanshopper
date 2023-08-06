@@ -20,13 +20,15 @@ const INITIAL_STATE = {
   passwordRepeat: null,
   confirmationCode: undefined,
   resetPassword : false,
-	error: { showDialog: false, dialogTitle: '', publicMessage: '', logMessage: '', status: 200, statusText: null, },
+  error: { showDialog: false, dialogTitle: '', publicMessage: '', logMessage: '', status: 200, statusText: null, },
+  redirectData: null,
 };
 
 export default (state = INITIAL_STATE, action) => {
+  console.log(action)
   switch (action.type) {
     case LOGIN:
-      return { ...state, ...action.payload.queryParams };
+      return { ...state,  ...action.payload.queryParams };
     case LOGOUT:
       return INITIAL_STATE;
     case REGISTRATION_IN_PROGRESS:

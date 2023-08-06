@@ -1,20 +1,21 @@
- import React, { useState } from "react";
+import React, { useState } from "react";
 import { Pressable, Text } from 'react-native';
 
 import Constants from 'expo-constants';
 import * as Linking from 'expo-linking';
 import * as WebBrowser from 'expo-web-browser';
+import * as RootNavigation from '../../actions/RootNavigation.js';
 
 import getStyleSheet from '../../styles/styles';  
 import { COGNITO_AUTH } from '../../constants/auth';
 import { } from '../../constants/banners';
-import { onRedirect, toQueryString } from '../../actions';
+import { toQueryString } from '../../actions';
 
 
 
-export default function LoanShopperLogin({children})  {
-  	const [redirectData,setRedirectData] = useState()
+export default function LoanShopperLogin(props)  {
 	const styles = getStyleSheet();
+	console.log(props)
 	const _openAuthSessionAsync = async (url) => {
 		try {
 			//console.log("Opening browser");
@@ -29,12 +30,11 @@ export default function LoanShopperLogin({children})  {
 				}
 				*/
 
-				let redirectData;
 				if (event.url) {
-					redirectData = Linking.parse(event.url);
-					//console.log(redirectData);
-					onRedirect(redirectData);
-					setRedirectData(redirectData);			
+					const redirectData = Linking.parse(event.url);
+					props.onRedirect(redirectData);
+					console.log(redirectData);
+					RootNavigation.navigate('Menu')
 				}
 			};
 
@@ -43,16 +43,15 @@ export default function LoanShopperLogin({children})  {
 			}
 
 			let result = await WebBrowser.openAuthSessionAsync(url);
-			//console.log("Returned Auth session");
-			//console.log(result);
+			console.log("Returned Auth session");
+			console.log(result);
 
 			if (Constants.platform.ios) {
 				redirectHandler(result);
 			}
-
 		} catch (error) {
+			console.log(error);
 			alert(error);
-			//console.log(error);
 		}
 	};
 
@@ -65,5 +64,5 @@ export default function LoanShopperLogin({children})  {
 			_openAuthSessionAsync( loginUrl )
 	}
 
-	return  <Pressable  onPress={onLoginPressed}>{children == undefined ?<Text style={styles.textMediumBoldLogoDarkBlue}>Login</Text> : children(onLoginPressed)}</Pressable>
+	return  <Pressable  onPress={onLoginPressed}>{props.children == undefined ?<Text style={styles.textMediumBoldLogoDarkBlue}>Login</Text> : props.children(onLoginPressed)}</Pressable>
 }

@@ -1,7 +1,5 @@
-import { useLocation } from "react-router-dom";
-import { useDispatch, } from "react-redux";
-
-import { LogBox, } from "react-native";
+import React from "react";
+import { connect } from 'react-redux';
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -14,35 +12,21 @@ import UserRegistration from "./components/UserRegistration";
 import EmailRegistration from "./components/EmailRegistration";
 import EmailRegistration2 from "./components/EmailRegistration2";
 
+const Stack = createStackNavigator();
 
-import { webAuthenticatedBorrower, onRedirect } from './actions/Auth'
+class Mobile extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
-
-function Root() {
-  const dispatch = useDispatch();
-  const search = useLocation().search;
-  const Stack = createStackNavigator();
-  const redirectData = Object.fromEntries(
-    new URLSearchParams(search)
-  )
-  //console.log(redirectData)
-
-  if (redirectData?.accessCode) {
-    //console.log('Preauthenticated')
-    dispatch(webAuthenticatedBorrower(redirectData.accessCode));
-    dispatch(onRedirect(redirectData.accessCode))
-  }         
-  LogBox.ignoreAllLogs();
- 
-
-
-
-  return (
+  render() {
+    console.log(this.props)
+    return (
       <NavigationContainer ref={navigationRef}>
         <Stack.Navigator initialRouteName={
-          !redirectData?.appEntryMode ? 'Landing' : 
-          redirectData?.appEntryMode && redirectData.appEntryMode.toUpperCase() === "EMAIL_REGISTRATION_START" ? 'VerifyOtp' :
-          redirectData?.appEntryMode && redirectData.appEntryMode.toUpperCase() === "REGISTRATION_IN_PROGRESS" ? 'UserRegistration' :
+          !this.props?.appEntryMode || this.props.appEntryMode.toUpperCase() === "INIT" ? 'Landing' : 
+          this.props?.appEntryMode && this.props.appEntryMode.toUpperCase() === "EMAIL_REGISTRATION_START" ? 'VerifyOtp' :
+          this.props?.appEntryMode && this.props.appEntryMode.toUpperCase() === "REGISTRATION_IN_PROGRESS" ? 'UserRegistration' :
           'Menu'} >
           <>
             <Stack.Screen name="Landing" component={Landing} options={{ headerShown: false, gestureEnabled: false, }} />
@@ -53,8 +37,13 @@ function Root() {
             <Stack.Screen name="VerifyOtp" component={VerifyOtp} options={{ headerShown: false, gestureEnabled: false, }}  />
           </>
         </Stack.Navigator>
-      </NavigationContainer>
-  );
+      </NavigationContainer>     );
+  }
 }
 
-export default Root;
+const mapStateToProps = ({ authReducer }) => {
+  const { appEntryMode } = authReducer
+  return { appEntryMode };
+};
+
+export default connect(mapStateToProps, {  })(Mobile);

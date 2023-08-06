@@ -8,7 +8,7 @@ import Moment from 'moment';
 
 import getStyleSheet from '../styles/styles';  
 import { LOGO_DARK_BLUE, LOGO_BRIGHT_BLUE, WHITE,  } from "../constants/colors";
-import { showResetPassword } from '../actions';
+import { showResetPassword, onRedirect } from '../actions';
 import * as RootNavigation from '../actions/RootNavigation.js';
 import LoanShopperLogin from './common/LoanShopperLogin';
 import ResetPassword from './ResetPassword';
@@ -16,9 +16,9 @@ import {  } from "../constants/banners";
 
 function Countdown ( props)  {
 	const [visible,setVisible] = useState(props.show)
-		const styles = getStyleSheet();
+	const styles = getStyleSheet();
 
- return (
+ 	return (
 	 <>
 		<Icon.Button name={'email-plus'} size={40} borderRadius={10} 
 			backgroundColor={WHITE}  color={LOGO_DARK_BLUE} 
@@ -54,7 +54,7 @@ class EmailSignIn extends Component {
     	return (
 			<Card containerStyle={[styles.brokerCard, {backgroundColor:LOGO_BRIGHT_BLUE}]}  titleStyle={styles.cardTitle} >
 				<View style={styles.brokerCardPanel}>
-				<LoanShopperLogin>
+				<LoanShopperLogin {...this.props}>
 					{(onLoginPressed) => (
 						<Icon.Button name={'email-lock'} onPress={onLoginPressed}
 								backgroundColor={ LOGO_DARK_BLUE}  color={WHITE} size={40} borderRadius={10} 
@@ -81,7 +81,6 @@ class EmailSignIn extends Component {
 					onPress={this.props.showResetPassword} >Forgot password</Icon.Button>
 					<ResetPassword />
 				</View>
-
 			</Card>
         )
     }
@@ -92,4 +91,4 @@ const mapStateToProps = ({ }) => {
   return { };
 };
 
-export default connect(mapStateToProps, { showResetPassword })(EmailSignIn);
+export default connect(mapStateToProps, { showResetPassword,onRedirect })(EmailSignIn);
