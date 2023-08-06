@@ -14,6 +14,7 @@ import DocumentsReducer from "./DocumentsReducer";
 import BrokerReducer from "./BrokerReducer";
 import ProspectReducer from "./ProspectReducer";
 import LoanProductReducer from "./LoanProductReducer";
+import AccountReducer from "./AccountReducer";
 
 const appReducer = combineReducers({
   authReducer: AuthReducer,
@@ -31,6 +32,7 @@ const appReducer = combineReducers({
   brokerReducer: BrokerReducer,
   prospectReducer: ProspectReducer,
   loanProductReducer: LoanProductReducer,
+  accountReducer: AccountReducer,
 });
 export default (state, action) => {
   if (action.type === 'logout') {

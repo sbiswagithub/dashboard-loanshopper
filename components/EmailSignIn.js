@@ -52,8 +52,7 @@ class EmailSignIn extends Component {
 		//console.log(this.props)
 		//console.log(Moment('12/08/2023','DD/MM/YYYY').isBefore(Moment(new Date())))
     	return (
-			<Card containerStyle={[styles.brokerCard, {backgroundColor:LOGO_BRIGHT_BLUE}]} 
-				title={'Title'} titleStyle={styles.cardTitle} >
+			<Card containerStyle={[styles.brokerCard, {backgroundColor:LOGO_BRIGHT_BLUE}]}  titleStyle={styles.cardTitle} >
 				<View style={styles.brokerCardPanel}>
 				<LoanShopperLogin>
 					{(onLoginPressed) => (

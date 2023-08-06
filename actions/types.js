@@ -223,6 +223,11 @@ export const PROSPECTS_FILTER = 'prospects_filter';
 export const GET_BROKER_DETAILS = 'get_broker_details';
 export const SET_CLIENT_CONNECTIONS='set_client_connections';
 export const ADD_CONNECTION_BROKER_DETAILS='add_connection_broker_details';
+// For Account View
+export const SHOW_MY_ACCOUNT = 'show_my_account';
+export const SHOW_MY_BROKER_CONNECTIONS = 'show_my_broker_connections';
+export const SHOW_MY_DOCUMENTS = 'show_my_documents';
+export const SET_ACCEPTED_CONNECTIONS = 'set_accepted_connections';
 
 // Redundant
 export const QUICK_APPLY = 'quick_apply';

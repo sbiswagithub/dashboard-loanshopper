@@ -13,4 +13,4 @@ export * from './Deals';
 export * from './BrokerActivity';
 export * from './Connections'
 export * from './Services';
-
+export * from './Account';

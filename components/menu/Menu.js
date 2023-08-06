@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { Linking, } from 'react-native';
+import { Linking, View, } from 'react-native';
 import {
 	createDrawerNavigator,
 	DrawerContentScrollView,
-	DrawerItemList,
 	DrawerItem,
 } from '@react-navigation/drawer';
 import { getHeaderTitle } from '@react-navigation/elements';
@@ -12,9 +11,10 @@ import * as RootNavigation from '../../actions/RootNavigation.js';
 
 import Header from './Header';
 import Home from '../home/Home';
+import Account from '../account';
 import ClientConnections from '../clientConnections';
-import { onRegistrationInProgress, handleFetchError, onLogout,getMe, getBorrower, authenticatedBorrower, loadBorrowerDetails, 
-	fetchClientConnections, showResetPassword } from "../../actions";
+import { onRegistrationInProgress, handleFetchError, onLogout,getMe, getBorrower, authenticatedBorrower, 
+	loadBorrowerDetails, fetchNewClientConnections, showResetPassword } from "../../actions";
 
 import { HOME, T_AND_C, PRIVACY_POLICY, LOGOUT } from '../../constants/banners';
 import { privacy_policy_url, t_and_c_url, color_active, color_inactive } from '../../constants/home';
@@ -23,14 +23,11 @@ const Drawer = createDrawerNavigator();
 function DrawerActionContent(props) {
 	return (
 		<DrawerContentScrollView {...props}>
-			<DrawerItem label={"Home"} onPress={() => RootNavigation.navigate('Home')} activeTintColor={color_active} inactiveTintColor={color_inactive} />
-			<DrawerItem label={"My connections"} onPress={() => RootNavigation.navigate('ClientConnections')} activeTintColor={color_active} inactiveTintColor={color_inactive} />
+			<DrawerItem label={HOME} onPress={() => RootNavigation.navigate(HOME)} activeTintColor={color_active} inactiveTintColor={color_inactive} />
+			<DrawerItem label={"Account"} onPress={() => RootNavigation.navigate('Account')} activeTintColor={color_active} inactiveTintColor={color_inactive} />
 			<DrawerItem label={T_AND_C} onPress={() => Linking.openURL(t_and_c_url)} activeTintColor={color_active} inactiveTintColor={color_inactive} />
 			<DrawerItem label={PRIVACY_POLICY} onPress={() => Linking.openURL(privacy_policy_url)} activeTintColor={color_active} inactiveTintColor={color_inactive} />
-			<DrawerItem label={LOGOUT} onPress={() => {
-				props.onLogout()
-				RootNavigation.navigate('Landing')}} 
-				activeTintColor={color_active} inactiveTintColor={color_inactive} />
+			<DrawerItem label={LOGOUT} onPress={() => {props.onLogout();RootNavigation.navigate('Landing')}} activeTintColor={color_active} inactiveTintColor={color_inactive} />
 		</DrawerContentScrollView>
 	);
 }
@@ -76,13 +73,8 @@ class Menu extends Component {
 				}
 			}}
 			>
-				<Drawer.Screen
-					name={HOME}
-					component={Home}
-					options={{ drawerLabel: HOME }} />
-				<Drawer.Screen
-					name={"ClientConnections"}
-					component={ClientConnections} />
+				<Drawer.Screen name={HOME} component={Home} options={{ drawerLabel: HOME }} />
+				<Drawer.Screen name={"Account"} component={Account} options={{ drawerLabel: "Account" }} />
 			</Drawer.Navigator>
 		);
 	}
@@ -95,4 +87,4 @@ const mapStateToProps = ({ authReducer, homeReducer }) => {
 };
 
 export default connect(mapStateToProps, {
-	onLogout, onRegistrationInProgress,  handleFetchError, getMe,getBorrower, authenticatedBorrower, loadBorrowerDetails, fetchClientConnections, showResetPassword })(Menu);
+	onLogout, onRegistrationInProgress,  handleFetchError, getMe,getBorrower, authenticatedBorrower, loadBorrowerDetails, fetchNewClientConnections, showResetPassword })(Menu);

@@ -674,7 +674,7 @@ export const fetchBrokerAgent = (brokerAgentId, onSuccess, onError) => (dispatch
 	})
 }
 
-export const fetchClientConnections = (onSuccess, onError) => (dispatch) => {
+export const fetchNewClientConnections = (onSuccess, onError) => (dispatch) => {
   const clientConnectionsUri = `${API_CLIENT_CONNECTIONS_URI}` + toQueryString({ 'operationType': 'NewConnections' });
 		//console.log(clientConnectionsUri)
   return fetch(clientConnectionsUri, {
@@ -706,9 +706,41 @@ export const fetchClientConnections = (onSuccess, onError) => (dispatch) => {
 	})
 }
 
+export const fetchActiveClientConnections = (onSuccess, onError) => (dispatch) => {
+  const clientConnectionsUri = `${API_CLIENT_CONNECTIONS_URI}` + toQueryString({ 'operationType': 'ActiveConnections' });
+  //console.log(clientConnectionsUri)
+  return fetch(clientConnectionsUri, {
+      method: "GET",
+      headers: { 'Content-Type': 'application/json',  'Authorization': store.getState().authReducer.accessCode },
+    })
+	.then(response => {
+		if (response.status >= 400 && response.status < 600) {
+			const error = Object.assign({}, {
+				status: response.status,
+				statusText: response.statusText,
+				showDialog: true, 
+				dialogTitle: ERROR_DIALOG_TITLE_1, 
+				publicMessage: ERROR_DIALOG_PUBLIC_MSG_1, 
+				logMessage: 'Failed to connect to {API_BORROWER_URI}'
+			});
+			return Promise.reject(error);
+		} else
+			return response.json();
+	})
+	.then((json) => {
+		if(onSuccess)
+			onSuccess(json);
+	})
+	.catch((error) => {
+		//console.log(error)
+		if (onError)
+			onError(error);
+	})
+}
+
 export const getBorrower = (onSuccess, onError)  =>  (dispatch) => {
   const borrowerUri = `${API_BORROWER_URI}`;
-	console.log(borrowerUri)
+  //console.log(borrowerUri)
   return fetch(borrowerUri, {
 				method: "GET",
 				headers: { 'Content-Type': 'application/json',  'Authorization': store.getState().authReducer.accessCode  },
@@ -771,11 +803,12 @@ export const acceptClientConnection = (clientConnection, onSuccess, onError) => 
 			})
 }
 
-export const rejectClientConnection = (clientConnectionId, onSuccess, onError) => (dispatch) => {
-  const clientConnectionsUri = `${API_CLIENT_CONNECTIONS_URI}` + '/' + clientConnectionId + toQueryString({ 'operationType': 'RejectConnection' });
+export const rejectClientConnection = (clientConnection, onSuccess, onError) => (dispatch) => {
+  const clientConnectionsUri = `${API_CLIENT_CONNECTIONS_URI}` + '/' + clientConnection._id  + toQueryString({ 'operationType': 'RejectConnection' });
   return fetch(clientConnectionsUri, {
 				method: "PATCH",
 				headers: { 'Content-Type': 'application/json', 'Authorization': store.getState().authReducer.accessCode },
+			    body: JSON.stringify(clientConnection),
 			})
 			.then(response => {
 				if (response.status >= 400 && response.status < 600) {
