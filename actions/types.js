@@ -159,6 +159,7 @@ export const HOLIDAYS_UPDATED='holidays_updated';
 export const DENTAL_UPDATED='dental_updated';
 export const UNANTICIPATED_UPDATED='unanticipated_updated';
 export const OTHER_ANNUAL_UPDATED='other_annual_updated';
+export const PROMO_CODE_UPDATED='promo_code_updated';
 export const TOGGLE_ACCEPT = 'toggle_accept';
 export const LOAN_PURPOSE_SELECTED = 'loan_purpose_selected';
 export const LOAN_PROFILE_SELECTED = 'loan_profile_selected';

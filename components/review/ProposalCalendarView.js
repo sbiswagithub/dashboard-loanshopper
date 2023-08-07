@@ -1,8 +1,8 @@
 import React, { Component } from "react";
+import Constants from 'expo-constants';
 import { Text, View, FlatList } from 'react-native';
-import { List, Card, Portal, Dialog, Button, Avatar } from 'react-native-paper';
+import { Card, } from 'react-native-paper';
 import { connect } from 'react-redux';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import getStyleSheet from '../../styles/styles';  
 import { closeReview, loadProposals, setFilterMode } from '../../actions';
@@ -15,10 +15,9 @@ import { SHOWING_LIKED_BANNER, NO_LOANS_TO_DISPLAY, NO_LOANS_AT_ALL, DATES_BUTTO
 import { WHITE } from '../../constants/colors';
 
 const renderProposal = ({ item }) => {
-	const styles = getStyleSheet();
 	const id = item == null ? -1 : item._id;
     return (
-      <View key={id} >
+      <View key={id} style={{maxWidth:'85%'}} >
 		<ProposalListView proposalId={id}/>
       </View>
     );
@@ -37,7 +36,7 @@ class ProposalCalendarView extends Component {
     render () {
     	const styles = getStyleSheet();
     	return (
-	    		<View style={{alignSelf:"flex-start", width:'100%', height:'85%' }}>
+	    		<View style={{alignSelf:"flex-start", width:'100%', height:'100%' }}>
 					<Card style={{elevation:10, borderRadius:20, borderWidth:1, borderColor:WHITE}}>
 						<Card.Title title={FILTERS_BANNER} titleStyle={styles.textMediumBoldGray} />
 						<Card.Content>
@@ -67,13 +66,14 @@ class ProposalCalendarView extends Component {
 					<Text style={styles.largeGrayButtonText}>{this.props.reviewPeriod == QUARTERLY_VIEW ? NO_LOANS_AT_ALL : NO_LOANS_TO_DISPLAY}</Text>
 					:
 					<FlatList
-						style={{alignSelf:"flex-start", maxWidth:'30%'}}
+						style={{alignSelf:"flex-start", }}
 						data={this.props.proposalsInView}
 						renderItem={renderProposal}
 						keyExtractor={(item) => item._id}
 						keyboardShouldPersistTaps='handled' 
-						showsVerticalScrollIndicator={false} 
-						horizontal={false}
+						showsVerticalScrollIndicator={Constants.platform.web ? false: true} 
+						showsHorizontalScrollIndicator={Constants.platform.web ? true : false} 
+						horizontal={Constants.platform.web ? true : false}
 					/>}
 				</View>
         )

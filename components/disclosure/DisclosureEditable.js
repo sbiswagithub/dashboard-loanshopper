@@ -4,7 +4,7 @@ import { TouchableHighlight } from "react-native-gesture-handler";
 
 import { connect } from 'react-redux';
 
-import { closeDisclosure, toggleEditMode, toggleModal, toggleAcceptFlag,  } from '../../actions';
+import { closeDisclosure, toggleEditMode, toggleModal, toggleAcceptFlag, promoCodeUpdated } from '../../actions';
 import { ACCEPTANCE_BANNER } from '../../constants/banners';
 import getStyleSheet from '../../styles/styles';  
 import CoBorrowerInformation from './CoBorrowerInformation';  
@@ -94,10 +94,9 @@ class DisclosureEditable extends Component {
 						
 									<View style={styles.tableColumn}>    		
 									<TextInput style={[styles.whiteBgCentredTextInput, styles.disclTextEntry100]} 
-										clearTextOnFocus={true} 
-										onFocus={text => {}}
-										onChangeText={text => {}}
-										value={''} />
+										selectTextOnFocus={true} 
+										onChangeText={text => this.props.promoCodeUpdated(text)}
+										value={this.props.promoCode} />
 									</View>
 								</View>
 						</View>
@@ -120,11 +119,11 @@ class DisclosureEditable extends Component {
 }
 
 const mapStateToProps = ({ disclosureReducer, authReducer }) => {
-  const { modalVisible, editMode, titles, addressSet, employmentType, immigrationStatus, professionIdx,
+  const { modalVisible, editMode, titles, addressSet, employmentType, immigrationStatus, professionIdx, promoCode,
 	  isAccepted, hasTitle, hasFirstName, hasLastName, hasEmail, hasGrossIncAnn, hasBorrowing, professionSet, isRefinance, edit } = disclosureReducer;
   const { accessCode } = authReducer;
-  return { accessCode , modalVisible, editMode, titles, addressSet, employmentType, immigrationStatus, professionIdx,
+  return { accessCode , modalVisible, editMode, titles, addressSet, employmentType, immigrationStatus, professionIdx, promoCode,
 	  isAccepted, hasTitle, hasFirstName, hasLastName, hasEmail, hasGrossIncAnn, hasBorrowing, professionSet, isRefinance, edit };
 };
 
-export default connect(mapStateToProps, { closeDisclosure, toggleEditMode, toggleModal, toggleAcceptFlag,  })(DisclosureEditable);
+export default connect(mapStateToProps, { closeDisclosure, toggleEditMode, toggleModal, toggleAcceptFlag, promoCodeUpdated })(DisclosureEditable);

@@ -15,7 +15,7 @@ import {
 	POWER_UPDATED, WATER_UPDATED, PHONES_UPDATED, INTERNET_UPDATED, CABLE_AND_STREAMING_UPDATED, 
 	LIFE_INSURANCE_UPDATED, HEALTH_INSURANCE_UPDATED, 
 	VEHICLE_INSURANCE_UPDATED, HOME_CONTENTS_INSURANCE_UPDATED,
-	HOLIDAYS_UPDATED, DENTAL_UPDATED, UNANTICIPATED_UPDATED, OTHER_ANNUAL_UPDATED, 
+	HOLIDAYS_UPDATED, DENTAL_UPDATED, UNANTICIPATED_UPDATED, OTHER_ANNUAL_UPDATED, PROMO_CODE_UPDATED,
 	TOGGLE_EDIT, SHOW_MODAL, HIDE_MODAL,TOGGLE_ACCEPT,
 	LOAN_PURPOSE_SELECTED, LOAN_PROFILE_SELECTED, LOAN_PROCESSING_SELECTED,
 	LOAD_LOAN_REQUEST, CLEAR_CO_BORR, SHOW_NEXT, USER_EXISTS, DEPENDANTS_UPDATED, LVR_UPDATED, 
@@ -32,11 +32,10 @@ import { TITLE_MR, TITLE_MS, TITLE_MRS, PERMANENT, SELF_EMPLOYED, CITIZEN, RESID
 	SAVINGS_LABEL, VEHICLES_LABEL, INVESTMENTS_LABEL, OTHER_ASSETS_LABEL, CREDIT_CARDS_LABEL, OTHER_LOANS_LABEL,
 	WEEKLY_LABEL, MONTHLY_LABEL, ANNUAL_LABEL, LVR_DEFAULT, 
 	LEAST_INTEREST_RATE, LOWER_REPAYMENTS, LONGER_FIXED_TERM, SHORTER_LOAN_DURATION, 
-	REPAYMENT_TYPE_Y, REPAYMENT_TYPE_M, REPAYMENT_TYPE_F, REPAYMENT_TYPE_W, 
-	EDIT_1, EDIT_2, EDIT_3, EDIT_4, EDIT_5, EDIT_6, EDIT_7 } from '../constants/disclosure';
+	EDIT_1, } from '../constants/disclosure';
 import { NULL } from '../constants/common';
 import Moment from 'moment';
-import { REPAYMENT_Y, REPAYMENT_M, REPAYMENT_F, REPAYMENT_W, BRIDGING_FINANCE, OFFSET_ACCOUNT, HOME_INSURANCE, CREDIT_CARD, TX_ACCOUNT, SAV_ACCOUNT, HOME_AND_LAND_PKG, HOME_IMPROV_PKG, REDRAW_FACILITY } from '../constants/banners';
+import { REPAYMENT_M, BRIDGING_FINANCE, OFFSET_ACCOUNT, HOME_INSURANCE, CREDIT_CARD, TX_ACCOUNT, SAV_ACCOUNT, HOME_AND_LAND_PKG, HOME_IMPROV_PKG, REDRAW_FACILITY } from '../constants/banners';
 
 const validateEmail = email => {
 	var re = /^(([^<>()\[\]\\.,;:\s@”]+(\.[^<>()\[\]\\.,;:\s@”]+)*)|(“.+”))@((\[[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}])|(([a-zA-Z\-0–9]+\.)+[a-zA-Z]{2,}))$/;
@@ -197,6 +196,8 @@ const propsToLoanRequest = props => {
 			averageMonthlyRepayment: {value: props.currentRepayment},
 		};
 
+	loanRequest.promoCode = props.promoCode;
+
 	return loanRequest;
 };
 
@@ -332,6 +333,9 @@ const INITIAL_STATE = {
     unanticipated:0,
     otherAnnual:0,
 
+	// Promo code
+	promoCode: undefined,
+
 	// List options from GET calls when required
 	// [{
     // "addressLine1": "43 Taylor St",
@@ -451,6 +455,8 @@ export default (state = INITIAL_STATE, action) => {
 		    dental: findExpense(action.payload, DENTAL_LABEL),
 		    unanticipated: findExpense(action.payload, UNANTICIPATED_LABEL),
 		    otherAnnual: findExpense(action.payload, OTHER_ANNUAL_LABEL),
+			// Promo code
+			promoCode: action?.payload?.promoCode,
 
 			// Application state
 			modalVisible: false,
@@ -671,6 +677,8 @@ export default (state = INITIAL_STATE, action) => {
 	  return { ...state, unanticipated: action.payload };
   case OTHER_ANNUAL_UPDATED:
 	  return { ...state, otherAnnual: action.payload };
+  case PROMO_CODE_UPDATED:
+	  return { ...state, promoCode: action.payload };
   // General actions
   case TOGGLE_EDIT:
 	  return { ...state, editMode: !action.payload, isAccepted: action.payload, edit: EDIT_1 };
