@@ -363,7 +363,8 @@ export const resetLoanshopperPassword = (props, onSuccess, onError) => (dispatch
 }
 
 export const getLoanRequest = (onSuccess, onError) => (dispatch) => {
-	return fetch(API_LOAN_REQUESTS_URI, {
+	const uri = `${API_LOAN_REQUESTS_URI}` ;
+	return fetch(uri, {
 				    method: "GET",
 				    headers: {  'Authorization': store.getState().authReducer.accessCode, 'Content-Type': 'application/json'},
 				})
@@ -375,7 +376,7 @@ export const getLoanRequest = (onSuccess, onError) => (dispatch) => {
 		                    showDialog: true, 
 		                    dialogTitle: ERROR_DIALOG_TITLE_1, 
 		                    publicMessage: ERROR_DIALOG_PUBLIC_MSG_1, 
-                    		logMessage: 'Failed to connect to ' + API_LOAN_REQUESTS_URI
+                    		logMessage: 'Failed to connect to ' + uri
 		                });
 		                return Promise.reject(error);
 					} else
