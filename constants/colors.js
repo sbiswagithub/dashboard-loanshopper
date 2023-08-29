@@ -20,3 +20,5 @@ export const TRANSPARENT = '#00000000';
 export const BLACK = '#000000';
 export const WHITE = '#ffffff';
 export const HIGHLIGHTED_YELLOW = '#F7C04A'
+export const TEXT_GRAY = '#999999'
+export const BORDER_YELLOW = '#fcc438'

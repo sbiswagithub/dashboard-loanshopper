@@ -13,10 +13,9 @@ import { LOAN_PROCESSING, LOAN_REQUIREMENTS, LOAN_PROFILE, LOAN_AMOUNT, LOAN_PUR
 import { THUMB_COLOR } from '../../constants/common';
 import { LVR_SLIDER_MAX, BORROWING_SLIDER_MAX, RESIDENTIAL, INVESTMENT, BOTH_RESI_AND_INVEST, FIRST_MORTGAGE, REFINANCE, LT_4_WEEKS, NORMAL_PERIOD, 
 	FIXED, VARIABLE, SPLIT, LEAST_INTEREST_RATE, LOWER_REPAYMENTS, LONGER_FIXED_TERM, SHORTER_LOAN_DURATION, 
-	REPAYMENT_TYPE_Y, REPAYMENT_TYPE_M, REPAYMENT_TYPE_F, REPAYMENT_TYPE_W, REPAYMENT_SLIDER_MAX } from '../../constants/disclosure';
+	REPAYMENT_TYPE_Y, REPAYMENT_TYPE_M, REPAYMENT_TYPE_F, REPAYMENT_TYPE_W,  } from '../../constants/disclosure';
 import { borrowingUpdated, loanProcessingSelected, loanProfileSelected, loanPurposeSelected, currencyToNumber, lvrUpdated, ratePreferenceUpdated, 
 	loanPreferenceUpdated, repaymentPreferenceUpdated, extrasUpdated, currentLendingUpdated } from '../../actions';
-import { REDRAW, CURR_HOMELOAN_UPDATED, CURR_REPAYMENT_UPDATED } from "../../actions/types";
 import MortgageAddressSelect from "./MortgageAddressSelect";
 import CurrentLendingDetails from "./CurrentLendingDetails";
 const theme = {
@@ -52,13 +51,13 @@ class LoanInformation extends Component {
     		    <View style={styles.disclosureBoxRow}>
         		<Text style={[styles.textMediumBoldGray]}>{LOAN_REQUIREMENTS}</Text>
     		    </View>
-				{this.props.edit === 2 ? 
+				{this.props.edit === 3 ? 
 		        <View style={[styles.disclosureBoxRow]}>
 		    		<View style={{ flex: 0.9, flexDirection:'column'}}>
 		    		<View style={styles.space}/>
 					<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{LOAN_AMOUNT}</Text>
 						<View style={styles.space}/>
-						<Text style={[styles.textMediumLogoDarkBlue,{ alignSelf:"center" }]} >Choose the amount you are looking to borrow. For investors, at this time, please set an estimated total amount of borrowing</Text>
+						<Text style={[styles.textMediumLogoDarkBlue,{ alignSelf:"center" }]} >Choose the amount you are looking to borrow. Investors should set an estimated total amount of borrowing across all properties</Text>
 						<View style={styles.space}/>
 
 			   			<View style={styles.boxRow}>
@@ -76,7 +75,7 @@ class LoanInformation extends Component {
     		    </View>
 				: null }
 
-				{this.props.edit === 3 ? 
+				{this.props.edit === 4 ? 
 		        <View style={[styles.disclosureBoxRow]}>
 		    		<View style={{ flex: 0.9, flexDirection:'column'}}>
 		    		<View style={styles.space}/>
@@ -100,7 +99,7 @@ class LoanInformation extends Component {
     		    </View>
 				: null }
 
-				{this.props.edit === 4 ? 
+				{this.props.edit === 5 ? 
     		    <View style={styles.disclosureBoxRow}>
 		    		<View style={{ flex: 0.9, flexDirection:'column'}}>
 						<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{LOAN_PROCESSING}</Text>
@@ -117,7 +116,7 @@ class LoanInformation extends Component {
     		    </View>
 				: null }
 
-				{this.props.edit === 5 ? 
+				{this.props.edit === 6 ? 
 				<View>
     		    <View style={styles.disclosureBoxRow}>
 		    		<View style={{ flex: 0.9, flexDirection:'column'}}>
@@ -141,7 +140,7 @@ class LoanInformation extends Component {
 				</View>
 				: null }
 
-				{this.props.edit === 6 ? 
+				{this.props.edit === 7 ? 
     		    <View style={styles.disclosureBoxRow}>
 		    		<View style={{ flex: 0.9, flexDirection:'column'}}>
 						<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{LOAN_PURPOSE}</Text>
@@ -162,14 +161,14 @@ class LoanInformation extends Component {
     		    </View>
 				: null }
 
-				{this.props.edit === 7 ? 
+				{this.props.edit === 8 ? 
 		        <View style={[styles.disclosureBoxRow]}>
 		    		<View style={styles.space}/>
 					<MortgageAddressSelect />
     		    </View>
 				: null }
 
-				{this.props.edit === 8 ? 
+				{this.props.edit === 9 ? 
     		    <View style={styles.disclosureBoxRow}>
 		    		<View style={{ flex: 0.9, flexDirection:'column'}}>
 					<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{RATE_PREFERENCE}</Text>
@@ -190,7 +189,7 @@ class LoanInformation extends Component {
     		    </View>
 				: null }
 
-				{this.props.edit === 9 ? 
+				{this.props.edit === 10 ? 
     		    <View style={styles.disclosureBoxRow}>
 		    		<View style={{ flex: 0.9, flexDirection:'column'}}>
 					<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{FIRST_PREFERENCE}</Text>
@@ -213,7 +212,7 @@ class LoanInformation extends Component {
 	    		    </View>
     		    </View>
 				: null }
-				{this.props.edit === 10 ? 
+				{this.props.edit === 11 ? 
     		    <View style={styles.disclosureBoxRow}>
 		    		<View style={{ flex: 0.9, flexDirection:'column'}}>
 						<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{SECOND_PREFERENCE}</Text>
@@ -236,7 +235,7 @@ class LoanInformation extends Component {
 	    		    </View>
     		    </View>
 				: null }
-				{this.props.edit === 11 ? 
+				{this.props.edit === 12 ? 
     		    <View style={styles.disclosureBoxRow}>
 		    		<View style={{ flex: 0.9, flexDirection:'column'}}>
 						<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{REPAYMENT_FREQUENCY}</Text>
@@ -259,7 +258,7 @@ class LoanInformation extends Component {
 	    		    </View>
     		    </View>
 				: null }
-				{this.props.edit === 12 ? 
+				{this.props.edit === 13 ? 
     		    <View style={styles.disclosureBoxRow}>
 		    		<View style={{ flex: 0.9, flexDirection:'column'}}>
 						<Text style={[styles.textSmallBoldGray, {alignSelf:'center',}]}>{EXTRAS}</Text>

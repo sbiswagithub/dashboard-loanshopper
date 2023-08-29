@@ -50,6 +50,11 @@ class SubmissionSection2 extends Component {
     	        	</View>
     	        		) : null }
     		    
+        		{ this.props.statementOfIntent != null && this.props.statementOfIntent != ''  ? (
+        			<View><View style={styles.hrLight}/>
+	    		    <TableRow cellLeftText={'Statement of intent'} cellRightText={this.props.statementOfIntent} />
+    	        	</View>
+    	        		) : null }
 		    </View>
         )	
     }
@@ -57,6 +62,7 @@ class SubmissionSection2 extends Component {
 
 const mapStateToProps = ({ disclosureReducer }) => {
   const {
+	  statementOfIntent,
 	professions,
 	professionIdx,
     employmentType, 
@@ -66,6 +72,7 @@ const mapStateToProps = ({ disclosureReducer }) => {
 	isPermanent
   } = disclosureReducer;
   return {
+	  statementOfIntent,
 	professions,
 	professionIdx,
     employmentType, 

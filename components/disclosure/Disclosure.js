@@ -175,6 +175,7 @@ class Disclosure extends Component {
 					<View style={[styles.stackedSimpleLayout]}>
 						<View style={{justifyContent:"space-between"}}>
 							<Text style={[styles.textLargeLogoDarkBlue, {alignSelf:"center"}]} >{DISCLOSURE_BANNER}</Text>
+							<View style={styles.space} />
 							<View style={{flexDirection:'row', alignSelf:"flex-end", alignItems:"flex-end", justifyContent:"flex-end", width:"55%" }}>
 								<View style={{flexDirection:'row',justifyContent:'space-between', marginRight:'2%'}}>
 									<View style={{flexDirection:'row',alignItems:"flex-start", justifyContent:"flex-start", width:"45%" }}>
@@ -211,6 +212,8 @@ class Disclosure extends Component {
 							</View>
 
 						</View>
+						<View style={styles.space} />
+						<Text style={[styles.textMediumBoldLogoDarkBlue, {alignSelf:"center"}]} >The information collected here will be used by mortgage brokers for a pre-assessment of your lending capacity. For the best results please complete all applicable fields so we can deliver loan proposals that match your needs and conditions.</Text>
 						<View style={styles.space}/>
 						<DisclosureSubmission />
 					</View>

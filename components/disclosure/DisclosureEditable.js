@@ -9,6 +9,7 @@ import { ACCEPTANCE_BANNER } from '../../constants/banners';
 import getStyleSheet from '../../styles/styles';  
 import CoBorrowerInformation from './CoBorrowerInformation';  
 import MinimumRequiredDetails from './MinimumRequiredDetails';
+import BorrowersStatement from './BorrowersStatement';
 import LoanInformation from './LoanInformation';
 import Assets from  './Assets';
 import Liabilities from  './Liabilities';
@@ -33,21 +34,21 @@ class DisclosureEditable extends Component {
 					<MinimumRequiredDetails /> 
 				</View> : null }
 
-				{this.props.edit >= 2 && this.props.edit <= 12 ? 
+				{this.props.edit == 2 ? 
 				<View style={styles.disclosurePanel}>
-				<LoanInformation /> 
+					<BorrowersStatement />
 				</View> : null }
 
-				{this.props.edit == 13 ? 
+				{this.props.edit >= 3 && this.props.edit <= 13 ? 
         			<View style={styles.disclosurePanel}>
-			        <CoBorrowerInformation />
+				<LoanInformation /> 
 	    		    </View>
 				: null }
 
 				{this.props.edit == 14 ? 
 		        	<View style={styles.disclosurePanel}>
 			    		<View style={[styles.disclosureBoxRow]}>
-				    	<Assets />
+			        <CoBorrowerInformation />
 		    		    </View>
 		    		</View>
 				: null }
@@ -55,7 +56,7 @@ class DisclosureEditable extends Component {
 				{this.props.edit == 15 ? 
 		        	<View style={styles.disclosurePanel}>
 			    		<View style={[styles.disclosureBoxRow]}>
-				    	<Liabilities />
+				    	<Assets />
 		    		    </View>	   
 		    		</View>
 				: null }
@@ -63,7 +64,7 @@ class DisclosureEditable extends Component {
 				{this.props.edit == 16 ? 
 		        	<View style={styles.disclosurePanel}>
 			    		<View style={[styles.disclosureBoxRow]}>
-				    	<WeeklySpend />
+				    	<Liabilities />
 		    		    </View>
 		    		</View>
 				: null }
@@ -71,7 +72,7 @@ class DisclosureEditable extends Component {
 				{this.props.edit == 17 ? 
 		        	<View style={styles.disclosurePanel}>
 			    		<View style={[styles.disclosureBoxRow]}>
-				    	<MonthlySpend />
+				    	<WeeklySpend />
 		    		    </View>
 	    		    </View>
 				: null }
@@ -79,12 +80,20 @@ class DisclosureEditable extends Component {
 				{this.props.edit == 18 ? 
 		        	<View style={styles.disclosurePanel}>
 			    		<View style={[styles.disclosureBoxRow]}>
-				    	<AnnualSpend />
+				    	<MonthlySpend />
 		    		    </View>
 	    		    </View>
 				: null }
 
 				{this.props.edit == 19 ? 
+		        	<View style={styles.disclosurePanel}>
+			    		<View style={[styles.disclosureBoxRow]}>
+				    	<AnnualSpend />
+		    		    </View>
+	    		    </View>
+				: null }
+
+				{this.props.edit == 20 ? 
 		        	<View style={styles.disclosurePanel}>
 						<View style={[styles.tableView, {width:'80%', alignSelf:"center"}]}>
 							<View style={styles.tableRow}>

@@ -8,7 +8,7 @@ import {
 	PROFESSION_FOUND, PROFESSION_SELECTED, PROFESSION_UNSELECTED,
 	EMPLOYEMENT_TYPE_SELECTED,
 	IMMIGRATION_STATUS_SELECTED,
-	GR_ANN_INC_UPDATED, BORROWING_UPDATED,
+	GR_ANN_INC_UPDATED, STMT_OF_INTENT_UPDATED, BORROWING_UPDATED,
 	CASH_SAV_UPDATED, VEHICLES_UPDATED, INVST_UPDATED, OTH_ASSETS_UPDATED,
 	CRED_CARD_UPDATED, OTH_LOANS_UPDATED,
 	RENT_UPDATED, GROCERIES_UPDATED, LIFES_UPDATED, COMMUTE_UPDATED, 
@@ -85,6 +85,7 @@ const checkFullName = (title, firstName, lastName) => {
 const propsToLoanRequest = props => {
 	var loanRequest = {
 		_id: props.loanRequest._id,
+		statementOfIntent: props.statementOfIntent,
 		loanProcessing: props.loanProcessing,
 		loanProfile: props.loanProfile,
 		loanPurpose: props.loanPurpose,
@@ -292,6 +293,7 @@ const INITIAL_STATE = {
 	redraw:false,
 	homeImprovementPackage:false,
 
+	statementOfIntent:null,
 	currentHomeLoan: null,
 	currentLender: null,
 	currentRepayment: null,
@@ -385,6 +387,7 @@ export default (state = INITIAL_STATE, action) => {
 			addressSet: true,
 			professionSet: true,
 			hasGrossIncAnn: true,
+			statementOfIntent: action.payload?.statementOfIntent,
 		    grossIncAnn: action?.payload?.financials?.annualIncome == null ? 0 : action.payload.financials.annualIncome.value,
 		    borrowing: action?.payload?.loanAmount == null ? 0 : action.payload.loanAmount.value,
 			isResidential: action?.payload?.loanPurpose == null ||  action.payload.loanPurpose == RESIDENTIAL,
@@ -576,6 +579,8 @@ export default (state = INITIAL_STATE, action) => {
 	  return { ...state, immigrationStatus: action.payload, isCitizen: action.payload === CITIZEN, isResident: action.payload === RESIDENT, isWorkVisa: action.payload === WORK_VISA, hasOtherPersonalInfo: true };
   case GR_ANN_INC_UPDATED:
 	  return { ...state, grossIncAnn: action.payload, hasGrossIncAnn: action.payload > 0, hasOtherPersonalInfo: true };
+  case STMT_OF_INTENT_UPDATED:
+	  return { ...state, statementOfIntent : action.payload}
   case LOAN_PROCESSING_SELECTED:
 	  return { ...state, loanProcessing: action.payload, isNormal: action.payload === NORMAL_PERIOD, isExpedited: action.payload === LT_4_WEEKS, };
   case BORROWING_UPDATED:

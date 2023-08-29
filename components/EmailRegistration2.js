@@ -99,7 +99,7 @@ class EmailRegistration2 extends Component {
 				<ErrorDialog />
 
 				<Portal>
-					<Dialog visible={this.state.showPortal} >
+					<Dialog visible={this.state.showPortal} style={{maxWidth:'50%', alignSelf:"center"}}>
 					<Dialog.Title style={styles.textMediumBoldLogoBrightBlue} >Welcome to Loanshopper!</Dialog.Title>
 					<Dialog.Content><Paragraph style={[styles.textMedium, {color:LOGO_DARK_BLUE}]}>Hi {this.props.firstName}, great to have you on board. You will soon recieve a one time passcode on your mobile, click ok to enter your OTP.</Paragraph></Dialog.Content>
 					<Dialog.Actions>
