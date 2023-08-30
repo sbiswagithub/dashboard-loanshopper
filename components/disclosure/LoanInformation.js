@@ -51,7 +51,7 @@ class LoanInformation extends Component {
     		    <View style={styles.disclosureBoxRow}>
         		<Text style={[styles.textMediumBoldGray]}>{LOAN_REQUIREMENTS}</Text>
     		    </View>
-				{this.props.edit === 3 ? 
+				{this.props.edit === 4 ? 
 		        <View style={[styles.disclosureBoxRow]}>
 		    		<View style={{ flex: 0.9, flexDirection:'column'}}>
 		    		<View style={styles.space}/>
@@ -75,7 +75,7 @@ class LoanInformation extends Component {
     		    </View>
 				: null }
 
-				{this.props.edit === 4 ? 
+				{this.props.edit === 5 ? 
 		        <View style={[styles.disclosureBoxRow]}>
 		    		<View style={{ flex: 0.9, flexDirection:'column'}}>
 		    		<View style={styles.space}/>
@@ -99,7 +99,7 @@ class LoanInformation extends Component {
     		    </View>
 				: null }
 
-				{this.props.edit === 5 ? 
+				{this.props.edit === 6 ? 
     		    <View style={styles.disclosureBoxRow}>
 		    		<View style={{ flex: 0.9, flexDirection:'column'}}>
 						<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{LOAN_PROCESSING}</Text>
@@ -116,7 +116,7 @@ class LoanInformation extends Component {
     		    </View>
 				: null }
 
-				{this.props.edit === 6 ? 
+				{this.props.edit === 7 ? 
 				<View>
     		    <View style={styles.disclosureBoxRow}>
 		    		<View style={{ flex: 0.9, flexDirection:'column'}}>
@@ -140,7 +140,7 @@ class LoanInformation extends Component {
 				</View>
 				: null }
 
-				{this.props.edit === 7 ? 
+				{this.props.edit === 8 ? 
     		    <View style={styles.disclosureBoxRow}>
 		    		<View style={{ flex: 0.9, flexDirection:'column'}}>
 						<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{LOAN_PURPOSE}</Text>
@@ -161,14 +161,14 @@ class LoanInformation extends Component {
     		    </View>
 				: null }
 
-				{this.props.edit === 8 ? 
+				{this.props.edit === 9 ? 
 		        <View style={[styles.disclosureBoxRow]}>
 		    		<View style={styles.space}/>
 					<MortgageAddressSelect />
     		    </View>
 				: null }
 
-				{this.props.edit === 9 ? 
+				{this.props.edit === 10 ? 
     		    <View style={styles.disclosureBoxRow}>
 		    		<View style={{ flex: 0.9, flexDirection:'column'}}>
 					<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{RATE_PREFERENCE}</Text>
@@ -189,7 +189,7 @@ class LoanInformation extends Component {
     		    </View>
 				: null }
 
-				{this.props.edit === 10 ? 
+				{this.props.edit === 11 ? 
     		    <View style={styles.disclosureBoxRow}>
 		    		<View style={{ flex: 0.9, flexDirection:'column'}}>
 					<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{FIRST_PREFERENCE}</Text>
@@ -212,7 +212,7 @@ class LoanInformation extends Component {
 	    		    </View>
     		    </View>
 				: null }
-				{this.props.edit === 11 ? 
+				{this.props.edit === 12 ? 
     		    <View style={styles.disclosureBoxRow}>
 		    		<View style={{ flex: 0.9, flexDirection:'column'}}>
 						<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{SECOND_PREFERENCE}</Text>
@@ -235,7 +235,7 @@ class LoanInformation extends Component {
 	    		    </View>
     		    </View>
 				: null }
-				{this.props.edit === 12 ? 
+				{this.props.edit === 13 ? 
     		    <View style={styles.disclosureBoxRow}>
 		    		<View style={{ flex: 0.9, flexDirection:'column'}}>
 						<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{REPAYMENT_FREQUENCY}</Text>
@@ -258,7 +258,7 @@ class LoanInformation extends Component {
 	    		    </View>
     		    </View>
 				: null }
-				{this.props.edit === 13 ? 
+				{this.props.edit === 14 ? 
     		    <View style={styles.disclosureBoxRow}>
 		    		<View style={{ flex: 0.9, flexDirection:'column'}}>
 						<Text style={[styles.textSmallBoldGray, {alignSelf:'center',}]}>{EXTRAS}</Text>

@@ -161,6 +161,9 @@ export const UNANTICIPATED_UPDATED='unanticipated_updated';
 export const OTHER_ANNUAL_UPDATED='other_annual_updated';
 export const PROMO_CODE_UPDATED='promo_code_updated';
 export const STMT_OF_INTENT_UPDATED = 'stmt_updated';
+export const EMPLOYEMENT_EXPERIENCE_UPDATED = 'employment_experience_updated';
+export const EMPLOYEMENT_EXPERIENCE_ADDED = 'employment_experience_added';
+export const EMPLOYEMENT_EXPERIENCE_REMOVED = 'employment_experience_removed';
 
 export const TOGGLE_ACCEPT = 'toggle_accept';
 export const LOAN_PURPOSE_SELECTED = 'loan_purpose_selected';

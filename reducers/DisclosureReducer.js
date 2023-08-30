@@ -22,7 +22,7 @@ import {
 	RATE_PREF_UPDATED, FIRST_PREF_UPDATED, SECOND_PREF_UPDATED, REPAYMENT_PREF_UPDATED, EXTRAS_PREF_UPDATED, REDRAW, 
 	CURR_HOMELOAN_UPDATED, CURR_LENDER_UPDATED, CURR_REPAYMENT_UPDATED, CURR_HOME_LOAN_TYPE_UPDATED, 
 	MORTGAGE_ADDRESS_FOUND, MORTGAGE_ADDRESS_SELECTED, MORTGAGE_ADDRESS_UNSELECTED, MORTGAGE_ADDRESS_BLUR, MORTGAGE_ADDRESS_REMOVE,
-	EDIT_MORE, CHECK_ACCOUNT_FOR_MOBILE, CHECK_ACCOUNT_FOR_EMAIL, PROFESSION_BLUR, EDIT_LESS, TOGGLE_ALERT
+	EDIT_MORE, CHECK_ACCOUNT_FOR_MOBILE, CHECK_ACCOUNT_FOR_EMAIL, PROFESSION_BLUR, EDIT_LESS, TOGGLE_ALERT, EMPLOYEMENT_EXPERIENCE_UPDATED, EMPLOYEMENT_EXPERIENCE_ADDED, EMPLOYEMENT_EXPERIENCE_REMOVED
 	} from '../actions/types';
 import { TITLE_MR, TITLE_MS, TITLE_MRS, PERMANENT, SELF_EMPLOYED, CITIZEN, RESIDENT, WORK_VISA,
 	BOTH_RESI_AND_INVEST, RESIDENTIAL, INVESTMENT, FIRST_MORTGAGE, REFINANCE, LT_4_WEEKS, NORMAL_PERIOD,
@@ -98,7 +98,10 @@ const propsToLoanRequest = props => {
 				employmentType: props.employmentType,
 				immigrationStatus: props.immigrationStatus,
 				primaryProfession: props.profession,
-				numDependants: props.dependants
+				numDependants: props.dependants,
+				employmentHistory : props.employmentHistory.filter(e => {
+					return e.employerName != undefined
+				})
 			}
 		},
 		financials : {
@@ -350,7 +353,9 @@ const INITIAL_STATE = {
     //}]
 	addresses: [],
 	mortgageAddresses:[],
-    professions: [],
+	professions: [],
+	// Should have { employerName: , position: , employerContact: , employerEmail: , startDate: , endDate: , isCurrent: }
+	employmentHistory:[{employerName: undefined, position: undefined, employerContact: undefined, employerEmail: undefined, isCurrent: undefined}],
 
 	// Temporary variables for selecting from list options
 	addressIdx: '',
@@ -498,6 +503,9 @@ export default (state = INITIAL_STATE, action) => {
 		    employmentType: action?.payload?.employmentType == null ? PERMANENT : action.payload.employmentType,
 		    immigrationStatus: action?.payload?.immigrationStatus == null ? CITIZEN : action.payload.immigrationStatus,
 			dependants: action?.payload?.numDependants == null ? 0 : action?.payload?.numDependants, 
+			employmentHistory: action?.payload?.employmentHistory == null ? 
+				[{employerName: undefined, position: undefined, employerContact: undefined, employerEmail: undefined, isCurrent: undefined}] : 
+				action?.payload?.employmentHistory,
 
 			// Flags
 			professionSet: action?.payload?.primaryProfession != null,
@@ -581,6 +589,56 @@ export default (state = INITIAL_STATE, action) => {
 	  return { ...state, grossIncAnn: action.payload, hasGrossIncAnn: action.payload > 0, hasOtherPersonalInfo: true };
   case STMT_OF_INTENT_UPDATED:
 	  return { ...state, statementOfIntent : action.payload}
+  case EMPLOYEMENT_EXPERIENCE_UPDATED:
+		var currentHistory = []
+		state.employmentHistory.map(e => currentHistory.push(e))
+		const experience = currentHistory.pop();
+		if (action.payload?.employerName) 
+			currentHistory.push({...experience, employerName : action.payload.employerName})
+		else if (action.payload?.position ) 
+			currentHistory.push({...experience, position : action.payload.position}) 
+		else if (action.payload?.employerContact ) 
+			currentHistory.push({...experience, employerContact : action.payload.employerContact})  
+		else if (action.payload?.employerEmail)
+			currentHistory.push({...experience, employerEmail : action.payload.employerEmail})
+		else if (action.payload?.startDate)
+			currentHistory.push({...experience, startDate : action.payload.startDate})
+		else if (action.payload?.endDate)
+			currentHistory.push({...experience, isCurrent:false, endDate : action.payload.endDate})
+		else if (action.payload?.isCurrent != undefined) {
+				currentHistory.push({...experience, endDate : undefined, isCurrent : action.payload.isCurrent})
+			} 
+		else 
+			currentHistory.push({...experience})
+		
+	  return { ...state, employmentHistory : currentHistory }
+  case EMPLOYEMENT_EXPERIENCE_ADDED:
+		var currentHistory = []
+		state.employmentHistory.map(e => currentHistory.push(e))
+		currentHistory.push(
+		  {employerName: undefined, position: undefined, employerContact: undefined, employerEmail: undefined, isCurrent: undefined})	
+	  return { ...state, employmentHistory : currentHistory }
+  case EMPLOYEMENT_EXPERIENCE_REMOVED:
+		var currentHistory = []
+		const matchFields = (left,right) => {
+			return (left == undefined && right == undefined) || (left == right)
+		}
+		state.employmentHistory.forEach(e => {
+			if (
+				matchFields(e?.employerName ? e?.employerName : undefined , action.payload?.employerName ? action.payload?.employerName  : undefined )&&
+				matchFields(e?.position ? e?.position : undefined , action.payload?.position ? action.payload?.position : undefined )&&
+				matchFields(e?.employerContact ? e?.employerContact : undefined , action.payload?.employerContact ? action.payload?.employerContact : undefined )&&
+				matchFields(e?.employerEmail ? e?.employerEmail : undefined , action.payload?.employerEmail ? action.payload?.employerEmail : undefined )&&
+				matchFields(e?.startDate ? e?.startDate : undefined , action.payload?.startDate ? action.payload?.startDate : undefined )&&
+				matchFields(e?.endDate ? e?.endDate : undefined , action.payload?.endDate ? action.payload?.endDate : undefined )&&
+				matchFields(e?.isCurrent ? e?.isCurrent : undefined , action.payload?.isCurrent ? action.payload?.isCurrent : undefined ) )
+				console.log('')
+			else
+				currentHistory.push(e)
+		})
+		currentHistory.push(
+		  {employerName: undefined, position: undefined, employerContact: undefined, employerEmail: undefined, isCurrent: undefined})	
+	  return { ...state, employmentHistory : currentHistory }
   case LOAN_PROCESSING_SELECTED:
 	  return { ...state, loanProcessing: action.payload, isNormal: action.payload === NORMAL_PERIOD, isExpedited: action.payload === LT_4_WEEKS, };
   case BORROWING_UPDATED:

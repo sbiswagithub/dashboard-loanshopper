@@ -17,7 +17,7 @@ function DateEntryWithError(props) {
 		<>
 		<View style={{ flexDirection:'column', alignItems:"center" }}>
 			<TextInput style={[styles.whiteBgCentredTextInput, styles.disclTextEntryWide,]} 
-					selectTextOnFocus={true} placeholder={'DD/MM/YYYY'} 
+					placeholder={'DD/MM/YYYY'} 
 					onChangeText={(text) => {
 						setDobText(text)
 						if (!new RegExp('\\d+\/?').test(text))
