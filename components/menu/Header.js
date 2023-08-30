@@ -13,7 +13,7 @@ export default class Header extends Component {
 				<IconButton icon="menu" size={30} color="#00b4f0"
 					onPress={() => this.props.onTogglePress()}/>
 		        <View style={{flex: 1, flexDirection:'column'}}>
-					<Image source={require('../../assets/LoanShopper_LR.png')}  
+					<Image src={require('../../assets/LoanShopper_LR.png')}  
 						style={[styles.logoHeader, styles.centreAligned]} />
 			    </View>
 			</View>	   	

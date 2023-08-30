@@ -37,6 +37,7 @@ import { NULL } from '../constants/common';
 import Moment from 'moment';
 import { REPAYMENT_M, BRIDGING_FINANCE, OFFSET_ACCOUNT, HOME_INSURANCE, CREDIT_CARD, TX_ACCOUNT, SAV_ACCOUNT, HOME_AND_LAND_PKG, HOME_IMPROV_PKG, REDRAW_FACILITY } from '../constants/banners';
 
+const EMPLOYMENT_RECORD_TEMPLATE = {employerName: undefined, position: undefined, employerContact: undefined, employerEmail: undefined, isCurrent: undefined}
 const validateEmail = email => {
 	var re = /^(([^<>()\[\]\\.,;:\s@”]+(\.[^<>()\[\]\\.,;:\s@”]+)*)|(“.+”))@((\[[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}])|(([a-zA-Z\-0–9]+\.)+[a-zA-Z]{2,}))$/;
 	return email != null && re.test(email);
@@ -355,7 +356,7 @@ const INITIAL_STATE = {
 	mortgageAddresses:[],
 	professions: [],
 	// Should have { employerName: , position: , employerContact: , employerEmail: , startDate: , endDate: , isCurrent: }
-	employmentHistory:[{employerName: undefined, position: undefined, employerContact: undefined, employerEmail: undefined, isCurrent: undefined}],
+	employmentHistory:[EMPLOYMENT_RECORD_TEMPLATE],
 
 	// Temporary variables for selecting from list options
 	addressIdx: '',
@@ -503,9 +504,7 @@ export default (state = INITIAL_STATE, action) => {
 		    employmentType: action?.payload?.employmentType == null ? PERMANENT : action.payload.employmentType,
 		    immigrationStatus: action?.payload?.immigrationStatus == null ? CITIZEN : action.payload.immigrationStatus,
 			dependants: action?.payload?.numDependants == null ? 0 : action?.payload?.numDependants, 
-			employmentHistory: action?.payload?.employmentHistory == null ? 
-				[{employerName: undefined, position: undefined, employerContact: undefined, employerEmail: undefined, isCurrent: undefined}] : 
-				action?.payload?.employmentHistory,
+			employmentHistory: action?.payload?.employmentHistory == null || !Array.isArray(action?.payload?.employmentHistory) ? [EMPLOYMENT_RECORD_TEMPLATE] : action?.payload?.employmentHistory.concat([EMPLOYMENT_RECORD_TEMPLATE]),
 
 			// Flags
 			professionSet: action?.payload?.primaryProfession != null,
@@ -615,8 +614,7 @@ export default (state = INITIAL_STATE, action) => {
   case EMPLOYEMENT_EXPERIENCE_ADDED:
 		var currentHistory = []
 		state.employmentHistory.map(e => currentHistory.push(e))
-		currentHistory.push(
-		  {employerName: undefined, position: undefined, employerContact: undefined, employerEmail: undefined, isCurrent: undefined})	
+		currentHistory.push(EMPLOYMENT_RECORD_TEMPLATE)	
 	  return { ...state, employmentHistory : currentHistory }
   case EMPLOYEMENT_EXPERIENCE_REMOVED:
 		var currentHistory = []
@@ -636,8 +634,7 @@ export default (state = INITIAL_STATE, action) => {
 			else
 				currentHistory.push(e)
 		})
-		currentHistory.push(
-		  {employerName: undefined, position: undefined, employerContact: undefined, employerEmail: undefined, isCurrent: undefined})	
+		currentHistory.push(EMPLOYMENT_RECORD_TEMPLATE)	
 	  return { ...state, employmentHistory : currentHistory }
   case LOAN_PROCESSING_SELECTED:
 	  return { ...state, loanProcessing: action.payload, isNormal: action.payload === NORMAL_PERIOD, isExpedited: action.payload === LT_4_WEEKS, };

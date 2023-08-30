@@ -62,7 +62,8 @@ class SubmissionSection2 extends Component {
 
 const mapStateToProps = ({ disclosureReducer }) => {
   const {
-	  statementOfIntent,
+	statementOfIntent,
+	employmentHistory,
 	professions,
 	professionIdx,
     employmentType, 
@@ -72,7 +73,8 @@ const mapStateToProps = ({ disclosureReducer }) => {
 	isPermanent
   } = disclosureReducer;
   return {
-	  statementOfIntent,
+	statementOfIntent,
+	employmentHistory,
 	professions,
 	professionIdx,
     employmentType, 

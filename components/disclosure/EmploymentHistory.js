@@ -8,66 +8,10 @@ import getStyleSheet from '../../styles/styles';
 import { employmentExperienceRemoved, employmentExperienceAdded, employmentExperienceUpdated } from '../../actions';
 import {  } from '../../constants/disclosure';
 import {  } from '../../constants/banners';
+import EmploymentRecord from './EmploymentRecord'
 import { BACKGROUND_LIGHT_GRAY, LOGO_BRIGHT_BLUE, LOGO_DARK_BLUE } from "../../constants/colors";
 
 const styles = getStyleSheet();
-
-function EmploymentRecord(props) {
-	return (
-		<View key={'emphistory_' +  new Date()} style={{ flexDirection:'column', margin:'1%', padding:'1%', borderWidth:1, borderColor: LOGO_BRIGHT_BLUE, borderRadius:5}}>
-			<View style={{ flexDirection:'row', padding:'1%', alignContent:"stretch", justifyContent:"flex-start", alignItems:"baseline"}}>
-				<Text style={[styles.textSmallBoldPurple]}>{props.employerName}</Text>
-				<View style={{padding:'1%'}}/>
-				<Text style={[styles.textSmallGray]}>{props.position}</Text>
-			</View>
-			{props.startDate ? 
-			<View style={{ flexDirection:'row', padding:'1%', alignContent:"stretch", justifyContent:"flex-start", alignItems:"baseline"}}>
-				{props.isCurrent ? 
-				<Text style={[styles.textSmallLogoDarkBlue]}>{props.startDate} to current</Text> : 
-				<View><Text style={[styles.textSmallLogoDarkBlue]}>{props.startDate} to {props.endDate}</Text></View> }
-			</View> : null}
-			{props.employerContact ? 
-			<View style={{ flexDirection:'row', padding:'1%', alignContent:"stretch", justifyContent:"flex-start", alignItems:"baseline"}}>
-				<Text style={[styles.textSmallLogoDarkBlue]}>Contact - {props.employerContact} {props.employerEmail}</Text>
-			</View> : null }
-			<View style={{ flexDirection:'row-reverse', padding:'1%', }}>
-				<Icon.Button name="minus" size={10} borderRadius={5} backgroundColor={LOGO_DARK_BLUE } iconStyle={{margin:1}} 
-					onPressIn={props.remove} >Remove</Icon.Button>
-			</View>
-		</View>
-	)
-}
-
-function PeriodDate(props) {
-	const [error,setError] = useState()
-	const [period,setPeriod] = useState()
-	console.log(props)
-	return (
-		<>
-			<TextInput style={[styles.whiteBgCentredTextInput, styles.disclTextEntry]} 
-					placeholder={props.placeholder}
-					value={period} 
-					onChangeText={text => {
-						setPeriod(text)
-						props.onChange(text)
-					}} 
-					onBlur={() => {
-						console.log(period)
-						if (new RegExp('\\d{2}\/\\d{4}').test(period)) {
-							const date = Moment(period,'MM/YYYY')
-							if (!date.isValid())
-								setError('Invalid period')
-							else
-								setError(undefined)
-						} else {
-							setError('Invalid period')
-						}
-					}}
-					 />
-			{error ? <Text style={{color:'red', fontSize:15}} >{error}</Text> : null}
-		</>
-	);
-}
 
 class EmploymentHistory extends Component {
 
@@ -78,7 +22,6 @@ class EmploymentHistory extends Component {
 	}
 
 	checkStartDate(period) {
-		console.log('Start ' + period)
 		if (new RegExp('\\d+\/\\d{4}').test(period)) {
 			const date = Moment(period,'MM/YYYY')
 			this.setState(!date.isValid() ?
@@ -90,7 +33,6 @@ class EmploymentHistory extends Component {
 		}
 	}
 	checkEndDate(period) {
-		console.log('End ' + period)
 		if (new RegExp('\\d+\/\\d{4}').test(period)) {
 			const date = Moment(period,'MM/YYYY')
 			this.setState(!date.isValid() ?
@@ -156,7 +98,7 @@ class EmploymentHistory extends Component {
 								value={employmentExperience?.endDate == undefined ? '' : employmentExperience.endDate}
 									onChangeText={text => this.props.employmentExperienceUpdated({endDate : text})}
 									onBlur={() => {
-										if (!employmentExperience.isCurrent)
+										if (employmentExperience?.endDate != undefined && !employmentExperience.isCurrent)
 											this.checkEndDate(employmentExperience.endDate)
 									}}   />
 						{this.state.isEndDateError ? <Text style={{color:'red', fontSize:15}} >{this.state.error}</Text> : null}
@@ -184,7 +126,7 @@ class EmploymentHistory extends Component {
 						e.position == undefined || 
 						e.startDate == undefined || 
 						(e.endDate == undefined && (e.isCurrent == false || e.isCurrent == undefined)) ? null : 
-						<EmploymentRecord {...e} remove={() => {
+						<EmploymentRecord {...e} onRemove={() => {
 							this.props.employmentExperienceRemoved(e)
 							this.setState({...this.state, error : undefined, isEndDateError : undefined, isStartDateError : undefined})
 						}}  />}
