@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import getStyleSheet from '../../styles/styles';
 import {  } from '../../actions';
 import {  } from "../../constants/colors";
-
+import EmploymentRecord from './EmploymentRecord'
 
 class EmploymentHistoryRow extends Component {
 
@@ -21,7 +21,16 @@ class EmploymentHistoryRow extends Component {
 	        	</View>
 
 	    		<View style={styles.tableColumn60pct}>
-	    		<Text style={[styles.textMediumLogoDarkBlue]}>{this.props.cellRightText}</Text>
+					{this.props.employmentHistory.map(e => (
+					<>
+					{e.employerName == undefined || 
+						e.position == undefined || 
+						e.startDate == undefined || 
+						(e.endDate == undefined && (e.isCurrent == false || e.isCurrent == undefined)) ? null : 
+						<EmploymentRecord {...e}  />}
+					</>
+					))}
+
 	    		</View>
     		</View>
         )	
@@ -29,8 +38,8 @@ class EmploymentHistoryRow extends Component {
 }
 
 const mapStateToProps = ({ disclosureReducer }) => {
-  const {  } = disclosureReducer;
-  return {  };
+  const { employmentHistory } = disclosureReducer;
+  return { employmentHistory  };
 };
 
 export default connect(mapStateToProps, {  })(EmploymentHistoryRow);

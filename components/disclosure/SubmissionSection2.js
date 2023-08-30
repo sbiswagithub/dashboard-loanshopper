@@ -9,7 +9,7 @@ import { PRIMARY_PROFESSION_DEFAULT, CITIZEN, RESIDENT, WORK_VISA, SELF_EMPLOYED
 import { numberToCurrency  } from '../../actions';
 import TableRow from './TableRow';
 import MultiChoiceTableRow from "./MultiChoiceTableRow";
-
+import EmploymentHistoryRow from './EmploymentHistoryRow'
 
 class SubmissionSection2 extends Component {
 
@@ -53,6 +53,12 @@ class SubmissionSection2 extends Component {
         		{ this.props.statementOfIntent != null && this.props.statementOfIntent != ''  ? (
         			<View><View style={styles.hrLight}/>
 	    		    <TableRow cellLeftText={'Statement of intent'} cellRightText={this.props.statementOfIntent} />
+    	        	</View>
+    	        		) : null }
+
+        		{ this.props.employmentHistory != null && this.props.employmentHistory.length > 1  ? (
+        			<View><View style={styles.hrLight}/>
+	    		    <EmploymentHistoryRow />
     	        	</View>
     	        		) : null }
 		    </View>
