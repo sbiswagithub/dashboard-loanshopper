@@ -3,7 +3,7 @@ import { trackPromise, } from 'react-promise-tracker';
 
 import { toQueryString } from '../actions/Utils';
 import { LOAD_PROPOSAL_DETAILS, SELECT_DETAILS_PANEL, UPDATED_PROPOSAL, SHOW_MODAL, HIDE_MODAL, 
-	SHOW_SUBMITTED_APPLICATION_MODAL, HIDE_SUBMITTED_APPLICATION_MODAL, SHOW_NEXT_STEPS, NEXT_DISPLAY_STEP, 
+	SHOW_SUBMITTED_APPLICATION_MODAL, HIDE_SUBMITTED_APPLICATION_MODAL, SHOW_NEXT_STEPS, 
 	TOGGLE_CLAIM_CASHBACK, TOGGLE_APPLICATION_STATUS, TOGGLE_BROKER_MESSAGES, TOGGLE_DOCUMENTS_UPLOAD, 
 	PICK_DOCUMENT_TYPE, LOAD_DOCUMENT_SESSION, SELECT_UPLOAD_DOCUMENT, CLOSE_UPLOAD_DOCUMENT, 
 	DOCUMENT_UPLOAD_RESULT, SET_PROPOSAL_DOCUMENTS, SHOW_BROKER_OVERVIEW, SHOW_PROPOSAL_OVERVIEW } from '../actions/types';
@@ -290,8 +290,6 @@ export default (state = INITIAL_STATE, action) => {
 	  return { ...state, showNewApplicationMessage: true };
 	case HIDE_SUBMITTED_APPLICATION_MODAL:
 	  return { ...state, showNewApplicationMessage: false };
-	case NEXT_DISPLAY_STEP:
-	  return { ...state, displayStep : action.payload === true ? state.displayStep + 1 : state.displayStep - 1,};
 	case SHOW_NEXT_STEPS:
 	  return { ...state, showNextSteps: !state.showNextSteps, };
 	case TOGGLE_CLAIM_CASHBACK:

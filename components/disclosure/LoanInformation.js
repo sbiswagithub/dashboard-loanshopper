@@ -104,7 +104,7 @@ class LoanInformation extends Component {
 		    		<View style={{ flex: 0.9, flexDirection:'column'}}>
 						<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{LOAN_PROCESSING}</Text>
 						<View style={styles.space}/>
-						<Text style={[styles.textMediumLogoDarkBlue,{ alignSelf:"center" }]} >Processing time may vary, however you may use this section to highlight special circumstances, for example loan approval required in under 4 weeks</Text>
+						<Text style={[styles.textMediumLogoDarkBlue,{ alignSelf:"center" }]} >Processing time may vary, however you may use this section to highlight special circumstances</Text>
 						<View style={styles.space}/>
 			    		<View style={styles.chipsLayout}>
 					    	<Chip style={this.props.isNormal ? styles.chipNormal : null} textStyle={this.props.isNormal ? styles.textSmallBoldWhite : null}
@@ -215,29 +215,6 @@ class LoanInformation extends Component {
 				{this.props.edit === 12 ? 
     		    <View style={styles.disclosureBoxRow}>
 		    		<View style={{ flex: 0.9, flexDirection:'column'}}>
-						<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{SECOND_PREFERENCE}</Text>
-						<View style={styles.space}/>
-						<Text style={[styles.textMediumLogoDarkBlue,{ alignSelf:"center" }]} >Choose if you have a second preference for home loan selection</Text>
-						<View style={styles.space}/>
-			    		<View style={[styles.chipsStackedLayout, {alignSelf:"center" }]}>
-					    	<Chip style={this.props.secondPreference == LEAST_INTEREST_RATE ? styles.chipNormal : null} textStyle={this.props.secondPreference == LEAST_INTEREST_RATE ? styles.textSmallBoldWhite : null}
-					    		selected={this.props.secondPreference == LEAST_INTEREST_RATE} onPress={() => this.props.loanPreferenceUpdated(2,LEAST_INTEREST_RATE)}>{LEAST_INTEREST_RATE}</Chip>
-							<View style={styles.space}/>
-					    	<Chip style={this.props.secondPreference == LOWER_REPAYMENTS ? styles.chipNormal : null} textStyle={this.props.secondPreference == LOWER_REPAYMENTS ? styles.textSmallBoldWhite : null}
-					    		selected={this.props.secondPreference == LOWER_REPAYMENTS} onPress={() => this.props.loanPreferenceUpdated(2,LOWER_REPAYMENTS)}>{LOWER_REPAYMENTS}</Chip>
-							<View style={styles.space}/>
-					    	<Chip style={this.props.secondPreference == LONGER_FIXED_TERM ? styles.chipNormal : null} textStyle={this.props.secondPreference == LONGER_FIXED_TERM ? styles.textSmallBoldWhite : null}
-					    		selected={this.props.secondPreference == LONGER_FIXED_TERM} onPress={() => this.props.loanPreferenceUpdated(2,LONGER_FIXED_TERM)}>{LONGER_FIXED_TERM}</Chip>
-							<View style={styles.space}/>
-					    	<Chip style={this.props.secondPreference == SHORTER_LOAN_DURATION ? styles.chipNormal : null} textStyle={this.props.secondPreference == SHORTER_LOAN_DURATION ? styles.textSmallBoldWhite : null}
-					    		selected={this.props.secondPreference == SHORTER_LOAN_DURATION} onPress={() => this.props.loanPreferenceUpdated(2,SHORTER_LOAN_DURATION)}>{SHORTER_LOAN_DURATION}</Chip>
-				        </View>
-	    		    </View>
-    		    </View>
-				: null }
-				{this.props.edit === 13 ? 
-    		    <View style={styles.disclosureBoxRow}>
-		    		<View style={{ flex: 0.9, flexDirection:'column'}}>
 						<Text style={[styles.textSmallBoldGray, {alignSelf:'center'}]}>{REPAYMENT_FREQUENCY}</Text>
 						<View style={styles.space}/>
 						<Text style={[styles.textMediumLogoDarkBlue,{ alignSelf:"center" }]} >Choose your prefered loan instalement frequency.</Text>
@@ -258,7 +235,7 @@ class LoanInformation extends Component {
 	    		    </View>
     		    </View>
 				: null }
-				{this.props.edit === 14 ? 
+				{this.props.edit === 13 ? 
     		    <View style={styles.disclosureBoxRow}>
 		    		<View style={{ flex: 0.9, flexDirection:'column'}}>
 						<Text style={[styles.textSmallBoldGray, {alignSelf:'center',}]}>{EXTRAS}</Text>

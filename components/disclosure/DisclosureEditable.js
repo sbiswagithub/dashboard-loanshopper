@@ -45,13 +45,13 @@ class DisclosureEditable extends Component {
 					<EmploymentHistory />
 				</View> : null }
 
-				{this.props.edit >= 4 && this.props.edit <= 14 ? 
+				{this.props.edit >= 4 && this.props.edit <= 13 ? 
         			<View style={styles.disclosurePanel}>
 				<LoanInformation /> 
 	    		    </View>
 				: null }
 
-				{this.props.edit == 15 ? 
+				{this.props.edit == 14 ? 
 		        	<View style={styles.disclosurePanel}>
 			    		<View style={[styles.disclosureBoxRow]}>
 			        <CoBorrowerInformation />
@@ -59,7 +59,7 @@ class DisclosureEditable extends Component {
 		    		</View>
 				: null }
 
-				{this.props.edit == 16 ? 
+				{this.props.edit == 15 ? 
 		        	<View style={styles.disclosurePanel}>
 			    		<View style={[styles.disclosureBoxRow]}>
 				    	<Assets />
@@ -67,7 +67,7 @@ class DisclosureEditable extends Component {
 		    		</View>
 				: null }
 
-				{this.props.edit == 17 ? 
+				{this.props.edit == 16 ? 
 		        	<View style={styles.disclosurePanel}>
 			    		<View style={[styles.disclosureBoxRow]}>
 				    	<Liabilities />
@@ -75,7 +75,7 @@ class DisclosureEditable extends Component {
 		    		</View>
 				: null }
 
-				{this.props.edit == 18 ? 
+				{this.props.edit == 17 ? 
 		        	<View style={styles.disclosurePanel}>
 			    		<View style={[styles.disclosureBoxRow]}>
 				    	<WeeklySpend />
@@ -83,7 +83,7 @@ class DisclosureEditable extends Component {
 	    		    </View>
 				: null }
 
-				{this.props.edit == 19 ? 
+				{this.props.edit == 18 ? 
 		        	<View style={styles.disclosurePanel}>
 			    		<View style={[styles.disclosureBoxRow]}>
 				    	<MonthlySpend />
@@ -91,7 +91,7 @@ class DisclosureEditable extends Component {
 	    		    </View>
 				: null }
 
-				{this.props.edit == 20 ? 
+				{this.props.edit == 19 ? 
 		        	<View style={styles.disclosurePanel}>
 			    		<View style={[styles.disclosureBoxRow]}>
 				    	<AnnualSpend />
@@ -99,7 +99,7 @@ class DisclosureEditable extends Component {
 	    		    </View>
 				: null }
 
-				{this.props.edit == 21 ? 
+				{this.props.edit == 20 ? 
 		        	<View style={styles.disclosurePanel}>
 						<View style={[styles.tableView, {width:'80%', alignSelf:"center"}]}>
 							<View style={styles.tableRow}>

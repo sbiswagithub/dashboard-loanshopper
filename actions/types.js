@@ -183,7 +183,6 @@ export const CURR_HOME_LOAN_TYPE_UPDATED = 'current_homeloan_type_updated';
 export const CURR_LENDER_UPDATED = 'current_lender_updated';
 export const CURR_REPAYMENT_UPDATED = 'current_repayment_updated';
 export const SECURITY_ADDRESS_UPDATED = 'security_address_updated';
-export const NEXT_DISPLAY_STEP = 'next_display_step';
 // For entry
 export const ENTRY_BORROW_1 = 'entry_borrow_1';
 export const ENTRY_DISCLOSURE_2 = 'entry_disclosure_2';

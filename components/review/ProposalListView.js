@@ -35,7 +35,7 @@ const renderProposalCard = (props) => {
 					<View style={[{flexDirection: "column", justifyContent: "space-between", }]}>
 						<View style={styles.tableColumn}>
 						<View style={[styles.tableRow]}>
-							<Text style={[styles.textMediumBoldWhite,{padding:'2%',  }]}>{props?.proposal?.loanPackageSummary?.label} at {props?.proposal?.loanPackageSummary?.interestRate}%</Text>
+							<Text style={[styles.textMediumBoldWhite,{padding:'2%',  }]}>{props?.proposal?.lender?.name} {props?.proposal?.loanPackageSummary?.label} at {props?.proposal?.loanPackageSummary?.interestRate}%</Text>
 						</View>
 						<View style={[styles.tableRow]}>
 							<Text style={[styles.textMediumLogoBrightBlue,{padding:'2%',  }]}>Loan proposal from {props?.proposal?.agent?.firstName} of {props?.proposal?.agency?.companyDetails?.companyName} </Text>

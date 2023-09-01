@@ -201,7 +201,7 @@ class Disclosure extends Component {
 							<Icon.Button name="banckward" size={20} borderRadius={25} disabled={this.props.edit === 1 }
 								backgroundColor={this.props.edit > 1 ? LOGO_BRIGHT_BLUE : BACKGROUND_LIGHT_GRAY} iconStyle={{margin:1}} onPress={()=>{this.props.editLess();}}>{"Less"}</Icon.Button>		
 							<Icon.Button name="forward" size={20} borderRadius={25} disabled={this.props.edit === 19 || this._missingMinimumRequiredDetails()}
-								backgroundColor={this.props.edit < 19 && !this._missingMinimumRequiredDetails() ? LOGO_BRIGHT_BLUE : BACKGROUND_LIGHT_GRAY} iconStyle={{margin:1}} onPress={()=>{this.props.editMore();}}>{MORE}</Icon.Button>		
+								backgroundColor={this.props.edit < 20 && !this._missingMinimumRequiredDetails() ? LOGO_BRIGHT_BLUE : BACKGROUND_LIGHT_GRAY} iconStyle={{margin:1}} onPress={()=>{this.props.editMore();}}>{MORE}</Icon.Button>		
 							</View>
 							: !this.props.editMode  ? 
 								<Icon.Button name="cloudupload" size={20} borderRadius={25}

@@ -6,7 +6,7 @@ import { trackPromise } from "react-promise-tracker";
 
 import getStyleSheet from '../../styles/styles';  
 import { MORE, PREV, CASBACK_DISCLAIMER } from '../../constants/banners';
-import { numberToCurrency, changeDisplay, toggleBrokerMessages, handleFetchError, fetchStoredDocuments, setProposalDocuments } from '../../actions';
+import { numberToCurrency, toggleBrokerMessages, handleFetchError, fetchStoredDocuments, setProposalDocuments } from '../../actions';
 import ProposalHeader from './ProposalHeader';
 import ProposedNextSteps from './ProposedNextSteps';
 import ProposalRequiredDocumentsList from './ProposalRequiredDocumentsList';
@@ -21,18 +21,18 @@ import { LOGO_BRIGHT_BLUE, BACKGROUND_LIGHT_GRAY, } from '../../constants/colors
 
 class Proposal extends Component {
 
+	state = {liked : undefined, step : undefined}
 	constructor(props) {
         super(props);
 	}
 
 	componentDidMount() {
+		this.setState({...this.state,liked : this.props.displayProposal?.liked ? this.props.displayProposal?.liked : false, step : 1 })
 		trackPromise(
 			this.props.fetchStoredDocuments(this.props.setProposalDocuments))
 	}
 
 	render () {
-		const disablePrev = this.props.displayStep == 1 || (this.props.selectedLoanProduct && this.props.displayStep == 1)
-		const disableNext = this.props.displayStep == 3 || (this.props.selectedLoanProduct && this.props.displayStep == 2)
 		const styles = getStyleSheet();
 		const totalLending = this.props?.displayProposal?.loanPackage?.loanProducts.reduce((loanAmount, link) => loanAmount + link.loanAmount.value, 0)
 		//console.log(this.props?.displayProposal)
@@ -46,7 +46,7 @@ class Proposal extends Component {
 				this.props.showNextSteps ? <ProposedNextSteps /> : 
 				this.props.showOverview ? 
 					<View style={{flexDirection:'column',paddingBottom:'1%'}}>
-						{this.props.displayStep == 1 ? 
+						{this.state.step === 1 ? 
 						<View>
 							<Text style={styles.textMediumBoldPurple}>General information</Text>
 							<View style={styles.space} />
@@ -58,15 +58,13 @@ class Proposal extends Component {
 							<View style={styles.space} />
 							<Text style={styles.textMediumLogoDarkBlue}>Total lending - {numberToCurrency(totalLending)}</Text>
 						</View> :
-						this.props.displayStep === 2 ?
+						this.state.step === 2 ?
 						<View>
 							<Text style={styles.textMediumBoldPurple}>Loanshopper cashback</Text>
 							<View style={styles.space} />
-							{this.props.displayProposal?.prospect?.connection ? 
+							{this.props.displayProposal?.prospect?.clientConnectionId ? 
 							<View style={styles.stackedSimpleLayout} >
 								<Text style={styles.textMediumLogoDarkBlue}>You will not be able to claim a Loanshopper cashback reward on this proposal.</Text>
-								<View style={styles.space} />
-								<View style={styles.hr} />
 								<View style={styles.space} />
 								<Text style={styles.textSmallLogoDarkBlue}>{CASBACK_DISCLAIMER}</Text>
 							</View>
@@ -74,16 +72,16 @@ class Proposal extends Component {
 							<View style={styles.stackedSimpleLayout} >
 								<Text style={styles.textMediumBoldLogoBrightBlue}>This loan proposal is eligible for a $200/- Loanshopper cashback reward.</Text>
 								<View style={styles.space} />
-								<View style={styles.hr} />
-								<View style={styles.space} />
 							<Text style={styles.textSmallLogoDarkBlue}>{CASBACK_DISCLAIMER}</Text>
 							</View>
 							}
 						</View> 
 						: 
-						this.props.displayStep === 3 ?
-						<View>
+						this.state.step === 3 ?
+						<View style={{flexDirection:"column", flexGrow:1,}}>
 							<Text style={styles.textMediumBoldPurple}>Loan products</Text>
+							<View style={styles.space} />
+							<Text style={[styles.textMediumBoldLogoBrightBlue,{padding:'1%',  }]}>{this.props?.displayProposal?.lender?.name}</Text>
 							<View style={styles.space} />
 							<LoanProductList />						
 						</View> 
@@ -92,14 +90,14 @@ class Proposal extends Component {
 						}
 						<View style={styles.chipsLayout}>
 							<Icon.Button name="banckward" size={20} borderRadius={25}
-								backgroundColor={disablePrev ? BACKGROUND_LIGHT_GRAY : LOGO_BRIGHT_BLUE} iconStyle={{margin:1}} 
-								disabled={disablePrev}
-								onPress={()=> this.props.changeDisplay(false)}
+								backgroundColor={this.state.step == 1 ? BACKGROUND_LIGHT_GRAY : LOGO_BRIGHT_BLUE} iconStyle={{margin:1}} 
+								disabled={this.state.step == 1}
+								onPress={()=> this.setState({...this.state, step : this.state.step - 1})}
 								>{PREV}</Icon.Button> 
 							<Icon.Button name="forward" size={20} borderRadius={25}
-								backgroundColor={disableNext ? BACKGROUND_LIGHT_GRAY : LOGO_BRIGHT_BLUE} iconStyle={{margin:1}} 
-								disabled={disableNext}
-								onPress={()=> this.props.changeDisplay(true)}
+								backgroundColor={this.state.step == 3 ? BACKGROUND_LIGHT_GRAY : LOGO_BRIGHT_BLUE} iconStyle={{margin:1}} 
+								disabled={this.state.step == 3}
+								onPress={()=> this.setState({...this.state, step : this.state.step + 1})}
 								>{MORE}</Icon.Button> 
 						</View>	
 					</View>  : 
@@ -139,15 +137,15 @@ class Proposal extends Component {
 }
 
 const mapStateToProps = ({ authReducer, proposalCalendarReducer, proposalReducer, loanProductReducer,  }) => {
-  const { documentUploadSessions, showNextSteps, displayStep, showBrokerMessages, 
+  const { documentUploadSessions, showNextSteps, showBrokerMessages, 
 	showDocumentsUpload, selectedDocumentTypeForUpload, showOverview, showBrokerInfo } = proposalReducer;
   const { selectedLoanProduct } = loanProductReducer;
   const { displayProposal } = proposalCalendarReducer;
   const { accessCode, borrower } = authReducer;
-  return { accessCode, borrower, displayProposal, showNextSteps, displayStep, 
+  return { accessCode, borrower, displayProposal, showNextSteps, 
 	selectedLoanProduct, showBrokerMessages, showDocumentsUpload, selectedDocumentTypeForUpload, 
 	documentUploadSessions, showOverview, showBrokerInfo };
 };
 
-export default connect(mapStateToProps, { changeDisplay, toggleBrokerMessages, 
+export default connect(mapStateToProps, { toggleBrokerMessages, 
 	handleFetchError, fetchStoredDocuments, setProposalDocuments })(Proposal);
