@@ -76,4 +76,4 @@ export const REPAYMENT_TYPE_Y = 'Y';
 export const REPAYMENT_TYPE_M = 'M';
 export const REPAYMENT_TYPE_F = 'F';
 export const REPAYMENT_TYPE_W = 'W';
-
+export const EDIT_MAX = 20
