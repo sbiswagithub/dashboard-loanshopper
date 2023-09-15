@@ -44,7 +44,7 @@ class Disclosure extends Component {
 	_missingMinimumRequiredDetails() {
 		return !this.props.addressSet || this.props.dob == null || 
 					this.props.employmentType === null || this.props.immigrationStatus === null  || 
-					!this.props.professionSet || !this.props.hasGrossIncAnn 
+					this.props.profession === null || !this.props.hasGrossIncAnn 
 	}
 	
     // Save switch 

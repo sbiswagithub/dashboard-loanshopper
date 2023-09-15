@@ -269,28 +269,10 @@ export const mortgageAddressRemoved = (addressData) => {
 	  };
 };
 
-
-export const professionsOnBlur = () => {
-  return {
-	    type: PROFESSION_BLUR,
-	  };
-};
-export const professionsFound = (professionsArray, input) => {
-  return {
-	    type: PROFESSION_FOUND,
-	    payload: { professions : professionsArray , professionPart : input} 
-	  };
-};
 export const professionSelected = (profession) => {
   return {
 	    type: PROFESSION_SELECTED,
 	    payload: profession,
-	  };
-};
-export const professionUnSelected = () => {
-  return {
-	    type: PROFESSION_UNSELECTED,
-	    payload: '',
 	  };
 };
 
@@ -360,11 +342,7 @@ export const toggleEditMode = (editMode) => {
 	    payload: editMode
 	  };
 }
-export const toggleAlert = () => {
-  return {
-	    type: TOGGLE_ALERT,
-	  };
-}
+
 export const toggleModal = (mode) => {
   return {
 	    type: mode,

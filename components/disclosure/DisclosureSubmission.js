@@ -124,10 +124,8 @@ class DisclosureSubmission extends Component {
 const mapStateToProps = ({ disclosureReducer }) => {
   const {
 	  editMode,
-	professions,
 	addressIdx,
 	purchaseAddressIdx,
-	professionIdx,
     title,
     firstName,
     lastName,
@@ -172,10 +170,8 @@ const mapStateToProps = ({ disclosureReducer }) => {
   } = disclosureReducer;
   return {
 	  editMode,
-	professions,
 	addressIdx,
 	purchaseAddressIdx,
-	professionIdx,
     title,
     firstName,
     lastName,

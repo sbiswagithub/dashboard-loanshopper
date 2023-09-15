@@ -9,7 +9,7 @@ import DateOfBirthWeb from './DateOfBirthWeb';
 import AnnualIncome from  './AnnualIncome';
 import EmploymentType from './EmploymentType';  
 import ImmigrationStatus from './ImmigrationStatus';
-import PrimaryProfessionSelect from './PrimaryProfessionSelect';
+import SimpleProfessionSelect from './SimpleProfessionSelect';
 import CurrentAddressSelect from './CurrentAddressSelect';
 import Dependants from './Dependants';
 
@@ -48,7 +48,7 @@ class MinimumRequiredDetails extends Component {
     		    </View>	    		    
 				<View style={styles.hrLight}/>
 	    		<View style={styles.disclosureBoxRow}>
-			    <PrimaryProfessionSelect />
+			    <SimpleProfessionSelect />
     		    </View>
 
 				<View style={styles.hrLight}/>

@@ -5,8 +5,7 @@ import {
 	TITLE_COBORR_SELECTED, FNAME_COBORR_UPDATED, LNAME_COBORR_UPDATED, CO_BORR_EMAIL_UPDATED,
 	COBORR_GR_ANN_INC_UPDATED,
 	ADDRESS_FOUND, ADDRESS_SELECTED, ADDRESS_UNSELECTED,ADDRESS_BLUR,
-	PROFESSION_FOUND, PROFESSION_SELECTED, PROFESSION_UNSELECTED,
-	EMPLOYEMENT_TYPE_SELECTED,
+	PROFESSION_SELECTED, EMPLOYEMENT_TYPE_SELECTED,
 	IMMIGRATION_STATUS_SELECTED,
 	GR_ANN_INC_UPDATED, STMT_OF_INTENT_UPDATED, BORROWING_UPDATED,
 	CASH_SAV_UPDATED, VEHICLES_UPDATED, INVST_UPDATED, OTH_ASSETS_UPDATED,
@@ -22,7 +21,7 @@ import {
 	RATE_PREF_UPDATED, FIRST_PREF_UPDATED, SECOND_PREF_UPDATED, REPAYMENT_PREF_UPDATED, EXTRAS_PREF_UPDATED, REDRAW, 
 	CURR_HOMELOAN_UPDATED, CURR_LENDER_UPDATED, CURR_REPAYMENT_UPDATED, CURR_HOME_LOAN_TYPE_UPDATED, 
 	MORTGAGE_ADDRESS_FOUND, MORTGAGE_ADDRESS_SELECTED, MORTGAGE_ADDRESS_UNSELECTED, MORTGAGE_ADDRESS_BLUR, MORTGAGE_ADDRESS_REMOVE,
-	EDIT_MORE, CHECK_ACCOUNT_FOR_MOBILE, CHECK_ACCOUNT_FOR_EMAIL, PROFESSION_BLUR, EDIT_LESS, TOGGLE_ALERT, EMPLOYEMENT_EXPERIENCE_UPDATED, EMPLOYEMENT_EXPERIENCE_ADDED, EMPLOYEMENT_EXPERIENCE_REMOVED,
+	EDIT_MORE, CHECK_ACCOUNT_FOR_MOBILE, CHECK_ACCOUNT_FOR_EMAIL, EDIT_LESS, TOGGLE_ALERT, EMPLOYEMENT_EXPERIENCE_UPDATED, EMPLOYEMENT_EXPERIENCE_ADDED, EMPLOYEMENT_EXPERIENCE_REMOVED, 
 	CRED_CARD_ADDED, CRED_CARD_REMOVED
 	} from '../actions/types';
 import { TITLE_MR, TITLE_MS, TITLE_MRS, PERMANENT, SELF_EMPLOYED, CITIZEN, RESIDENT, WORK_VISA,
@@ -221,7 +220,7 @@ const propsToLoanRequest = props => {
 
 	loanRequest.promoCode = props.promoCode;
 
-	//console.log(loanRequest)
+	console.log(loanRequest)
 	return loanRequest;
 };
 
@@ -240,7 +239,6 @@ const INITIAL_STATE = {
 	showAlert: false,
 	addressSet: false,
 	mortgageAddressSet:false,
-	professionSet: false,
     showDp: false,
     showCoBorrDp: false,
     titleMr: false,
@@ -374,7 +372,7 @@ const INITIAL_STATE = {
     //}]
 	addresses: [],
 	mortgageAddresses:[],
-	professions: [],
+
 	// Should have { employerName: , position: , employerContact: , employerEmail: , startDate: , endDate: , isCurrent: }
 	employmentHistory:[EMPLOYMENT_RECORD_TEMPLATE],
 
@@ -385,11 +383,7 @@ const INITIAL_STATE = {
 	mortgageAddressIdx: '',
 	previousMortgageAddressIdx: '',
 	mortgageAddressStart: '',
-	professionIdx: '',
-	professionPart: '',
-	previousProfession: '',
 
-	
 	// Should be from Auth Reducer borrower
     borrowerId:'',
     title:'',
@@ -411,7 +405,6 @@ export default (state = INITIAL_STATE, action) => {
 		  	updateMode: action?.payload?._id != null, 
 		  	loanRequest: action.payload, 
 			addressSet: true,
-			professionSet: true,
 			hasGrossIncAnn: true,
 			statementOfIntent: action.payload?.statementOfIntent,
 		    grossIncAnn: action?.payload?.financials?.annualIncome == null ? 0 : action.payload.financials.annualIncome.value,
@@ -505,12 +498,10 @@ export default (state = INITIAL_STATE, action) => {
 			purchaseAddressSet: false,
 		    showCoBorrDp: false,
 	  };
-
   case LOAD_BORROWER_DETAILS:
 	  //console.log(action.payload)
 	  return { ...state, 
 		    addresses: [],
-		    professions: [],
 	  		// Mandatory fields
 	  		title: action.payload.title, 
 	  		firstName: action.payload.firstName, 
@@ -522,14 +513,12 @@ export default (state = INITIAL_STATE, action) => {
 		    addressIdx: action?.payload?.currentAddress?.externalId,
 		    previousAddressSelection: action?.payload?.currentAddress?.fullAddress,
 			profession: action?.payload?.primaryProfession,
-			previousProfession: action?.payload?.primaryProfession,
 		    employmentType: action?.payload?.employmentType == null ? PERMANENT : action.payload.employmentType,
 		    immigrationStatus: action?.payload?.immigrationStatus == null ? CITIZEN : action.payload.immigrationStatus,
 			dependants: action?.payload?.numDependants == null ? 0 : action?.payload?.numDependants, 
 			employmentHistory: action?.payload?.employmentHistory == null || !Array.isArray(action?.payload?.employmentHistory) ? [EMPLOYMENT_RECORD_TEMPLATE] : action?.payload?.employmentHistory.concat([EMPLOYMENT_RECORD_TEMPLATE]),
 
 			// Flags
-			professionSet: action?.payload?.primaryProfession != null,
 			addressSet: action?.payload?.currentAddress != null,
 		    titleMr: action?.payload?.title == TITLE_MR,
 		    titleMrs: action?.payload?.title == TITLE_MRS,
@@ -559,14 +548,8 @@ export default (state = INITIAL_STATE, action) => {
 
 
   // Profession auto complete
-  case PROFESSION_FOUND:
-      return { ...state, professionSet: false, professionIdx : action.payload?.index ? action.payload.index : state.professionIdx, profession : action.payload.professionPart, professionPart: action.payload.professionPart, professions : action.payload.professions.length > 0 ? action.payload.professions : state.professions, };
   case PROFESSION_SELECTED:
-      return { ...state, professionSet: true, professionIdx : action.payload.index, professions: [], profession : action.payload.profession.name, previousProfession: action.payload.profession.name,  hasOtherPersonalInfo: true, };
-  case PROFESSION_UNSELECTED:
-      return { ...state, professionSet: false, professionIdx : '', professionPart: '', professions:[], profession : null };
-  case PROFESSION_BLUR:
-      return { ...state, professionSet: state.previousProfession != null, profession : state.previousProfession, professions : [], };
+      return { ...state, profession : action.payload, hasOtherPersonalInfo: true };
 
   // Address auto complete
   case ADDRESS_FOUND:
