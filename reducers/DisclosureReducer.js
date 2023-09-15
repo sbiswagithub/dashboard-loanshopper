@@ -22,7 +22,8 @@ import {
 	RATE_PREF_UPDATED, FIRST_PREF_UPDATED, SECOND_PREF_UPDATED, REPAYMENT_PREF_UPDATED, EXTRAS_PREF_UPDATED, REDRAW, 
 	CURR_HOMELOAN_UPDATED, CURR_LENDER_UPDATED, CURR_REPAYMENT_UPDATED, CURR_HOME_LOAN_TYPE_UPDATED, 
 	MORTGAGE_ADDRESS_FOUND, MORTGAGE_ADDRESS_SELECTED, MORTGAGE_ADDRESS_UNSELECTED, MORTGAGE_ADDRESS_BLUR, MORTGAGE_ADDRESS_REMOVE,
-	EDIT_MORE, CHECK_ACCOUNT_FOR_MOBILE, CHECK_ACCOUNT_FOR_EMAIL, PROFESSION_BLUR, EDIT_LESS, TOGGLE_ALERT, EMPLOYEMENT_EXPERIENCE_UPDATED, EMPLOYEMENT_EXPERIENCE_ADDED, EMPLOYEMENT_EXPERIENCE_REMOVED
+	EDIT_MORE, CHECK_ACCOUNT_FOR_MOBILE, CHECK_ACCOUNT_FOR_EMAIL, PROFESSION_BLUR, EDIT_LESS, TOGGLE_ALERT, EMPLOYEMENT_EXPERIENCE_UPDATED, EMPLOYEMENT_EXPERIENCE_ADDED, EMPLOYEMENT_EXPERIENCE_REMOVED,
+	CRED_CARD_ADDED, CRED_CARD_REMOVED
 	} from '../actions/types';
 import { TITLE_MR, TITLE_MS, TITLE_MRS, PERMANENT, SELF_EMPLOYED, CITIZEN, RESIDENT, WORK_VISA,
 	BOTH_RESI_AND_INVEST, RESIDENTIAL, INVESTMENT, FIRST_MORTGAGE, REFINANCE, LT_4_WEEKS, NORMAL_PERIOD,
@@ -69,6 +70,13 @@ const findLiability = (loanRequest, label) => {
 	    return element.label === label;
 	  });
 	return item == null ? 0 : item.amount.value;
+};
+const findCreditCards = (loanRequest) => {
+	const creditCards = [];
+	if (loanRequest.financials.creditCards != null)
+		loanRequest.financials.creditCards.map(c => creditCards.push({...c, cardLimit : c.cardLimit.value}))
+
+	return creditCards ;
 };
 const findHomeLoanChoice = (homeLoanChoice) => {
 	return homeLoanChoice == null ? null :
@@ -128,6 +136,16 @@ const propsToLoanRequest = props => {
 			{ label: CREDIT_CARDS_LABEL, amount : {value : props.creditCards}},
 			{ label: OTHER_LOANS_LABEL, amount : {value : props.otherLoans}}
 		] };
+
+	if (props.creditCardList.length  > 0) {		
+		loanRequest.financials.creditCards = []
+		props.creditCardList.map(card => {
+			loanRequest.financials.creditCards.push({
+				cardIssuer : card.cardIssuer, cardLimit : { value : card.cardLimit }
+			})
+		})
+	}
+
 	loanRequest.financials.expenses = { expenseItem : [
 			{ label: RENT_LABEL, frequency: WEEKLY_LABEL, amount : {value : props.rent}},
 			{ label: GROCERIES_LABEL, frequency: WEEKLY_LABEL, amount : {value : props.groceries}},
@@ -203,6 +221,7 @@ const propsToLoanRequest = props => {
 
 	loanRequest.promoCode = props.promoCode;
 
+	//console.log(loanRequest)
 	return loanRequest;
 };
 
@@ -232,7 +251,7 @@ const INITIAL_STATE = {
 	titleMsCoBorr:false,
 	isPermanent: true, 
 	isSelfEmployed: false,
-	isCitizen: false, 
+	isCitizen: true, 
 	isResident: false, 
 	isWorkVisa: false,
 	isResidential: true,
@@ -316,7 +335,8 @@ const INITIAL_STATE = {
     investments:0, 
 	otherAssets:0,
 	// Liabilities
-    creditCards:0,
+	creditCards:0,
+	creditCardList : [],
 	otherLoans:0,
 	// Weekly Expenses
     rent:0, 
@@ -442,7 +462,9 @@ export default (state = INITIAL_STATE, action) => {
 		    investments: findAsset(action.payload, INVESTMENTS_LABEL),
 		    otherAssets: findAsset(action.payload, OTHER_ASSETS_LABEL),
 			// Liabilities
-		    creditCards: findLiability(action.payload, CREDIT_CARDS_LABEL),
+			creditCards: findLiability(action.payload, CREDIT_CARDS_LABEL),
+			creditCardList : findCreditCards(action.payload),
+			
 		    otherLoans: findLiability(action.payload, OTHER_LOANS_LABEL),
 			// Weekly expenses
 		    rent: findExpense(action.payload, RENT_LABEL),
@@ -566,6 +588,7 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, mortgageAddressSet: false, mortgageAddressIdx:'', mortgageAddressStart: null, mortgageAddresses:[], mortgageAddressSelection: null};
   case MORTGAGE_ADDRESS_REMOVE:
       return { ...state, mortgageAddressesList: state.mortgageAddressesList.filter(address => address.addressIdx != action.payload?.addressIdx), };
+
   case TITLE_COBORR_SELECTED:
 	  return { ...state, hasCoborrower: true, titleCoBorr: action.payload, titleMrCoBorr: action.payload === TITLE_MR, titleMrsCoBorr: action.payload === TITLE_MRS, titleMsCoBorr: action.payload === TITLE_MS };
   case FNAME_COBORR_UPDATED:
@@ -630,7 +653,7 @@ export default (state = INITIAL_STATE, action) => {
 				matchFields(e?.startDate ? e?.startDate : undefined , action.payload?.startDate ? action.payload?.startDate : undefined )&&
 				matchFields(e?.endDate ? e?.endDate : undefined , action.payload?.endDate ? action.payload?.endDate : undefined )&&
 				matchFields(e?.isCurrent ? e?.isCurrent : undefined , action.payload?.isCurrent ? action.payload?.isCurrent : undefined ) )
-				console.log('')
+				{}
 			else
 				currentHistory.push(e)
 		})
@@ -696,6 +719,19 @@ export default (state = INITIAL_STATE, action) => {
   case OTH_ASSETS_UPDATED:
 	  return { ...state, otherAssets: action.payload  };
   // Liabilities
+  case CRED_CARD_ADDED:
+	  var cards = []
+	  state.creditCardList.forEach(e => cards.push(e))
+	  cards.push({...action.payload})
+
+	  return { ...state, creditCardList: cards, creditCards : cards.map(card=>card.cardLimit).reduce((a,b)=>a+b) };
+  case CRED_CARD_REMOVED:
+	  var cards = []
+	  state.creditCardList.forEach(e => {
+		  if (action.payload != e.id)
+				cards.push(e)
+	  })
+	  return { ...state, creditCardList: cards, creditCards : cards.length == 0 ? 0 : cards.map(card=>card.cardLimit).reduce((a,b)=>a+b) };
   case CRED_CARD_UPDATED:
 	  return { ...state, creditCards: action.payload };
   case OTH_LOANS_UPDATED:

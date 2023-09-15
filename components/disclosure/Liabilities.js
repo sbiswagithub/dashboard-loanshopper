@@ -9,6 +9,8 @@ import { LIAB_COL_L_BANNER, LIAB_COL_R_BANNER, CRED_CARD_BANNER, OTH_LOANS_BANNE
 import { MAX_6_DIG } from '../../constants/disclosure';
 import { CRED_CARD_UPDATED, OTH_LOANS_UPDATED, } from '../../actions/types';
 
+import CreditCards from  './CreditCards'
+
 class Liabilities extends Component {
 
 	constructor(props) {
@@ -37,20 +39,7 @@ class Liabilities extends Component {
         		</View>
     		    <Divider style={styles.tableDivider} />
 
-        		<View style={styles.tableRow}>
-    		    	<View style={styles.tableColumn150}>    		
-    	    		<Text style={[styles.textMediumGray]}>{CRED_CARD_BANNER}</Text>
-    	        	</View>
-    	
-    	    		<View style={styles.tableColumn100}>    		
-    	    		<TextInput style={[styles.whiteBgCentredTextInput, styles.disclTextEntry100]} 
-    	    			clearTextOnFocus={true} keyboardType = 'number-pad'  
-			    		onFocus={() => this.whenUpdated(CRED_CARD_UPDATED, 0)}
-		    			onChangeText={text => this.whenUpdated(CRED_CARD_UPDATED, text)}
-			    		value={'$' + this.props.creditCards.toLocaleString(undefined, {maximumFractionDigits:0})}
-		    			placeholder={ZERO_DOLLAR_BANNER} />
-    	    		</View>
-        		</View>
+    		    	<CreditCards />
             	<View style={styles.hrLight}/>    		
 
         		<View style={styles.tableRow}>

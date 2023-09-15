@@ -7,6 +7,7 @@ import getStyleSheet from '../../styles/styles';
 import { LIABILITIES_BANNER, CRED_CARD_BANNER, OTH_LOANS_BANNER, } from '../../constants/banners';
 import { numberToCurrency  } from '../../actions';
 import TableRow from './TableRow';
+import CreditCards from './CreditCards';
 
 class SubmissionSection7 extends Component {
 
@@ -23,9 +24,7 @@ class SubmissionSection7 extends Component {
     	        	</View>
         		</View>
     		    <Divider style={styles.tableDivider} />
-        		{ this.props.creditCards != 0 ? (
-				    <TableRow cellLeftText={CRED_CARD_BANNER} cellRightText={numberToCurrency(this.props.creditCards)} />
-    	        		) : null }
+				<CreditCards readMode={true} />
 
         		{ this.props.otherLoans != 0 ? (
         			<View><View style={styles.hrLight}/>    		
@@ -39,11 +38,11 @@ class SubmissionSection7 extends Component {
 
 const mapStateToProps = ({ disclosureReducer }) => {
   const {
-    creditCards,
+	creditCards,
     otherLoans,
   } = disclosureReducer;
   return {
-    creditCards,
+	creditCards,
     otherLoans,
   };
 };

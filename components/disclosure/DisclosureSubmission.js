@@ -93,7 +93,7 @@ class DisclosureSubmission extends Component {
 		this.props.otherAssets > 0 ;				
 	}
 	hasLiabilities() {
-		return this.props.creditCards > 0 ||
+		return this.props.creditCardList.length > 0 ||
 		this.props.otherLoans > 0 ;		
 	}
 	hasEstWklyExp() {
@@ -146,7 +146,7 @@ const mapStateToProps = ({ disclosureReducer }) => {
     vehicles, 
     investments, 
     otherAssets,
-    creditCards,
+	creditCardList,
     otherLoans,
     rent, 
     groceries,
@@ -194,7 +194,7 @@ const mapStateToProps = ({ disclosureReducer }) => {
     vehicles, 
     investments, 
     otherAssets,
-    creditCards,
+	creditCardList,
     otherLoans,
     rent, 
     groceries,
