@@ -64,8 +64,8 @@ const findAsset = (loanRequest, label) => {
 	return item == null ? 0 : item.amount.value;
 };
 const findLiability = (loanRequest, label) => {
-	const liabilityItems = loanRequest?.financials?.liabilityItems?.liabiltyItem == null ? 
-		[] : loanRequest.financials.liabilityItems.liabiltyItem;
+	const liabilityItems = loanRequest?.financials?.liabilities?.liabilityItem == null ? 
+		[] : loanRequest.financials.liabilities.liabilityItem;
 	const item = liabilityItems.find((element) => {
 	    return element.label === label;
 	  });
