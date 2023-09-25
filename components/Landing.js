@@ -12,6 +12,7 @@ import getStyleSheet from "./../styles/styles";
 
 import { LinearGradient } from "expo-linear-gradient";
 import EmailSignIn from './EmailSignIn'
+import LoanShopperLogin from './common/LoanShopperLogin';
 
 export default function Landing({ navigation }) {
   const styles = getStyleSheet();
@@ -42,52 +43,7 @@ export default function Landing({ navigation }) {
           style={styles.logoMastheadWide}
         />
 
-          <View style={[styles.signInBannerBlock, {maxHeight:"70%"}]}>
-						<EmailSignIn />
-
-            <View style={[styles.signInBanner, {maxWidth:"90%", alignSelf:"center"}]}>
-              <View style={{flex: 1,
-                  flexDirection:'row',
-                  alignItems: 'flex-start',
-                  justifyContent: 'space-between', }}>
-                <Image style={[styles.tabIcon, {marginRight:10,}]} source={require('../assets/home.png')} />
-               
-                <View style={{flex: 1,
-                  flexDirection:'column',
-                  alignItems: 'flex-start',
-                  justifyContent: 'space-between',maxWidth:"90%",}}>
-                  <Text style={[styles.textMediumBoldLogoDarkBlue,]}>Secure</Text>
-                  <Text style={[styles.textSmallWhite,]}>{banners.SIGNIN_BANNER_2}</Text>
-                </View>
-                </View>
-              <View style={{flex: 1,
-                  flexDirection:'row',
-                  alignItems: 'flex-start',
-                  justifyContent: 'space-between',maxWidth:"90%",}}>
-                <Image style={[styles.tabIcon, {marginRight:10,}]} source={require('../assets/home.png')} />
-                <View style={{flex: 1,
-                  flexDirection:'column',
-                  alignItems: 'flex-start',
-                  justifyContent: 'space-between',}}>
-                  <Text style={[styles.textMediumBoldLogoPaleBlue,]}>Universal</Text>
-                <Text style={styles.textSmallWhite}>{banners.SIGNIN_BANNER_3}</Text>
-                </View>
-                </View>
-              <View style={{flex: 1,
-                  flexDirection:'row',
-                  alignItems: 'flex-start',
-                  justifyContent: 'space-between',}}>
-                <Image style={[styles.tabIcon, {marginRight:10}]} source={require('../assets/home.png')} />
-                <View style={{flex: 1,
-                  flexDirection:'column',
-                  alignItems: 'flex-start',
-                  justifyContent: 'space-between',}}>
-                  <Text style={[styles.textMediumBoldLogoBrightBlue,]}>Offers</Text>
-                <Text style={styles.textSmallWhite}>{banners.SIGNIN_BANNER_4}</Text>
-                </View>
-                </View>
-          </View>
-        </View>
+          <EmailSignIn />
       </View>
     </View>
   );

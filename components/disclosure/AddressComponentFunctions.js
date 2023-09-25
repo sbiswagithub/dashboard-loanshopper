@@ -11,7 +11,6 @@ export const  AddressSelect = (props) =>  {
     return (
 		<View >
 			<TextInput style={[styles.whiteBgCentredTextInput, styles.disclTextEntryWide, {marginTop:5, marginBottom:5}]} 
-				selectTextOnFocus={true} 
 				onBlur={props.addressOnBlur}
 				value={props.addressSelection} 
 				placeholder={props.addressPlaceholder}

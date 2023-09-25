@@ -19,12 +19,12 @@ export const LINKEDIN_AUTH = {
     	"client_id": EXPO_PUBLIC_LINKED_IN_CLIENT_ID,
     	"redirect_uri": EXPO_PUBLIC_API_SECURE_OAUTH ,
     	"state": "{origin:linkedin, target:'" + Linking.createURL('/') + "'}",
-    	"scope": "r_liteprofile"
+    	"scope": "openid email"
     }
 };
 ////console.log(LINKEDIN_AUTH);
 export const FACEBOOK_AUTH = {
-	facebookUrl: "https://www.facebook.com/v11.0/dialog/oauth",
+	facebookUrl: "https://www.facebook.com/v18.0/dialog/oauth",
     facebookQParams:{
     	"response_type": "code",
     	"client_id": EXPO_PUBLIC_FACEBOOK_CLIENT_ID,
@@ -43,4 +43,4 @@ export const COGNITO_AUTH = {
     	"scope": "openid aws.cognito.signin.user.admin",
     }
 };
-console.log(EXPO_PUBLIC_API_SECURE_OAUTH)
+//console.log(EXPO_PUBLIC_API_SECURE_OAUTH)

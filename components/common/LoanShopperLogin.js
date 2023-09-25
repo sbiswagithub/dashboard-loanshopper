@@ -56,7 +56,7 @@ export default function LoanShopperLogin(props)  {
 	};
 
 	const onLoginPressed = () => {
-		const loginUrl = COGNITO_AUTH.loginUrl + toQueryString(COGNITO_AUTH.authorizeQParams)
+		const loginUrl = props?.url ? props.url : COGNITO_AUTH.loginUrl + toQueryString(COGNITO_AUTH.authorizeQParams)
 		console.log(loginUrl)
 		if (Constants.platform.web)
 			window.open( loginUrl,"_self" )
@@ -64,5 +64,5 @@ export default function LoanShopperLogin(props)  {
 			_openAuthSessionAsync( loginUrl )
 	}
 
-	return  <Pressable  onPress={onLoginPressed}>{props.children == undefined ?<Text style={styles.textMediumBoldLogoDarkBlue}>Login</Text> : props.children(onLoginPressed)}</Pressable>
+	return  <Pressable  onPress={onLoginPressed}>{props?.children == undefined ?<Text style={styles.textMediumBoldLogoDarkBlue}>Login</Text> : props.children(onLoginPressed)}</Pressable>
 }

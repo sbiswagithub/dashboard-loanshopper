@@ -92,7 +92,7 @@ const checkFullName = (title, firstName, lastName) => {
 };
 const propsToLoanRequest = props => {
 	var loanRequest = {
-		_id: props.loanRequest._id,
+		_id: props.loanRequest?._id,
 		statementOfIntent: props.statementOfIntent,
 		loanProcessing: props.loanProcessing,
 		loanProfile: props.loanProfile,

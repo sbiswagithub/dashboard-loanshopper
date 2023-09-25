@@ -234,7 +234,7 @@ class Disclosure extends Component {
 				<Portal>
 					<Dialog visible={this.props.showAlert} style={{maxWidth:'50%', alignSelf:"center"}} >
 					<Dialog.Title>{"Oops, did you forget something"}</Dialog.Title>
-					<Dialog.Content><Paragraph>{"Required minimum details"}</Paragraph></Dialog.Content>
+					<Dialog.Content><Paragraph>{"Please fill in all entries on this page"}</Paragraph></Dialog.Content>
 					<Dialog.Actions>
 						<Button onPress={this.props.toggleAlert}>{ALERT_NO_BUTTON_LABEL}</Button>
 					</Dialog.Actions>

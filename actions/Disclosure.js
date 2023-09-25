@@ -342,7 +342,11 @@ export const toggleEditMode = (editMode) => {
 	    payload: editMode
 	  };
 }
-
+export const toggleAlert = () => {
+  return {
+	    type: TOGGLE_ALERT,
+	  };
+}
 export const toggleModal = (mode) => {
   return {
 	    type: mode,
