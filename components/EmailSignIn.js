@@ -57,7 +57,7 @@ class EmailSignIn extends Component {
 				<View style={[styles.loginRow]}>
 					<View style={[{flexDirection:"row", flex: 1, justifyContent:"space-between", alignSelf:"center"}]}>
 						<View style={[styles.hr, {alignSelf:"stretch", width:'40%'}]}/>
-						<Text style={styles.textMediumBoldGray}>OR</Text>
+						<Text style={styles.textMediumBoldWhite}>OR</Text>
 						<View style={[styles.hr, {alignSelf:"stretch", width:'40%'}]}/>
 					</View>
 				</View>
@@ -65,7 +65,7 @@ class EmailSignIn extends Component {
 				<View style={styles.loginRow}>
 					<LoanShopperLogin {...this.props} url={LINKEDIN_AUTH.linkedInUrl + toQueryString(LINKEDIN_AUTH.linkedInQParams)} >
 					{(onLoginPressed) => (
-						<Image style={[{width:'400px', height:'50px', borderWidth:'2px' , borderRadius:'10px', borderColor:WHITE }]} source={require('../assets/linkedin.png')} onPress={onLoginPressed} />
+						<Image style={[{width:'400px', height:'50px', borderWidth:2 , borderRadius:10, borderColor:WHITE }]} source={require('../assets/linkedin.png')} onPress={onLoginPressed} />
 					)}
 					</LoanShopperLogin>
 				</View>
