@@ -12,7 +12,10 @@ const linking = {
   config: {
     screens: {
       Home: 'Home',
-      AppStores: 'AppStores',
+      AppStores:  {
+        path: 'appstores',
+        alias: ['AppStores'],
+      },
     },
   },
 };
