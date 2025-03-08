@@ -9,7 +9,7 @@ import getStyleSheet from "../../styles/styles";
 export default function Index({  }) {
   const styles = getStyleSheet();
   useEffect(() => {
-    if ((window.navigator?.userAgent && window.navigator.userAgent.toUpperCase().toUpperCase() === 'WINDOWS') {
+    if (window.navigator?.userAgentData?.platform && window.navigator.userAgentData.platform.toUpperCase() === 'WINDOWS') {
       Linking.openURL('https://loanshopper.com.au')
     } else if (window.navigator?.userAgent && window.navigator.userAgent.toUpperCase().match(/IPHONE|IPAD/) ) {
       Linking.openURL('https://apps.apple.com/au/app/loanshopper/id6464032507')
@@ -47,8 +47,6 @@ export default function Index({  }) {
           style={styles.logoMastheadWide}
         />
 
-        <Text style={styles.textMediumBoldWhite}>{Platform?.OS}</Text>
-        <Text style={styles.textMediumBoldWhite}>{window.navigator?.userAgent}</Text>
       </View>
     </View>
   );
