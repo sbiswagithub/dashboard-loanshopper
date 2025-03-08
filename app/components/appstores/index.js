@@ -11,6 +11,10 @@ export default function Index({  }) {
   useEffect(() => {
     if (window.navigator?.userAgentData?.platform && window.navigator.userAgentData.platform.toUpperCase() === 'WINDOWS') {
       Linking.openURL('https://loanshopper.com.au')
+    } else if (window.navigator?.userAgentData?.platform && window.navigator.userAgentData.platform.toUpperCase().match(/IPHONE|IPAD/) ) {
+      Linking.openURL('https://apps.apple.com/au/app/loanshopper/id6464032507')
+    } else if (window.navigator?.userAgentData?.platform && window.navigator.userAgentData.platform.toUpperCase().match(/ANDROID/) ) {
+      Linking.openURL('https://play.google.com/store/apps/details?id=au.com.loanshopper')
     } else if (Platform?.OS.toUpperCase().match(/IOS/) ) {
       Linking.openURL('https://apps.apple.com/au/app/loanshopper/id6464032507')
     } else if (Platform?.OS.toUpperCase().match(/ANDROID/) ) {
