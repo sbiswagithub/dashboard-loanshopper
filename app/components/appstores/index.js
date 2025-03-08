@@ -21,8 +21,6 @@ export default function Index({  }) {
       Linking.openURL('https://play.google.com/store/apps/details?id=au.com.loanshopper')
     }
   })
-  console.log('Platform ' + Platform?.OS)
-  console.log(window.navigator?.userAgent)
   return (
     <View style={[styles.container, styles.evenlySpacedSingleColumn]}>
       <LinearGradient
