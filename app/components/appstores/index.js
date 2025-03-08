@@ -1,4 +1,4 @@
-import { View, Image, Platform } from "react-native";
+import { View, Image, Text, Platform } from "react-native";
 import * as Linking from 'expo-linking';
 import { LinearGradient } from "expo-linear-gradient";
 import { useEffect } from "react";
@@ -9,21 +9,20 @@ import getStyleSheet from "../../styles/styles";
 export default function Index({  }) {
   const styles = getStyleSheet();
   useEffect(() => {
-    if (window.navigator?.userAgentData?.platform && window.navigator.userAgentData.platform.toUpperCase() === 'WINDOWS') {
+    if ((window.navigator?.userAgent && window.navigator.userAgent.toUpperCase().toUpperCase() === 'WINDOWS') {
       Linking.openURL('https://loanshopper.com.au')
-    } else if (window.navigator?.userAgentData?.platform && window.navigator.userAgentData.platform.toUpperCase().match(/IPHONE|IPAD/) ) {
+    } else if (window.navigator?.userAgent && window.navigator.userAgent.toUpperCase().match(/IPHONE|IPAD/) ) {
       Linking.openURL('https://apps.apple.com/au/app/loanshopper/id6464032507')
-    } else if (window.navigator?.userAgentData?.platform && window.navigator.userAgentData.platform.toUpperCase().match(/ANDROID/) ) {
+    } else if (window.navigator?.userAgent && window.navigator.userAgent.toUpperCase().match(/ANDROID/) ) {
       Linking.openURL('https://play.google.com/store/apps/details?id=au.com.loanshopper')
     } else if (Platform?.OS.toUpperCase().match(/IOS/) ) {
       Linking.openURL('https://apps.apple.com/au/app/loanshopper/id6464032507')
     } else if (Platform?.OS.toUpperCase().match(/ANDROID/) ) {
       Linking.openURL('https://play.google.com/store/apps/details?id=au.com.loanshopper')
-    } else
-      Linking.openURL('https://loanshopper.com.au')
-
+    }
   })
-  console.log(Platform?.OS)
+  console.log('Platform ' + Platform?.OS)
+  console.log(window.navigator?.userAgent)
   return (
     <View style={[styles.container, styles.evenlySpacedSingleColumn]}>
       <LinearGradient
@@ -36,7 +35,6 @@ export default function Index({  }) {
         start={{ x: 0.75, y: 1 }}
         end={{ x: 0.75, y: 0 }}
       />
-
       <View
         style={[
           {marginTop:'10%'},
@@ -49,7 +47,8 @@ export default function Index({  }) {
           style={styles.logoMastheadWide}
         />
 
-
+        <Text style={styles.textMediumBoldWhite}>{Platform?.OS}</Text>
+        <Text style={styles.textMediumBoldWhite}>{window.navigator?.userAgent}</Text>
       </View>
     </View>
   );
