@@ -1,18 +1,10 @@
-import {
-  View,
-  Image,
-  Platform 
-} from "react-native";
-
-
-import { LOGO_BRIGHT_BLUE, LOGO_DARK_BLUE, WHITE } from "../../constants/colors";
+import { View, Image, Platform } from "react-native";
 import * as Linking from 'expo-linking';
-
-import getStyleSheet from "../../styles/styles";
-
 import { LinearGradient } from "expo-linear-gradient";
 import { useEffect } from "react";
 
+import { LOGO_BRIGHT_BLUE, LOGO_DARK_BLUE, WHITE } from "../../constants/colors";
+import getStyleSheet from "../../styles/styles";
 
 export default function Index({  }) {
   const styles = getStyleSheet();
