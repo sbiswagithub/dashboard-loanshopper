@@ -9,9 +9,7 @@ import getStyleSheet from "../../styles/styles";
 export default function Index({  }) {
   const styles = getStyleSheet();
   useEffect(() => {
-    if (window.navigator?.userAgentData?.platform && window.navigator.userAgentData.platform.toUpperCase() === 'WINDOWS') {
-      Linking.openURL('https://loanshopper.com.au')
-    } else if (window.navigator?.userAgent && window.navigator.userAgent.toUpperCase().match(/IPHONE|IPAD/) ) {
+    if (window.navigator?.userAgent && window.navigator.userAgent.toUpperCase().match(/IPHONE|IPAD/) ) {
       Linking.openURL('https://apps.apple.com/au/app/loanshopper/id6464032507')
     } else if (window.navigator?.userAgent && window.navigator.userAgent.toUpperCase().match(/ANDROID/) ) {
       Linking.openURL('https://play.google.com/store/apps/details?id=au.com.loanshopper')
@@ -19,7 +17,8 @@ export default function Index({  }) {
       Linking.openURL('https://apps.apple.com/au/app/loanshopper/id6464032507')
     } else if (Platform?.OS.toUpperCase().match(/ANDROID/) ) {
       Linking.openURL('https://play.google.com/store/apps/details?id=au.com.loanshopper')
-    }
+    } else
+      Linking.openURL('https://loanshopper.com.au')
   })
   return (
     <View style={[styles.container, styles.evenlySpacedSingleColumn]}>
