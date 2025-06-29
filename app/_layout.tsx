@@ -5,6 +5,7 @@ import { Text } from "react-native";
 
 import Home from "./components/home";
 import AppStores from "./components/appstores";
+import React from "react";
 const Stack = createStackNavigator();
 
 const linking = {
